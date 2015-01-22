@@ -1,6 +1,17 @@
 IATI Website Tests
 ==================
 
+.. image:: https://travis-ci.org/IATI/IATI-Website-Tests.svg?branch=master
+    :target: https://travis-ci.org/IATI/IATI-Websites-Tests
+.. image:: https://requires.io/github/IATI/IATI-Website-Tests/requirements.svg?branch=master
+    :target: https://requires.io/github/IATI/IATI-Website-Tests/requirements/?branch=master
+    :alt: Requirements Status
+.. image:: https://img.shields.io/badge/license-MIT-blue.svg
+    :target: https://github.com/IATI/IATI-Website-Tests/blob/master/LICENSE
+    
+Introduction
+------------
+
 This repository contains tests of the live websites.
 
 Currently only the dashboard is tested.
