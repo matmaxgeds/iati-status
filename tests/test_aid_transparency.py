@@ -14,6 +14,5 @@ class TestAidTransparency(WebTestBase):
         """
         result = self._get_links_from_page(loaded_request)
 
-        assert "http://iatistandard.org/" in result
-        assert "http://www.aidtransparency.net/" in result
-        assert "http://www.iatiregistry.org/" in result
+        assert ("http://iatistandard.org/" in result) or ("http://dashboard.iatistandard.org/" in result)
+        assert "http://www.aidtransparency.net" in result
