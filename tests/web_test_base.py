@@ -40,7 +40,17 @@ class WebTestBase:
         return self._locate_xpath_result(request, xpath + "/text()")
 
     def _substring_in_list(self, substr_to_find, list_to_search):
+        """
+        Returns a boolean value to indicate whether or not a given substring
+        is located within the strings of a list.
+        """
         return len([s for s in list_to_search if substr_to_find in s]) > 0
+
+    def _loaded_request_from_url(self, url):
+        """
+        Returns the loaded request for a given URL.
+        """
+        return self.loaded_requests[url]
 
     @classmethod
     def setup_class(cls):

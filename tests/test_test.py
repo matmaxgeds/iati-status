@@ -16,10 +16,15 @@ class TestTest(WebTestBase):
         ("technical publishing framework", '//*[@id="home-strapline"]/h1')
     ]
 
-    def test_locate_text(self, loaded_request, text_to_find):
+    @pytest.mark.parametrize("target_url", ["http://iatistandard.org/"])
+    def test_locate_text(self, target_url):
         """
         Tests that each page contains lthe specified text at the required location.
         """
-        result = self._get_text_from_xpath(loaded_request, text_to_find[1])
+        req = self._loaded_request_from_url(target_url)
+        text_to_find = "technical publishing framework"
+        xpath_to_locate = '//*[@id="home-strapline"]/h1'
 
-        assert self._substring_in_list(text_to_find[0], result)
+        result = self._get_text_from_xpath(req, xpath_to_locate)
+
+        assert self._substring_in_list(text_to_find, result)
