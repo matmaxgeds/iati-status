@@ -9,10 +9,11 @@ Usage:
 """
 class TestTest(WebTestBase):
     urls_to_get = [
-        "http://aidtransparency.net/"
+        "http://iatistandard.org/"
+        , "http://iatistandard.org/202/namespaces-extensions/"
     ]
     text_to_find = [
-        ("information", '//*[@id="home-strapline"]/h1')
+        ("technical publishing framework", '//*[@id="home-strapline"]/h1')
     ]
 
     def test_locate_text(self, loaded_request, text_to_find):
