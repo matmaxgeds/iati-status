@@ -9,6 +9,7 @@ IATI Website Tests
 .. image:: https://img.shields.io/badge/license-MIT-blue.svg
     :target: https://github.com/IATI/IATI-Website-Tests/blob/master/LICENSE
 
+
 Introduction
 ------------
 
@@ -20,15 +21,23 @@ Currently only the dashboard is tested.
 | We use tron-ci http://tron-ci.herokuapp.com/ to run this every day.
 | Since travis is not designed for daily tests (rather for per commit tests) this causes some odd behaviour.
 
+
 Installation
 ------------
 
 ```
+# Download dependencies
 sudo apt-get install virtualenv
+
+# Create a virtual environment
 virtualenv pyenv
+
+# Activate the virtual environment
 source pyenv/bin/activate
 
+# Install requirements
 pip install -r requirements.txt
 
+# Run the tests
 py.test tests/
 ```
