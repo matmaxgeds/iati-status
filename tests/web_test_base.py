@@ -1,5 +1,6 @@
-import requests
+from lxml import etree
 import pytest
+import requests
 
 class WebTestBase:
     urls_to_get = []
@@ -10,6 +11,26 @@ class WebTestBase:
     Values are the request objects
     """
     loaded_requests = dict()
+
+    def _locate_xpath_result(self, request, xpath):
+        """
+        Takes a Request object and an xpath.
+        Locates all instances of the specified xpath content within the html
+        associated with the request.
+        Returns a list of all the content matching the xpath
+        """
+        parser = etree.HTMLParser()
+        tree = etree.fromstring(request.text, parser)
+        return tree.xpath(xpath)
+
+    def _get_links_from_page(self, request):
+        """
+        Locates the location of all <a href="...">...</a> tags on the page associated
+        with the provided request.
+        Returns a list of strings containing the linked URLs
+            ie. the contents of the `href` attribute
+        """
+        return  self._locate_xpath_result(request, "//a[@href]/@href")
 
     @classmethod
     def setup_class(cls):
