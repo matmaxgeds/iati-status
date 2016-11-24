@@ -12,9 +12,6 @@ class TestTest(WebTestBase):
         "http://iatistandard.org/"
         , "http://iatistandard.org/202/namespaces-extensions/"
     ]
-    text_to_find = [
-        ("technical publishing framework", '//*[@id="home-strapline"]/h1')
-    ]
 
     @pytest.mark.parametrize("target_url", ["http://iatistandard.org/"])
     def test_locate_text(self, target_url):
