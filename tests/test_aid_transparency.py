@@ -8,9 +8,9 @@ class TestAidTransparency(WebTestBase):
         , "http://www.aidtransparency.net/annualreport2015/"
     ]
 
-    def test_locate_xpath_content(self, loaded_request):
+    def test_locate_links(self, loaded_request):
         """
-        Tests that a page contains a html element
+        Tests that each page contains links to the defined URLs.
         """
         result = self._get_links_from_page(loaded_request)
 
