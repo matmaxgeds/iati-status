@@ -2,44 +2,49 @@ import requests
 import pytest
 
 class WebTestBase:
-    urls = ["http://iatiregistry.org"]
-    expected_link = 3
-    loaded_urls = dict()
-    num_urls = len(urls)
-
-    def display_urls(self):
-        return self.urls
+    urls_to_get = []
+    initial_num_urls_to_test = len(urls_to_get)
+    """
+    Will hold request objects from loading each of the URLS in self.urls
+    Keys are the urls themselves
+    Values are the request objects
+    """
+    loaded_requests = dict()
 
     @classmethod
     def setup_class(cls):
-        # import pdb;pdb.set_trace()
-        for url in cls.urls:
+        """
+        Initialise the class
+        Loads data from each of the required URLs
+        """
+        for url in cls.urls_to_get:
             result = requests.get(url)
-            cls.loaded_urls[url] = result
-        cls.num_urls = len(cls.urls)
+            cls.loaded_requests[url] = result
+        cls.num_urls = len(cls.urls_to_get)
 
     def pytest_generate_tests(cls, metafunc):
-        if 'nxt_req' in metafunc.fixturenames:
-            metafunc.parametrize("nxt_req", cls.urls)
+        """
+        Dynamically parametrizes fixtures after initialisation
+        """
+        if 'urls_to_get' in metafunc.fixturenames:
+            metafunc.parametrize("urls_to_get", cls.urls_to_get)
 
-    def loaded_request(self, idx):
-        return self.loaded_urls[self.urls[idx]]
+    @pytest.fixture
+    def loaded_request(cls, urls_to_get):
+        """
+        Converts the parametrized URL into loaded Request object that has
+        already been initialised.
+        """
+        return cls.loaded_requests[urls_to_get]
 
-    # @pytest.fixture(scope="class", params=urls)
-    # def load_urls(self, request):
-        # result = requests.get(request.param)
-        # return result
-
-    @pytest.mark.parametrize("idx", range(0, num_urls), scope="class")
-    def test_url_check(self, idx):
-        assert self.num_urls == 3
-
-    def test_expected_link(self):
-        assert self.expected_link == 4
+    def test_200_response(self, loaded_request):
+        """
+        Tests that each loaded request has a status code of 200.
+        """
+        assert loaded_request.status_code == 200
 
     def test_num_urls(self):
-        assert self.num_urls == 2
-
-    def test_correct_url(self, nxt_req):
-        assert len(self.urls) == 2
-        assert nxt_req == 8
+        """
+        Ensure that urls from a child class are being correctly detected
+        """
+        assert len(self.urls_to_get) > self.initial_num_urls_to_test
