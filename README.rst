@@ -17,9 +17,7 @@ This repository contains tests of the live websites.
 
 Currently only the dashboard is tested.
 
-These tests are run daily by Travis `cron jobs <http://example.com>`_: https://travis-ci.org/IATI/IATI-Website-Tests
-
-Since travis is not designed for daily tests (rather for per commit tests) this causes some odd behaviour.
+These tests are run daily by Travis `cron jobs <https://docs.travis-ci.com/user/cron-jobs/>`_: https://travis-ci.org/IATI/IATI-Website-Tests
 
 
 Installation
