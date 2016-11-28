@@ -17,7 +17,7 @@ class TestIATIDashboard(WebTestBase):
         """
         result = utility.get_links_from_page(loaded_request)
 
-        assert "https://github.com/IATI/IATI-Dashboard/blob/master/README.rst" in result
+        assert "https://github.com/IATI/IATI-Dashboard/" in result
 
     def test_recently_generated(self, loaded_request):
         """
