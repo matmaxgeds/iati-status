@@ -28,8 +28,8 @@ Installation
 	# Download dependencies
 	sudo apt-get install virtualenv
 
-	# Create a virtual environment
-	virtualenv pyenv
+	# Create a virtual environment using python 3
+	virtualenv -p python3 pyenv
 
 	# Activate the virtual environment
 	source pyenv/bin/activate
