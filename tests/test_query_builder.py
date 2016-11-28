@@ -10,6 +10,6 @@ class TestQueryBuilder(WebTestBase):
         """
         Tests that a page contains links to the defined URLs.
         """
-        result = self._get_links_from_page(loaded_request)
+        result = utility.get_links_from_page(loaded_request)
 
         assert "http://datastore.iatistandard.org/" in result
