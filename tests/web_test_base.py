@@ -5,7 +5,8 @@ from utility import utility
 
 class WebTestBase:
     urls_to_get = []
-    initial_num_urls_to_test = len(urls_to_get)
+    urls_to_post = dict()
+    initial_num_urls_to_test = len(urls_to_get) + len(urls_to_post.keys())
     """
     Will hold request objects from loading each of the URLS in self.urls
     Keys are the urls themselves
@@ -32,7 +33,7 @@ class WebTestBase:
             result = requests.post(url, data=cls.urls_to_post[url])
             # TODO: Deal with the same URL being requested in multiple ways
             cls.loaded_requests[url] = result
-        cls.num_urls = len(cls.urls_to_get)
+        cls.num_urls = len(cls.urls_to_get) + len(cls.urls_to_post)
 
     def pytest_generate_tests(cls, metafunc):
         """
@@ -43,6 +44,7 @@ class WebTestBase:
         if 'text_to_find' in metafunc.fixturenames:
             metafunc.parametrize("text_to_find", cls.text_to_find)
 
+    # TODO: Handle POST requests
     @pytest.fixture
     def loaded_request(cls, urls_to_get):
         """
