@@ -2,9 +2,11 @@ import pytest
 from web_test_base import *
 
 class TestIATIPreview(WebTestBase):
-    urls_to_get = [
-        "https://www.iatiregistry.org/"
-    ]
+    requests_to_load = {
+        'IATI Preview': {
+            'url': 'https://www.iatiregistry.org/'
+        }
+    }
 
     def test_contains_links(self, loaded_request):
         """

@@ -2,9 +2,11 @@ import pytest
 from web_test_base import *
 
 class TestIATIWiki(WebTestBase):
-    urls_to_get = [
-        "http://wiki.archive.iatistandard.org/"
-    ]
+    requests_to_load = {
+        'IATI Wiki Homepage': {
+            'url': 'http://wiki.archive.iatistandard.org/'
+        }
+    }
 
     def test_locate_links(self, loaded_request):
         """

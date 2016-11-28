@@ -2,9 +2,11 @@ import pytest
 from web_test_base import *
 
 class TestCSV2IATI(WebTestBase):
-    urls_to_get = [
-        "http://csv2iati.iatistandard.org/"
-    ]
+    requests_to_load = {
+        'CSV2IATI Homepage': {
+            'url': 'http://csv2iati.iatistandard.org/'
+        }
+    }
 
     def test_contains_links(self, loaded_request):
         """

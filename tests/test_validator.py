@@ -2,9 +2,11 @@ import pytest
 from web_test_base import *
 
 class TestIATIValidator(WebTestBase):
-    urls_to_get = [
-        "http://validator.iatistandard.org/"
-    ]
+    requests_to_load = {
+        'IATI Validator': {
+            'url': 'http://validator.iatistandard.org/'
+        }
+    }
 
     def test_contains_links(self, loaded_request):
         """

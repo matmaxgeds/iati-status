@@ -2,12 +2,20 @@ import pytest
 from web_test_base import *
 
 class TestIATIRegistry(WebTestBase):
-    urls_to_get = [
-        "http://iatiregistry.org/"
-        , "http://www.iatiregistry.org/"
-        , "https://iatiregistry.org/"
-        , "https://www.iatiregistry.org/"
-    ]
+    requests_to_load = {
+        'IATI Registry Homepage - http, no www': {
+            'url': 'http://iatiregistry.org/'
+        },
+        'IATI Registry Homepage - http, with www': {
+            'url': 'http://www.iatiregistry.org/'
+        },
+        'IATI Registry Homepage - https, no www': {
+            'url': 'https://iatiregistry.org/'
+        },
+        'IATI Registry Homepage - https, with www': {
+            'url': 'https://www.iatiregistry.org/'
+        }
+    }
 
     def test_contains_links(self, loaded_request):
         """

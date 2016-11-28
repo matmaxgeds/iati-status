@@ -2,9 +2,11 @@ import pytest
 from web_test_base import *
 
 class TestIATIDatastore(WebTestBase):
-    urls_to_get = [
-        "http://datastore.iatistandard.org/"
-    ]
+    requests_to_load = {
+        'Datastore Homepage': {
+            'url': 'http://datastore.iatistandard.org/'
+        }
+    }
 
     def test_contains_links(self, loaded_request):
         """

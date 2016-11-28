@@ -2,11 +2,17 @@ import pytest
 from web_test_base import *
 
 class TestAidTransparency(WebTestBase):
-    urls_to_get = [
-        "http://aidtransparency.net/"
-        , "http://www.aidtransparency.net/"
-        , "http://www.aidtransparency.net/annualreport2015/"
-    ]
+    requests_to_load = {
+        'AidTransparency Homepage - no www': {
+            'url': 'http://aidtransparency.net/'
+        },
+        'AidTransparency Homepage - with www': {
+            'url': 'http://www.aidtransparency.net/'
+        },
+        '2015 Annual Report': {
+            'url': 'http://www.aidtransparency.net/annualreport2015/'
+        }
+    }
 
     def test_locate_links(self, loaded_request):
         """

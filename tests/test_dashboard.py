@@ -2,9 +2,11 @@ import pytest
 from web_test_base import *
 
 class TestIATIDashboard(WebTestBase):
-    urls_to_get = [
-        "http://dashboard.iatistandard.org/"
-    ]
+    requests_to_load = {
+        'Dashboard Homepage': {
+            'url': 'http://dashboard.iatistandard.org/'
+        }
+    }
 
     def test_contains_links(self, loaded_request):
         """

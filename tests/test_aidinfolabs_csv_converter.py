@@ -2,9 +2,11 @@ import pytest
 from web_test_base import *
 
 class TestAidinfolabsCSVConverter(WebTestBase):
-    urls_to_get = [
-        "http://tools.aidinfolabs.org/csv/direct_from_registry/"
-    ]
+    requests_to_load = {
+        'AidInfo Labs CSV Conversion Tool': {
+            'url': 'http://tools.aidinfolabs.org/csv/direct_from_registry/'
+        }
+    }
 
     def test_locate_links(self, loaded_request):
         """
