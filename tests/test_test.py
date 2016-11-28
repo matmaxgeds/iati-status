@@ -32,7 +32,7 @@ class TestTest(WebTestBase):
     @pytest.mark.parametrize("target_request", ["implicit GET"])
     def test_locate_text(self, target_request):
         """
-        Tests that each page contains lthe specified text at the required location.
+        Tests that each page contains the specified text at the required location.
         """
         req = self.loaded_request_from_test_name(target_request)
         text_to_find = "technical publishing framework"
@@ -45,7 +45,7 @@ class TestTest(WebTestBase):
     @pytest.mark.parametrize("target_request", ["basic POST"])
     def test_invalid_xml(self, target_request):
         """
-        Tests that each page contains lthe specified text at the required location.
+        Tests that each page contains the specified text at the required location.
         """
         req = self.loaded_request_from_test_name(target_request)
         text_to_find = "This is not a well-formed xml file"
@@ -58,7 +58,7 @@ class TestTest(WebTestBase):
     @pytest.mark.parametrize("target_request", ["duplicated URL"])
     def test_duplicated_url(self, target_request):
         """
-        Tests that each page contains lthe specified text at the required location.
+        Tests that each page contains the specified text at the required location.
         """
         req = self.loaded_request_from_test_name(target_request)
         text_to_find = "This is a well formed xml file."
