@@ -28,6 +28,10 @@ class WebTestBase:
         for url in cls.urls_to_get:
             result = requests.get(url)
             cls.loaded_requests[url] = result
+        for url in cls.urls_to_post.keys():
+            result = requests.post(url, data=cls.urls_to_post[url])
+            # TODO: Deal with the same URL being requested in multiple ways
+            cls.loaded_requests[url] = result
         cls.num_urls = len(cls.urls_to_get)
 
     def pytest_generate_tests(cls, metafunc):
