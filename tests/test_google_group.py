@@ -2,9 +2,11 @@ import pytest
 from web_test_base import *
 
 class TestGoogleGroup(WebTestBase):
-    urls_to_get = [
-        "https://groups.google.com/forum/#!forum/iati-technical"
-    ]
+    requests_to_load = {
+        'Google Group Landing Page': {
+            'url': 'https://groups.google.com/forum/#!forum/iati-technical'
+        }
+    }
 
     def test_locate_links(self, loaded_request):
         """
