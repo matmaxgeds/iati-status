@@ -20,10 +20,12 @@ class TestTest(WebTestBase):
         'basic POST': {
             'url': 'http://validator.iatistandard.org/index.php'
             , 'method': 'POST'
-            , 'data': {'paste': 'jim bob 17'}
+            , 'data': {'paste': utility.load_file_contents('invalid.xml')}
         },
         'duplicated URL': {
             'url': 'http://validator.iatistandard.org/index.php'
+            , 'method': 'POST'
+            , 'data': {'paste': utility.load_file_contents('valid.xml')}
         }
     }
 
@@ -59,8 +61,8 @@ class TestTest(WebTestBase):
         Tests that each page contains lthe specified text at the required location.
         """
         req = self.loaded_request_from_test_name(target_request)
-        text_to_find = "Upload an XML file of IATI data."
-        xpath_to_locate = '//*[@id="status"]/div/form/fieldset/span'
+        text_to_find = "This is a well formed xml file."
+        xpath_to_locate = '//*[@id="status"]/div[2]'
 
         result = utility.get_text_from_xpath(req, xpath_to_locate)
 

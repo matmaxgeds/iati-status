@@ -1,5 +1,7 @@
 from lxml import etree
 
+import os
+
 def locate_xpath_result(request, xpath):
     """
     Takes a Request object and an xpath.
@@ -33,3 +35,25 @@ def substring_in_list(substr_to_find, list_to_search):
     is located within the strings of a list.
     """
     return len([s for s in list_to_search if substr_to_find in s]) > 0
+
+def get_data_folder():
+    """
+    Returns the location of the folder containing data files.
+    """
+    path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', 'data')
+    return os.path.normpath(path)
+
+def get_data_file(file_name):
+    """
+    Returns a path to a data file with the given name.
+    """
+    return os.path.join(get_data_folder(), file_name)
+
+def load_file_contents(file_name):
+    """
+    Reads the contents of a file into a string.
+    Returns a string containing the file contents.
+    """
+    with open(get_data_file(file_name), 'r') as myfile:
+        data = myfile.read()
+    return data
