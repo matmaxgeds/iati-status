@@ -12,6 +12,9 @@ class TestAidTransparency(WebTestBase):
         , '2015 Annual Report': {
             'url': 'http://www.aidtransparency.net/annualreport2015/'
         }
+        , 'Tabulated News Archive': {
+            'url': 'http://www.aidtransparency.net/category/news/page/5'
+        }
     }
 
     def test_locate_links(self, loaded_request):
@@ -28,6 +31,7 @@ class TestAidTransparency(WebTestBase):
         """
         Tests that he aidtransparency homepage contains two news articles.
         """
+        req = self.loaded_request_from_test_name(target_request)
         parent_xpath = '//*[@id="home-featured"]/div/article'
         title1_xpath = '//*[@id="home-featured"]/div/article[1]/div[2]/h2/a'
         title2_xpath = '//*[@id="home-featured"]/div/article[2]/div[2]/h2/a'
@@ -38,10 +42,23 @@ class TestAidTransparency(WebTestBase):
         min_summary_length = 40
         max_summary_length = 250
 
-        req = self.loaded_request_from_test_name(target_request)
-
         assert len(utility.locate_xpath_result(req, parent_xpath)) == 2
         assert max_title_length > len(utility.get_joined_text_from_xpath(req, title1_xpath)) > min_title_length
         assert max_title_length > len(utility.get_joined_text_from_xpath(req, title2_xpath)) > min_title_length
         assert max_summary_length > len(utility.get_joined_text_from_xpath(req, summary1_xpath).strip()) > min_summary_length
         assert max_summary_length > len(utility.get_joined_text_from_xpath(req, summary2_xpath).strip()) > min_summary_length
+
+    @pytest.mark.parametrize("target_request", ["Tabulated News Archive"])
+    def test_news_item_pagination(self, target_request):
+        """
+        Tests that pagination of the news archive is working.
+        Checks whether a page somewhere within the pagination contained the
+        expected number of links to articles.
+        """
+        req = self.loaded_request_from_test_name(target_request)
+        xpath = '//*[@id="content-wrapper"]/div[2]/article'
+        expected_article_count = 10
+
+        result = utility.locate_xpath_result(req, xpath)
+
+        assert len(result) == expected_article_count
