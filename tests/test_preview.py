@@ -4,7 +4,7 @@ from web_test_base import *
 class TestIATIPreview(WebTestBase):
     requests_to_load = {
         'IATI Preview': {
-            'url': 'https://www.iatiregistry.org/'
+            'url': 'http://preview.iatistandard.org/'
         }
     }
 
