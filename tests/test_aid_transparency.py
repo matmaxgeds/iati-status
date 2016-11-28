@@ -22,3 +22,13 @@ class TestAidTransparency(WebTestBase):
 
         assert ("http://iatistandard.org/" in result) or ("http://dashboard.iatistandard.org/" in result)
         assert "http://www.aidtransparency.net" in result
+
+    @pytest.mark.parametrize("target_request", ["AidTransparency Homepage - no www", "AidTransparency Homepage - with www"])
+    def test_homepage_news_items(self, target_request):
+        """
+        Tests that he aidtransparency homepage contains two news articles.
+        """
+        xpath = '//*[@id="home-featured"]/div/article'
+        req = self.loaded_request_from_test_name(target_request)
+
+        assert len(utility.locate_xpath_result(req, xpath)) == 2

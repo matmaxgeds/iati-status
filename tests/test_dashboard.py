@@ -23,12 +23,13 @@ class TestIATIDashboard(WebTestBase):
         """
         Tests that the dashboard was generated in the past 2 days.
         """
+        max_delay = timedelta(days=2)
         generation_time_xpath = '//*[@id="footer"]/div/p/em[1]'
         data_time_xpath = '//*[@id="footer"]/div/p/em[2]'
-        max_delay = timedelta(days=2)
 
         generation_time_arr = utility.get_text_from_xpath(loaded_request, generation_time_xpath)
         data_time_arr = utility.get_text_from_xpath(loaded_request, data_time_xpath)
+
         # TODO: split shared functionality so these assertions can be their own test
         assert len(generation_time_arr) == 1
         assert len(data_time_arr) == 1
