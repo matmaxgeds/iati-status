@@ -25,7 +25,7 @@ class WebTestBase:
         Initialise the class
         Loads data from each of the required URLs
         """
-        for testname, test in cls.requests_to_load.iteritems():
+        for testname, test in cls.requests_to_load.items():
             try:
                 method = test['method']
             except KeyError:
