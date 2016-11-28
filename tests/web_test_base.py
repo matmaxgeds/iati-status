@@ -4,9 +4,8 @@ import requests
 from utility import utility
 
 class WebTestBase:
-    urls_to_get = []
-    urls_to_post = dict()
-    initial_num_urls_to_test = len(urls_to_get) + len(urls_to_post.keys())
+    requests_to_load = dict()
+    initial_num_urls_to_test = len(requests_to_load)
     """
     Will hold request objects from loading each of the URLS in self.urls
     Keys are the urls themselves
@@ -14,11 +13,11 @@ class WebTestBase:
     """
     loaded_requests = dict()
 
-    def loaded_request_from_url(self, url):
+    def loaded_request_from_test_name(self, test_name):
         """
         Returns the loaded request for a given URL.
         """
-        return self.loaded_requests[url]
+        return self.loaded_requests[test_name]
 
     @classmethod
     def setup_class(cls):
@@ -26,32 +25,38 @@ class WebTestBase:
         Initialise the class
         Loads data from each of the required URLs
         """
-        for url in cls.urls_to_get:
-            result = requests.get(url)
-            cls.loaded_requests[url] = result
-        for url in cls.urls_to_post.keys():
-            result = requests.post(url, data=cls.urls_to_post[url])
-            # TODO: Deal with the same URL being requested in multiple ways
-            cls.loaded_requests[url] = result
-        cls.num_urls = len(cls.urls_to_get) + len(cls.urls_to_post)
+        for testname, test in cls.requests_to_load.iteritems():
+            try:
+                method = test['method']
+            except KeyError:
+                method = 'GET'
+
+            if method == 'GET':
+                result = requests.get(test['url'])
+            elif method == 'POST':
+                result = requests.post(test['url'], data=test['data'])
+            else:
+                raise ValueError('Invalid HTTP method - ' + method)
+
+            cls.loaded_requests[testname] = result
+        cls.num_urls = len(cls.requests_to_load)
 
     def pytest_generate_tests(cls, metafunc):
         """
         Dynamically parametrizes fixtures after initialisation
         """
-        if 'urls_to_get' in metafunc.fixturenames:
-            metafunc.parametrize("urls_to_get", cls.urls_to_get)
+        if 'requests_to_load' in metafunc.fixturenames:
+            metafunc.parametrize("requests_to_load", cls.requests_to_load.keys())
         if 'text_to_find' in metafunc.fixturenames:
             metafunc.parametrize("text_to_find", cls.text_to_find)
 
-    # TODO: Handle POST requests
     @pytest.fixture
-    def loaded_request(cls, urls_to_get):
+    def loaded_request(cls, requests_to_load):
         """
         Converts the parametrized URL into loaded Request object that has
         already been initialised.
         """
-        return cls.loaded_requests[urls_to_get]
+        return cls.loaded_requests[requests_to_load]
 
     def test_200_response(self, loaded_request):
         """
@@ -63,4 +68,4 @@ class WebTestBase:
         """
         Ensure that urls from a child class are being correctly detected
         """
-        assert len(self.urls_to_get) > self.initial_num_urls_to_test
+        assert len(self.requests_to_load) > self.initial_num_urls_to_test

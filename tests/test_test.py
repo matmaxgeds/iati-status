@@ -9,20 +9,27 @@ Usage:
     py.test tests/test_test.py -rsx
 """
 class TestTest(WebTestBase):
-    urls_to_get = [
-        "http://iatistandard.org/"
-        , "http://iatistandard.org/202/namespaces-extensions/"
-    ]
-    urls_to_post = {
-        "http://validator.iatistandard.org/index.php": {'paste': 'jim bob 17'}
+    requests_to_load = {
+        'implicit GET': {
+            'url': 'http://iatistandard.org/'
+        },
+        'explicit GET': {
+            'url': 'http://iatistandard.org/202/namespaces-extensions/'
+            , 'method': 'GET'
+        },
+        'basic POST': {
+            'url': 'http://validator.iatistandard.org/index.php'
+            , 'method': 'POST'
+            , 'data': {'paste': 'jim bob 17'}
+        }
     }
 
-    @pytest.mark.parametrize("target_url", ["http://iatistandard.org/"])
-    def test_locate_text(self, target_url):
+    @pytest.mark.parametrize("target_request", ["implicit GET"])
+    def test_locate_text(self, target_request):
         """
         Tests that each page contains lthe specified text at the required location.
         """
-        req = self.loaded_request_from_url(target_url)
+        req = self.loaded_request_from_test_name(target_request)
         text_to_find = "technical publishing framework"
         xpath_to_locate = '//*[@id="home-strapline"]/h1'
 
@@ -30,12 +37,12 @@ class TestTest(WebTestBase):
 
         assert utility.substring_in_list(text_to_find, result)
 
-    @pytest.mark.parametrize("target_url", ["http://validator.iatistandard.org/index.php"])
-    def test_invalid_xml(self, target_url):
+    @pytest.mark.parametrize("target_request", ["basic POST"])
+    def test_invalid_xml(self, target_request):
         """
         Tests that each page contains lthe specified text at the required location.
         """
-        req = self.loaded_request_from_url(target_url)
+        req = self.loaded_request_from_test_name(target_request)
         text_to_find = "This is not a well-formed xml file"
         xpath_to_locate = '//*[@id="status"]/div[2]'
 
