@@ -19,7 +19,7 @@ class TestTest(WebTestBase):
         """
         Tests that each page contains lthe specified text at the required location.
         """
-        req = self._loaded_request_from_url(target_url)
+        req = self.loaded_request_from_url(target_url)
         text_to_find = "technical publishing framework"
         xpath_to_locate = '//*[@id="home-strapline"]/h1'
 

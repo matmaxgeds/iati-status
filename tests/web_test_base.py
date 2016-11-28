@@ -13,7 +13,7 @@ class WebTestBase:
     """
     loaded_requests = dict()
 
-    def _loaded_request_from_url(self, url):
+    def loaded_request_from_url(self, url):
         """
         Returns the loaded request for a given URL.
         """
