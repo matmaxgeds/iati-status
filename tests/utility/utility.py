@@ -24,7 +24,7 @@ def get_links_from_page(request):
 
 def get_text_from_xpath(request, xpath):
     """
-    Locates the notes within the HTML at the specific xpath.
+    Locates the nodes within the HTML at the specific xpath.
     Returns a list of strings containing the contents of these nodes.
     """
     return locate_xpath_result(request, xpath + "/text()")
