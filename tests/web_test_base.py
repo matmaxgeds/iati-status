@@ -19,6 +19,18 @@ class WebTestBase:
         """
         return self.loaded_requests[test_name]
 
+    def passes_text_detection_test(self, target_request, text_to_find, xpath_to_locate):
+        """
+        Performs a test to see whether the specified text is located within
+        the request with a given name at the given xpath.
+        Returns True if the text exists correctly, else False.
+        """
+        req = self.loaded_request_from_test_name(target_request)
+
+        result = utility.get_text_from_xpath(req, xpath_to_locate)
+
+        return utility.substring_in_list(text_to_find, result)
+
     @classmethod
     def setup_class(cls):
         """

@@ -46,23 +46,17 @@ class TestIATIValidator(WebTestBase):
         """
         Tests that the validator correctly detects valid XML as valid.
         """
-        req = self.loaded_request_from_test_name(target_request)
         text_to_find = "This is a well formed xml file."
         xpath_to_locate = '//*[@id="status"]/div[2]'
 
-        result = utility.get_text_from_xpath(req, xpath_to_locate)
-
-        assert utility.substring_in_list(text_to_find, result)
+        assert self.passes_text_detection_test(target_request, text_to_find, xpath_to_locate)
 
     @pytest.mark.parametrize("target_request", ["Invalid paste data"])
     def test_invalid_pasted_xml(self, target_request):
         """
         Tests that the validator correctly detects invalid XML as invalid.
         """
-        req = self.loaded_request_from_test_name(target_request)
         text_to_find = "This is not a well-formed xml file"
         xpath_to_locate = '//*[@id="status"]/div[2]'
 
-        result = utility.get_text_from_xpath(req, xpath_to_locate)
-
-        assert utility.substring_in_list(text_to_find, result)
+        assert self.passes_text_detection_test(target_request, text_to_find, xpath_to_locate)
