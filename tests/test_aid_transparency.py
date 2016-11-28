@@ -15,6 +15,9 @@ class TestAidTransparency(WebTestBase):
         , 'Tabulated News Archive': {
             'url': 'http://www.aidtransparency.net/category/news/page/5'
         }
+        , 'Newsletter Subscription Page': {
+            'url': 'http://www.aidtransparency.net/contact/subscribe'
+        }
     }
 
     def test_locate_links(self, loaded_request):
@@ -62,3 +65,16 @@ class TestAidTransparency(WebTestBase):
         result = utility.locate_xpath_result(req, xpath)
 
         assert len(result) == expected_article_count
+
+    @pytest.mark.parametrize("target_request", ["Newsletter Subscription Page"])
+    def test_newsletter_subscription_page_form(self, target_request):
+        """
+        Tests to see whether there is a form to subscribe to the newsletter on
+        the newsletter subscription page.
+        """
+        req = self.loaded_request_from_test_name(target_request)
+        xpath = '//*[@id="mc-embedded-subscribe-form"]'
+
+        result = utility.locate_xpath_result(req, xpath)
+
+        assert len(result) == 1
