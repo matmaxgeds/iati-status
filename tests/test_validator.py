@@ -15,3 +15,11 @@ class TestIATIValidator(WebTestBase):
         result = utility.get_links_from_page(loaded_request)
 
         assert "http://iatistandard.org/" in result
+
+    def test_contains_form(self, loaded_request):
+        """
+        Test that the validator contains a form on each of three tabs.
+        """
+        assert len(utility.locate_xpath_result(loaded_request, '//*[@id="status"]/div/form')) == 1
+        assert len(utility.locate_xpath_result(loaded_request, '//*[@id="fileTab"]/div/form')) == 1
+        assert len(utility.locate_xpath_result(loaded_request, '//*[@id="extra"]/div/form')) == 1
