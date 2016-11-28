@@ -5,29 +5,29 @@ class TestIATIStandard(WebTestBase):
     requests_to_load = {
         'IATI Standard Homepage - no www': {
             'url': 'http://iatistandard.org/'
-        },
-        'IATI Standard Homepage - with www': {
+        }
+        , 'IATI Standard Homepage - with www': {
             'url': 'http://www.iatistandard.org/'
-        },
-        'IATI Standard - Misc Guidance Page': {
+        }
+        , 'IATI Standard - Misc Guidance Page': {
             'url': 'http://iatistandard.org/202/guidance/how-to-publish/prepare-your-org/'
-        },
-        'IATI Standard - Summary Page': {
+        }
+        , 'IATI Standard - Summary Page': {
             'url': 'http://iatistandard.org/202/organisation-standard/summary-table/'
-        },
-        'IATI Standard - Schema Page': {
+        }
+        , 'IATI Standard - Schema Page': {
             'url': 'http://iatistandard.org/202/schema/'
-        },
-        'IATI Standard - Old Schema Version, Developer Docs': {
+        }
+        , 'IATI Standard - Old Schema Version, Developer Docs': {
             'url': 'http://iatistandard.org/105/developer/'
-        },
-        'IATI Standard - Misc Developer Docs Page': {
+        }
+        , 'IATI Standard - Misc Developer Docs Page': {
             'url': 'http://iatistandard.org/105/developer/xquery/'
-        },
-        'IATI Standard - Activity Standard Docs Page': {
+        }
+        , 'IATI Standard - Activity Standard Docs Page': {
             'url': 'http://iatistandard.org/105/activity-standard/iati-activities/iati-activity/contact-info/'
-        },
-        'IATI Standard - Schema Version Homepage': {
+        }
+        , 'IATI Standard - Schema Version Homepage': {
             'url': 'http://iatistandard.org/201/'
         }
     }

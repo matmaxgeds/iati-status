@@ -5,14 +5,14 @@ class TestIATIRegistry(WebTestBase):
     requests_to_load = {
         'IATI Registry Homepage - http, no www': {
             'url': 'http://iatiregistry.org/'
-        },
-        'IATI Registry Homepage - http, with www': {
+        }
+        , 'IATI Registry Homepage - http, with www': {
             'url': 'http://www.iatiregistry.org/'
-        },
-        'IATI Registry Homepage - https, no www': {
+        }
+        , 'IATI Registry Homepage - https, no www': {
             'url': 'https://iatiregistry.org/'
-        },
-        'IATI Registry Homepage - https, with www': {
+        }
+        , 'IATI Registry Homepage - https, with www': {
             'url': 'https://www.iatiregistry.org/'
         }
     }

@@ -5,11 +5,11 @@ class TestAidTransparency(WebTestBase):
     requests_to_load = {
         'AidTransparency Homepage - no www': {
             'url': 'http://aidtransparency.net/'
-        },
-        'AidTransparency Homepage - with www': {
+        }
+        , 'AidTransparency Homepage - with www': {
             'url': 'http://www.aidtransparency.net/'
-        },
-        '2015 Annual Report': {
+        }
+        , '2015 Annual Report': {
             'url': 'http://www.aidtransparency.net/annualreport2015/'
         }
     }

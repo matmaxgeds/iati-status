@@ -12,17 +12,17 @@ class TestTest(WebTestBase):
     requests_to_load = {
         'implicit GET': {
             'url': 'http://iatistandard.org/'
-        },
-        'explicit GET': {
+        }
+        , 'explicit GET': {
             'url': 'http://iatistandard.org/202/namespaces-extensions/'
             , 'method': 'GET'
-        },
-        'basic POST': {
+        }
+        , 'basic POST': {
             'url': 'http://validator.iatistandard.org/index.php'
             , 'method': 'POST'
             , 'data': {'paste': utility.load_file_contents('invalid.xml')}
-        },
-        'duplicated URL': {
+        }
+        , 'duplicated URL': {
             'url': 'http://validator.iatistandard.org/index.php'
             , 'method': 'POST'
             , 'data': {'paste': utility.load_file_contents('valid.xml')}
