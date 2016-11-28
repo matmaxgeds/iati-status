@@ -29,6 +29,14 @@ def get_text_from_xpath(request, xpath):
     """
     return locate_xpath_result(request, xpath + "/text()")
 
+def get_joined_text_from_xpath(request, xpath):
+    """
+    Locates the nodes within the HTML at the specific xpath.
+    Returns a string containing the contents of the concatented
+    list of strings containing the contents of these nodes.
+    """
+    return ' '.join(get_text_from_xpath(request, xpath))
+
 def substring_in_list(substr_to_find, list_to_search):
     """
     Returns a boolean value to indicate whether or not a given substring

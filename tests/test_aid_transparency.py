@@ -28,7 +28,20 @@ class TestAidTransparency(WebTestBase):
         """
         Tests that he aidtransparency homepage contains two news articles.
         """
-        xpath = '//*[@id="home-featured"]/div/article'
+        parent_xpath = '//*[@id="home-featured"]/div/article'
+        title1_xpath = '//*[@id="home-featured"]/div/article[1]/div[2]/h2/a'
+        title2_xpath = '//*[@id="home-featured"]/div/article[2]/div[2]/h2/a'
+        summary1_xpath = '//*[@id="home-featured"]/div/article[1]/div[2]'
+        summary2_xpath = '//*[@id="home-featured"]/div/article[2]/div[2]'
+        min_title_length = 10
+        max_title_length = 100
+        min_summary_length = 40
+        max_summary_length = 250
+
         req = self.loaded_request_from_test_name(target_request)
 
-        assert len(utility.locate_xpath_result(req, xpath)) == 2
+        assert len(utility.locate_xpath_result(req, parent_xpath)) == 2
+        assert max_title_length > len(utility.get_joined_text_from_xpath(req, title1_xpath)) > min_title_length
+        assert max_title_length > len(utility.get_joined_text_from_xpath(req, title2_xpath)) > min_title_length
+        assert max_summary_length > len(utility.get_joined_text_from_xpath(req, summary1_xpath).strip()) > min_summary_length
+        assert max_summary_length > len(utility.get_joined_text_from_xpath(req, summary2_xpath).strip()) > min_summary_length
