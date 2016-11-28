@@ -1,4 +1,5 @@
 import pytest
+
 from web_test_base import *
 
 """
@@ -22,6 +23,6 @@ class TestTest(WebTestBase):
         text_to_find = "technical publishing framework"
         xpath_to_locate = '//*[@id="home-strapline"]/h1'
 
-        result = self._get_text_from_xpath(req, xpath_to_locate)
+        result = utility.get_text_from_xpath(req, xpath_to_locate)
 
-        assert self._substring_in_list(text_to_find, result)
+        assert utility.substring_in_list(text_to_find, result)
