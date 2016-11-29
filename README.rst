@@ -17,27 +17,25 @@ This repository contains tests of the live websites.
 
 Currently only the dashboard is tested.
 
-| These tests are run by travis - https://travis-ci.org/IATI/IATI-Website-Tests
-| We use tron-ci http://tron-ci.herokuapp.com/ to run this every day.
-| Since travis is not designed for daily tests (rather for per commit tests) this causes some odd behaviour.
+These tests are run daily by Travis `cron jobs <https://docs.travis-ci.com/user/cron-jobs/>`_: https://travis-ci.org/IATI/IATI-Website-Tests
 
 
 Installation
 ------------
 
-```
-# Download dependencies
-sudo apt-get install virtualenv
+.. code-block:: bash
 
-# Create a virtual environment
-virtualenv pyenv
+	# Download dependencies
+	sudo apt-get install virtualenv
 
-# Activate the virtual environment
-source pyenv/bin/activate
+	# Create a virtual environment using python 3
+	virtualenv -p python3 pyenv
 
-# Install requirements
-pip install -r requirements.txt
+	# Activate the virtual environment
+	source pyenv/bin/activate
 
-# Run the tests
-py.test tests/
-```
+	# Install requirements
+	pip install -r requirements.txt
+
+	# Run the tests
+	py.test tests/
