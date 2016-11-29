@@ -16,7 +16,6 @@ class TestIATIDashboard(WebTestBase):
         Test that each page contains links to the defined URLs.
         """
         result = utility.get_links_from_page(loaded_request)
-
         assert "https://github.com/IATI/IATI-Dashboard/" in result
 
     def test_recently_generated(self, loaded_request):
