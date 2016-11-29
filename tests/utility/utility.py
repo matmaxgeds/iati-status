@@ -75,6 +75,7 @@ def load_file_contents(file_name):
     Reads the contents of a file into a string.
     Returns a string containing the file contents.
     """
+    # TODO: Improve error handling
     with open(get_data_file(file_name), 'r') as myfile:
         data = myfile.read()
     return data
