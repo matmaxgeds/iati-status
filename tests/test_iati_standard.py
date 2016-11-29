@@ -1,3 +1,4 @@
+import re
 import pytest
 from web_test_base import *
 
@@ -41,3 +42,17 @@ class TestIATIStandard(WebTestBase):
         assert "http://iatistandard.org" in result
         assert "http://www.aidtransparency.net/" in result
         assert "http://iatiregistry.org" in result
+        assert utility.regex_match_in_list('^(\.\./)*license/$', result)
+        assert "http://glyphicons.com" in result
+        assert "http://creativecommons.org/licenses/by/3.0/" in result
+
+    def test_footer_license_information(self, loaded_request):
+        """
+        Tests that the footer contains license information.
+        This should include information about each text and icon licensing.
+        """
+        footer_xpath = '//*[@id="footer-credits"]/span'
+
+        result = utility.get_text_from_xpath(loaded_request, footer_xpath)
+
+        assert utility.substring_in_list('Text licensed under CC BY 4.0', result)

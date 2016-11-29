@@ -1,6 +1,6 @@
-from lxml import etree
-
 import os
+import re
+from lxml import etree
 
 def locate_xpath_result(request, xpath):
     """
@@ -42,7 +42,20 @@ def substring_in_list(substr_to_find, list_to_search):
     Returns a boolean value to indicate whether or not a given substring
     is located within the strings of a list.
     """
-    return len([s for s in list_to_search if substr_to_find in s]) > 0
+    result = [s for s in list_to_search if substr_to_find in s]
+
+    return len(result) > 0
+
+def regex_match_in_list(regex_str_to_find, list_to_search):
+    """
+    Returns a boolean value to indicate whether or not a given regex matches
+    any of the strings in a list.
+    """
+    regex = re.compile(regex_str_to_find)
+
+    result = [s for s in list_to_search if re.search(regex, s)]
+
+    return len(result) > 0
 
 def get_data_folder():
     """
