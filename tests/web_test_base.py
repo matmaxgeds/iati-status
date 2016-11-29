@@ -84,7 +84,7 @@ class WebTestBase:
 
         result = loaded_request.content.decode(loaded_request.encoding)
 
-        assert len(result) > min_response_size
+        assert len(result) >= min_response_size
 
     def test_num_urls(self):
         """
