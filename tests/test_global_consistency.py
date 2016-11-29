@@ -115,12 +115,18 @@ class TestGlobalConsistency(WebTestBase):
         assert dash_activities_unique_activity_count >= min_activity_count
         assert datastore_api_activity_count >= min_activity_count
 
-    def test_activity_count_dash_values(self, dash_home_activity_count, dash_home_unique_activity_count, dash_activities_activity_count, dash_activities_unique_activity_count):
+    def test_activity_count_dash_value_consistency(self, dash_home_activity_count, dash_home_unique_activity_count, dash_activities_activity_count, dash_activities_unique_activity_count):
         """
-        Test to ensure activity counts are consistent and sensible within the dashboard.
+        Test to ensure activity counts are consistent within the dashboard.
         """
         assert dash_home_activity_count == dash_activities_activity_count
         assert dash_home_unique_activity_count == dash_activities_unique_activity_count
+
+    def test_unique_vs_total_dash_activity_values(self, dash_home_activity_count, dash_home_unique_activity_count, dash_activities_activity_count, dash_activities_unique_activity_count):
+        """
+        Test to ensure unique activity counts within the dashboard are not higher
+        than the overall activity counts.
+        """
         assert dash_home_activity_count >= dash_home_unique_activity_count
         assert dash_activities_activity_count >= dash_activities_unique_activity_count
 
