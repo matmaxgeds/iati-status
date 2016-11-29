@@ -84,7 +84,6 @@ class WebTestBase:
             min_response_size = self.requests_to_load[request_to_load]['min_response_size']
         except KeyError:
             min_response_size = 4000
-
         req = self.loaded_request_from_test_name(request_to_load)
 
         result = req.content.decode(req.encoding)
