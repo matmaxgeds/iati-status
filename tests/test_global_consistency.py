@@ -131,7 +131,8 @@ class TestGlobalConsistency(WebTestBase):
         """
         max_datastore_disparity = 0.1
 
-        assert (datastore_api_activity_count >= dash_home_unique_activity_count * (1 - max_datastore_disparity)) and (datastore_api_activity_count <= dash_home_unique_activity_count * (1 + max_datastore_disparity))
+        assert datastore_api_activity_count >= dash_home_unique_activity_count * (1 - max_datastore_disparity)
+        assert datastore_api_activity_count <= dash_home_unique_activity_count * (1 + max_datastore_disparity)
 
     def test_activity_file_count_above_min(self, registry_activity_file_count, dash_home_activity_file_count, dash_files_activity_file_count):
         """
@@ -157,7 +158,8 @@ class TestGlobalConsistency(WebTestBase):
         """
         max_registry_disparity = 0.025
 
-        assert (registry_activity_file_count >= dash_files_activity_file_count * (1 - max_registry_disparity)) and (registry_activity_file_count <= dash_files_activity_file_count * (1 + max_registry_disparity))
+        assert registry_activity_file_count >= dash_files_activity_file_count * (1 - max_registry_disparity)
+        assert registry_activity_file_count <= dash_files_activity_file_count * (1 + max_registry_disparity)
 
     def test_org_file_count_above_min(self, registry_all_org_file_count, dash_home_org_file_count, dash_files_org_file_count):
         """
@@ -183,7 +185,8 @@ class TestGlobalConsistency(WebTestBase):
         """
         max_registry_disparity = 0.05
 
-        assert (registry_all_org_file_count >= dash_files_org_file_count * (1 - max_registry_disparity)) and (registry_all_org_file_count <= dash_files_org_file_count * (1 + max_registry_disparity))
+        assert registry_all_org_file_count >= dash_files_org_file_count * (1 - max_registry_disparity)
+        assert registry_all_org_file_count <= dash_files_org_file_count * (1 + max_registry_disparity)
 
     def test_publisher_count_above_min(self, registry_home_publisher_count, dash_home_publisher_count, dash_publishers_publisher_count):
         """
@@ -209,4 +212,5 @@ class TestGlobalConsistency(WebTestBase):
         """
         max_registry_disparity = 0.01
 
-        assert (registry_home_publisher_count >= dash_home_publisher_count * (1 - max_registry_disparity)) and (registry_home_publisher_count <= dash_home_publisher_count * (1 + max_registry_disparity))
+        assert registry_home_publisher_count >= dash_home_publisher_count * (1 - max_registry_disparity)
+        assert registry_home_publisher_count <= dash_home_publisher_count * (1 + max_registry_disparity)
