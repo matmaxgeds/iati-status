@@ -76,6 +76,16 @@ class WebTestBase:
         """
         assert loaded_request.status_code == 200
 
+    def test_non_tiny_response(self, loaded_request):
+        """
+        Tests that each loaded request has response content that is not tiny.
+        """
+        min_response_size = 4000
+
+        result = loaded_request.content.decode(loaded_request.encoding)
+
+        assert len(result) > min_response_size
+
     def test_num_urls(self):
         """
         Ensure that urls from a child class are being correctly detected
