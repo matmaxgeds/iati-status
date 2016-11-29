@@ -37,12 +37,11 @@ def get_single_int_from_xpath(request, xpath):
     Ensures the string can be a positive integer.
     Returns the located value.
     """
-    # TODO: Make this function neater
-    # TODO: Consider better name for function to make it clear that assertions are within
-    node_text_arr = locate_xpath_result(request, xpath + "/text()")
-    assert len(node_text_arr) == 1
-    node_str = node_text_arr[0].strip()
-    assert node_str.isdigit()
+    node_text_arr = get_text_from_xpath(request, xpath)
+    node_text_arr = [s for s in node_text_arr if len(s.strip()) > 0]
+    node_str = re.sub('\D', '', node_text_arr[0])
+    if len(node_str) == 0:
+        raise ValueError
     return int(node_str)
 
 def get_joined_text_from_xpath(request, xpath):
