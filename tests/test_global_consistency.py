@@ -47,6 +47,18 @@ class TestGlobalConsistency(WebTestBase):
         return cls._locate_int_on_page('IATI Dashboard - Homepage', '//*[@id="wrap"]/div[2]/div[2]/div[1]/div[2]/table/tbody/tr[2]/td[1]/a')
 
     @pytest.fixture
+    def dash_home_activity_file_count(cls):
+        return cls._locate_int_on_page('IATI Dashboard - Homepage', '//*[@id="wrap"]/div[2]/div[2]/div[1]/div[2]/table/tbody/tr[4]/td[1]/a')
+
+    @pytest.fixture
+    def dash_home_org_file_count(cls):
+        return cls._locate_int_on_page('IATI Dashboard - Homepage', '//*[@id="wrap"]/div[2]/div[2]/div[1]/div[2]/table/tbody/tr[5]/td[1]/a')
+
+    @pytest.fixture
+    def dash_home_publisher_count(cls):
+        return cls._locate_int_on_page('IATI Dashboard - Homepage', '//*[@id="wrap"]/div[2]/div[2]/div[1]/div[2]/table/tbody/tr[3]/td[1]/a')
+
+    @pytest.fixture
     def dash_activities_activity_count(cls):
         return cls._locate_int_on_page('IATI Dashboard - Activities Page', '//*[@id="wrap"]/div[2]/div[2]/div[1]/div/div[1]/h3/span[1]')
 
@@ -55,10 +67,46 @@ class TestGlobalConsistency(WebTestBase):
         return cls._locate_int_on_page('IATI Dashboard - Activities Page', '//*[@id="wrap"]/div[2]/div[2]/div[2]/div/div[1]/h3/span[1]')
 
     @pytest.fixture
+    def dash_files_activity_file_count(cls):
+        return cls._locate_int_on_page('IATI Dashboard - Files Page', '//*[@id="wrap"]/div[2]/div[2]/div[1]/div/div[1]/h3/span[1]')
+
+    @pytest.fixture
+    def dash_files_org_file_count(cls):
+        return cls._locate_int_on_page('IATI Dashboard - Files Page', '//*[@id="wrap"]/div[2]/div[2]/div[2]/div/div[1]/h3/span[1]')
+
+    @pytest.fixture
+    def dash_publishers_publisher_count(cls):
+        return cls._locate_int_on_page('IATI Dashboard - Publisher Page', '//*[@id="wrap"]/div[2]/div[2]/div[1]/div/div[1]/h3/span[1]')
+
+    @pytest.fixture
     def datastore_api_activity_count(cls):
         return cls._locate_int_on_page('Datastore API - Activity Count', '//result/iati-activities/query/total-count')
 
+    @pytest.fixture
+    def registry_home_publisher_count(cls):
+        return cls._locate_int_on_page('IATI Registry - Homepage', '//*[@id="home-icons"]/div/div[2]/div/a/strong')
+
+    @pytest.fixture
+    def registry_activity_file_count(cls):
+        return cls._locate_int_on_page('IATI Registry - Activity Dataset Page', '//*[@id="content"]/div[3]/div/section[1]/div[1]/form/h2')
+
+    @pytest.fixture
+    def registry_organisation_file_count(cls):
+        return cls._locate_int_on_page('IATI Registry - Organisation Dataset Page', '//*[@id="content"]/div[3]/div/section[1]/div[1]/form/h2')
+
+    @pytest.fixture
+    def registry_organization_file_count(cls):
+        return cls._locate_int_on_page('IATI Registry - organization Dataset Page', '//*[@id="content"]/div[3]/div/section[1]/div[1]/form/h2')
+
+    @pytest.fixture
+    def registry_all_org_file_count(cls, registry_organisation_file_count, registry_organization_file_count):
+        return registry_organisation_file_count + registry_organization_file_count
+
     def test_activity_count_above_min(self, dash_home_activity_count, dash_home_unique_activity_count, dash_activities_activity_count, dash_activities_unique_activity_count, datastore_api_activity_count):
+        """
+        Test to ensure the unique activity count is above a specified minumum value.
+        This checks both the dashboard and datastore.
+        """
         min_activity_count = 550000
 
         assert dash_home_activity_count >= min_activity_count
@@ -68,6 +116,9 @@ class TestGlobalConsistency(WebTestBase):
         assert datastore_api_activity_count >= min_activity_count
 
     def test_activity_count_dash_values(self, dash_home_activity_count, dash_home_unique_activity_count, dash_activities_activity_count, dash_activities_unique_activity_count):
+        """
+        Test to ensure activity counts are consistent and sensible within the dashboard.
+        """
         assert dash_home_activity_count == dash_activities_activity_count
         assert dash_home_unique_activity_count == dash_activities_unique_activity_count
         assert dash_home_activity_count >= dash_home_unique_activity_count
@@ -75,85 +126,87 @@ class TestGlobalConsistency(WebTestBase):
 
     def test_activity_count_consistency(self, datastore_api_activity_count, dash_home_unique_activity_count):
         """
-        Test to ensure the activity count is consistent across various
-        locations that display this value.
+        Test to ensure the activity count is consistent, within a margin of error,
+        between the datastore and dashboard.
         """
         max_datastore_disparity = 0.1
 
         assert (datastore_api_activity_count >= dash_home_unique_activity_count * (1 - max_datastore_disparity)) and (datastore_api_activity_count <= dash_home_unique_activity_count * (1 + max_datastore_disparity))
 
-    def test_activity_dataset_count_consistency(self):
+    def test_activity_file_count_above_min(self, registry_activity_file_count, dash_home_activity_file_count, dash_files_activity_file_count):
         """
-        Test to ensure the dataset count is consistent across various
-        locations that display this value.
+        Test to ensure the unique activity file count is above a specified minumum value.
+        This checks both the dashboard and registry.
         """
-        registry_file_req = self.loaded_request_from_test_name('IATI Registry - Activity Dataset Page')
-        dash_home_req = self.loaded_request_from_test_name('IATI Dashboard - Homepage')
-        dash_files_req = self.loaded_request_from_test_name('IATI Dashboard - Files Page')
-        registry_xpath = '//*[@id="content"]/div[3]/div/section[1]/div[1]/form/h2'
-        dash_home_xpath = '//*[@id="wrap"]/div[2]/div[2]/div[1]/div[2]/table/tbody/tr[4]/td[1]/a'
-        dash_files_xpath = '//*[@id="wrap"]/div[2]/div[2]/div[1]/div/div[1]/h3/span[1]'
         min_file_count = 4100
+
+        assert registry_activity_file_count >= min_file_count
+        assert dash_home_activity_file_count >= min_file_count
+        assert dash_files_activity_file_count >= min_file_count
+
+    def test_activity_file_count_dash_values(self, dash_home_activity_file_count, dash_files_activity_file_count):
+        """
+        Test to ensure activity file counts are consistent within the dashboard.
+        """
+        assert dash_home_activity_file_count == dash_files_activity_file_count
+
+    def test_activity_file_count_consistency(self, registry_activity_file_count, dash_home_activity_file_count, dash_files_activity_file_count):
+        """
+        Test to ensure the activity file count is consistent, within a margin of error,
+        between the registry and dashboard.
+        """
         max_registry_disparity = 0.025
 
-        registry_file_count = utility.get_single_int_from_xpath(registry_file_req, registry_xpath)
-        dash_home_file_count = utility.get_single_int_from_xpath(dash_home_req, dash_home_xpath)
-        dash_files_count = utility.get_single_int_from_xpath(dash_files_req, dash_files_xpath)
+        assert (registry_activity_file_count >= dash_files_activity_file_count * (1 - max_registry_disparity)) and (registry_activity_file_count <= dash_files_activity_file_count * (1 + max_registry_disparity))
 
-        assert registry_file_count >= min_file_count
-        assert dash_home_file_count >= min_file_count
-        assert dash_files_count >= min_file_count
-
-        assert dash_home_file_count == dash_files_count
-        assert (registry_file_count >= dash_files_count * (1 - max_registry_disparity)) and (registry_file_count <= dash_files_count * (1 + max_registry_disparity))
-
-    def test_organisation_dataset_count_consistency(self):
+    def test_org_file_count_above_min(self, registry_all_org_file_count, dash_home_org_file_count, dash_files_org_file_count):
         """
-        Test to ensure the dataset count is consistent across various
-        locations that display this value.
+        Test to ensure the organisation file count is above a specified minumum value.
+        This checks both the dashboard and registry.
         """
-        registry_file_s_req = self.loaded_request_from_test_name('IATI Registry - Organisation Dataset Page')
-        registry_file_z_req = self.loaded_request_from_test_name('IATI Registry - organization Dataset Page')
-        dash_home_req = self.loaded_request_from_test_name('IATI Dashboard - Homepage')
-        dash_files_req = self.loaded_request_from_test_name('IATI Dashboard - Files Page')
-        registry_xpath = '//*[@id="content"]/div[3]/div/section[1]/div[1]/form/h2'
-        dash_home_xpath = '//*[@id="wrap"]/div[2]/div[2]/div[1]/div[2]/table/tbody/tr[5]/td[1]/a'
-        dash_files_xpath = '//*[@id="wrap"]/div[2]/div[2]/div[2]/div/div[1]/h3/span[1]'
         min_file_count = 350
+
+        assert registry_all_org_file_count >= min_file_count
+        assert dash_home_org_file_count >= min_file_count
+        assert dash_files_org_file_count >= min_file_count
+
+    def test_org_file_count_dash_values(self, dash_home_org_file_count, dash_files_org_file_count):
+        """
+        Test to ensure organisation file counts are consistent within the dashboard.
+        """
+        assert dash_home_org_file_count == dash_files_org_file_count
+
+    def test_organisation_dataset_count_consistency(self, registry_all_org_file_count, dash_home_org_file_count, dash_files_org_file_count):
+        """
+        Test to ensure the activity file count is consistent, within a margin of error,
+        between the registry and dashboard.
+        """
         max_registry_disparity = 0.05
 
-        registry_file_count = utility.get_single_int_from_xpath(registry_file_s_req, registry_xpath) + utility.get_single_int_from_xpath(registry_file_z_req, registry_xpath)
-        dash_home_file_count = utility.get_single_int_from_xpath(dash_home_req, dash_home_xpath)
-        dash_files_count = utility.get_single_int_from_xpath(dash_files_req, dash_files_xpath)
+        assert (registry_all_org_file_count >= dash_files_org_file_count * (1 - max_registry_disparity)) and (registry_all_org_file_count <= dash_files_org_file_count * (1 + max_registry_disparity))
 
-        assert registry_file_count >= min_file_count
-        assert dash_home_file_count >= min_file_count
-        assert dash_files_count >= min_file_count
-
-        assert dash_home_file_count == dash_files_count
-        assert (registry_file_count >= dash_files_count * (1 - max_registry_disparity)) and (registry_file_count <= dash_files_count * (1 + max_registry_disparity))
-
-    def test_publisher_count_consistency(self):
+    def test_publisher_count_above_min(self, registry_home_publisher_count, dash_home_publisher_count, dash_publishers_publisher_count):
         """
-        Test to ensure the publisher count is consistent across various
-        locations that display this value.
+        Test to ensure the publisher count is above a specified minumum value.
+        This checks both the dashboard and registry.
         """
-        registry_home_req = self.loaded_request_from_test_name('IATI Registry - Homepage')
-        dash_home_req = self.loaded_request_from_test_name('IATI Dashboard - Homepage')
-        dash_publishers_req = self.loaded_request_from_test_name('IATI Dashboard - Publisher Page')
-        registry_xpath = '//*[@id="home-icons"]/div/div[2]/div/a/strong'
-        dash_home_xpath = '//*[@id="wrap"]/div[2]/div[2]/div[1]/div[2]/table/tbody/tr[3]/td[1]/a'
-        dash_pub_xpath = '//*[@id="wrap"]/div[2]/div[2]/div[1]/div/div[1]/h3/span[1]'
         min_publisher_count = 480
+
+        assert registry_home_publisher_count >= min_publisher_count
+        assert dash_home_publisher_count >= min_publisher_count
+        assert dash_publishers_publisher_count >= min_publisher_count
+
+    def test_publisher_count_dash_values(self, dash_home_publisher_count, dash_publishers_publisher_count):
+        """
+        Test to ensure organisation file counts are consistent within the dashboard.
+        """
+        assert dash_home_publisher_count == dash_publishers_publisher_count
+
+    def test_publisher_count_consistency(self, registry_home_publisher_count, dash_home_publisher_count):
+        """
+        Test to ensure the activity file count is consistent, within a margin of error,
+        between the registry and dashboard.
+        """
         max_registry_disparity = 0.01
 
-        registry_pub_count = utility.get_single_int_from_xpath(registry_home_req, registry_xpath)
-        dash_home_pub_count = utility.get_single_int_from_xpath(dash_home_req, dash_home_xpath)
-        dash_pub_count = utility.get_single_int_from_xpath(dash_publishers_req, dash_pub_xpath)
-
-        assert registry_pub_count >= min_publisher_count
-        assert dash_home_pub_count >= min_publisher_count
-        assert dash_pub_count >= min_publisher_count
-        assert dash_home_pub_count == dash_pub_count
-
-        assert (registry_pub_count >= dash_pub_count * (1 - max_registry_disparity)) and (registry_pub_count <= dash_pub_count * (1 + max_registry_disparity))
+        assert (registry_home_publisher_count >= dash_home_publisher_count * (1 - max_registry_disparity)) and (registry_home_publisher_count <= dash_home_publisher_count * (1 + max_registry_disparity))
