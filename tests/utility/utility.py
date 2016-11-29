@@ -1,6 +1,7 @@
 import os
 import re
 from lxml import etree
+import pytest
 
 def locate_xpath_result(request, xpath):
     """
@@ -28,6 +29,21 @@ def get_text_from_xpath(request, xpath):
     Returns a list of strings containing the contents of these nodes.
     """
     return locate_xpath_result(request, xpath + "/text()")
+
+def get_single_int_from_xpath(request, xpath):
+    """
+    Locates the nodes within the HTML at the specific xpath.
+    Finds a single string containing the contents of this node.
+    Ensures the string can be a positive integer.
+    Returns the located value.
+    """
+    # TODO: Make this function neater
+    # TODO: Consider better name for function to make it clear that assertions are within
+    node_text_arr = locate_xpath_result(request, xpath + "/text()")
+    assert len(node_text_arr) == 1
+    node_str = node_text_arr[0].strip()
+    assert node_str.isdigit()
+    return int(node_str)
 
 def get_joined_text_from_xpath(request, xpath):
     """
