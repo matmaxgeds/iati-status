@@ -33,40 +33,54 @@ class TestGlobalConsistency(WebTestBase):
         }
     }
 
-    def test_activity_count_consistency(self):
+    def _locate_int_on_page(self, test_name, xpath):
+        req = self.loaded_request_from_test_name(test_name)
+        result = utility.get_single_int_from_xpath(req, xpath)
+        return result
+
+    @pytest.fixture
+    def dash_home_activity_count(cls):
+        return cls._locate_int_on_page('IATI Dashboard - Homepage', '//*[@id="wrap"]/div[2]/div[2]/div[1]/div[2]/table/tbody/tr[1]/td[1]/a')
+
+    @pytest.fixture
+    def dash_home_unique_activity_count(cls):
+        return cls._locate_int_on_page('IATI Dashboard - Homepage', '//*[@id="wrap"]/div[2]/div[2]/div[1]/div[2]/table/tbody/tr[2]/td[1]/a')
+
+    @pytest.fixture
+    def dash_activities_activity_count(cls):
+        return cls._locate_int_on_page('IATI Dashboard - Activities Page', '//*[@id="wrap"]/div[2]/div[2]/div[1]/div/div[1]/h3/span[1]')
+
+    @pytest.fixture
+    def dash_activities_unique_activity_count(cls):
+        return cls._locate_int_on_page('IATI Dashboard - Activities Page', '//*[@id="wrap"]/div[2]/div[2]/div[2]/div/div[1]/h3/span[1]')
+
+    @pytest.fixture
+    def datastore_api_activity_count(cls):
+        return cls._locate_int_on_page('Datastore API - Activity Count', '//result/iati-activities/query/total-count')
+
+    def test_activity_count_above_min(self, dash_home_activity_count, dash_home_unique_activity_count, dash_activities_activity_count, dash_activities_unique_activity_count, datastore_api_activity_count):
+        min_activity_count = 550000
+
+        assert dash_home_activity_count >= min_activity_count
+        assert dash_home_unique_activity_count >= min_activity_count
+        assert dash_activities_activity_count >= min_activity_count
+        assert dash_activities_unique_activity_count >= min_activity_count
+        assert datastore_api_activity_count >= min_activity_count
+
+    def test_activity_count_dash_values(self, dash_home_activity_count, dash_home_unique_activity_count, dash_activities_activity_count, dash_activities_unique_activity_count):
+        assert dash_home_activity_count == dash_activities_activity_count
+        assert dash_home_unique_activity_count == dash_activities_unique_activity_count
+        assert dash_home_activity_count >= dash_home_unique_activity_count
+        assert dash_activities_activity_count >= dash_activities_unique_activity_count
+
+    def test_activity_count_consistency(self, datastore_api_activity_count, dash_home_unique_activity_count):
         """
         Test to ensure the activity count is consistent across various
         locations that display this value.
         """
-        dash_home_req = self.loaded_request_from_test_name('IATI Dashboard - Homepage')
-        dash_activities_req = self.loaded_request_from_test_name('IATI Dashboard - Activities Page')
-        datastore_api_req = self.loaded_request_from_test_name('Datastore API - Activity Count')
-        dash_home_xpath = '//*[@id="wrap"]/div[2]/div[2]/div[1]/div[2]/table/tbody/tr[1]/td[1]/a'
-        dash_home_unique_xpath = '//*[@id="wrap"]/div[2]/div[2]/div[1]/div[2]/table/tbody/tr[2]/td[1]/a'
-        dash_activities_xpath = '//*[@id="wrap"]/div[2]/div[2]/div[1]/div/div[1]/h3/span[1]'
-        dash_activities_unique_xpath = '//*[@id="wrap"]/div[2]/div[2]/div[2]/div/div[1]/h3/span[1]'
-        datastore_api_xpath = '//result/iati-activities/query/total-count'
-        min_activity_count = 550000
         max_datastore_disparity = 0.1
 
-        dash_home_act_count = utility.get_single_int_from_xpath(dash_home_req, dash_home_xpath)
-        dash_home_unique_act_count = utility.get_single_int_from_xpath(dash_home_req, dash_home_unique_xpath)
-        dash_activities_act_count = utility.get_single_int_from_xpath(dash_activities_req, dash_activities_xpath)
-        dash_activities_unique_act_count = utility.get_single_int_from_xpath(dash_activities_req, dash_activities_unique_xpath)
-        datastore_api_act_count = utility.get_single_int_from_xpath(datastore_api_req, datastore_api_xpath)
-
-        assert dash_home_act_count >= min_activity_count
-        assert dash_home_unique_act_count >= min_activity_count
-        assert dash_activities_act_count >= min_activity_count
-        assert dash_activities_unique_act_count >= min_activity_count
-        assert datastore_api_act_count >= min_activity_count
-
-        assert dash_home_act_count == dash_activities_act_count
-        assert dash_home_unique_act_count == dash_activities_unique_act_count
-        assert dash_home_act_count >= dash_home_unique_act_count
-        assert dash_activities_act_count >= dash_activities_unique_act_count
-
-        assert (datastore_api_act_count >= dash_home_unique_act_count * (1 - max_datastore_disparity)) and (datastore_api_act_count <= dash_home_unique_act_count * (1 + max_datastore_disparity))
+        assert (datastore_api_activity_count >= dash_home_unique_activity_count * (1 - max_datastore_disparity)) and (datastore_api_activity_count <= dash_home_unique_activity_count * (1 + max_datastore_disparity))
 
     def test_activity_dataset_count_consistency(self):
         """
