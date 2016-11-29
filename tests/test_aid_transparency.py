@@ -51,6 +51,22 @@ class TestAidTransparency(WebTestBase):
         assert max_summary_length > len(utility.get_joined_text_from_xpath(req, summary1_xpath).strip()) > min_summary_length
         assert max_summary_length > len(utility.get_joined_text_from_xpath(req, summary2_xpath).strip()) > min_summary_length
 
+
+    @pytest.mark.parametrize("target_request", ["AidTransparency Homepage - no www", "AidTransparency Homepage - with www"])
+    def test_homepage_news_item_image(self, target_request):
+        """
+        Test that the image for the latest news item loads correctly.
+        """
+        req = self.loaded_request_from_test_name(target_request)
+        min_img_file_size = 2048
+
+        img_url = utility.locate_xpath_result(req, '//*[@id="home-featured"]/div/article[1]/div[1]/a/img/@src')
+        assert len(img_url) == 1
+        result = requests.get(img_url[0])
+
+        assert result.status_code == 200
+        assert len(result.content) >= min_img_file_size
+
     @pytest.mark.parametrize("target_request", ["Tabulated News Archive"])
     def test_news_item_pagination(self, target_request):
         """
