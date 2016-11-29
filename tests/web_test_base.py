@@ -57,18 +57,18 @@ class WebTestBase:
         """
         Dynamically parametrizes fixtures after initialisation
         """
-        if 'requests_to_load' in metafunc.fixturenames:
-            metafunc.parametrize("requests_to_load", cls.requests_to_load.keys())
+        if 'request_to_load' in metafunc.fixturenames:
+            metafunc.parametrize("request_to_load", cls.requests_to_load.keys())
         if 'text_to_find' in metafunc.fixturenames:
             metafunc.parametrize("text_to_find", cls.text_to_find)
 
     @pytest.fixture
-    def loaded_request(cls, requests_to_load):
+    def loaded_request(cls, request_to_load):
         """
         Converts the parametrized URL into loaded Request object that has
         already been initialised.
         """
-        return cls.loaded_requests[requests_to_load]
+        return cls.loaded_requests[request_to_load]
 
     def test_200_response(self, loaded_request):
         """
@@ -76,13 +76,18 @@ class WebTestBase:
         """
         assert loaded_request.status_code == 200
 
-    def test_non_tiny_response(self, loaded_request):
+    def test_non_tiny_response(self, request_to_load):
         """
         Tests that each loaded request has response content that is not tiny.
         """
-        min_response_size = 4000
+        try:
+            min_response_size = self.requests_to_load[request_to_load]['min_response_size']
+        except KeyError:
+            min_response_size = 4000
 
-        result = loaded_request.content.decode(loaded_request.encoding)
+        req = self.loaded_request_from_test_name(request_to_load)
+
+        result = req.content.decode(req.encoding)
 
         assert len(result) >= min_response_size
 
