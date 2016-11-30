@@ -29,7 +29,7 @@ class TestGlobalConsistency(WebTestBase):
         }
         , 'Datastore API - Activity Count': {
             'url': 'http://datastore.iatistandard.org/api/1/access/activity.xml?limit=0'
-            , 'min_response_size': 300
+            , 'min_response_size': 295
         }
     }
 
