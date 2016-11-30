@@ -13,9 +13,9 @@ IATI Website Tests
 Introduction
 ------------
 
-This repository contains smoke tests and sanity checks for all live IATI websites.
+This repository contains smoke tests and sanity checks for all live IATI websites and web tools.
 
-The output of tests can be been at: https://travis-ci.org/IATI/IATI-Website-Tests
+The output of tests can be seen at: https://travis-ci.org/IATI/IATI-Website-Tests
 
 
 Technology Overview
@@ -26,6 +26,8 @@ Tests are written using `pytest <http://doc.pytest.org>`_.
 Most tests are designed to obtain HTML and associated content from IATI websites, using the `requests library <http://docs.python-requests.org>`_. Additional tests on the status of backups are made using the `paramiko module <http://www.paramiko.org>`_, which checks the status of expected backup files via an SSH connection.
 
 These tests are run daily (at around 12noon) using Travis `cron jobs <https://docs.travis-ci.com/user/cron-jobs/>`_.
+
+For a more detailed of the test architecture, view the README under `tests`.
 
 
 Installation
