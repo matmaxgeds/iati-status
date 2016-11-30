@@ -13,9 +13,18 @@ IATI Website Tests
 Introduction
 ------------
 
-This repository contains tests of all IATI live websites.
+This repository contains smoke tests and sanity checks for all live IATI websites.
 
-These tests are run daily by Travis `cron jobs <https://docs.travis-ci.com/user/cron-jobs/>`_: https://travis-ci.org/IATI/IATI-Website-Tests
+The output of tests can be been at: https://travis-ci.org/IATI/IATI-Website-Tests
+
+
+Technology Overview
+-------------------
+
+Tests are written using `pytest <http://doc.pytest.org>`_.
+
+These tests are run daily (at around 12noon) using Travis `cron jobs <https://docs.travis-ci.com/user/cron-jobs/>`_.
+
 
 
 Installation
