@@ -23,8 +23,9 @@ Technology Overview
 
 Tests are written using `pytest <http://doc.pytest.org>`_.
 
-These tests are run daily (at around 12noon) using Travis `cron jobs <https://docs.travis-ci.com/user/cron-jobs/>`_.
+Most tests are designed to obtain HTML and associated content from IATI websites, using the `requests library <http://docs.python-requests.org>`_.
 
+These tests are run daily (at around 12noon) using Travis `cron jobs <https://docs.travis-ci.com/user/cron-jobs/>`_.
 
 
 Installation
