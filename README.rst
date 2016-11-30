@@ -13,9 +13,7 @@ IATI Website Tests
 Introduction
 ------------
 
-This repository contains tests of the live websites.
-
-Currently only the dashboard is tested.
+This repository contains tests of all IATI live websites.
 
 These tests are run daily by Travis `cron jobs <https://docs.travis-ci.com/user/cron-jobs/>`_: https://travis-ci.org/IATI/IATI-Website-Tests
 
