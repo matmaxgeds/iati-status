@@ -5,12 +5,14 @@ The tests contained within this repository are high level smoke and sanity tests
 
 There are two categories of tests - website tests, and server tests. The website tests check the functionality of public-facing websites and web tools. The server tests check the functionality of the server(s) that run the afore-mentioned services.
 
+All tests utilise `py.test` as the test framework.
+
 Website Tests
 -------------
 
-_text_
+The website tests are based upon a core shared functionality located within `web_test_base.py`. All other web tests inherit from this core functionality.
 
 Server Tests
 ------------
 
-_text_
+The server tests also use py.test, however do not inherit from the same base class as the website tests.
