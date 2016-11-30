@@ -16,6 +16,7 @@ class TestIATIDashboard(WebTestBase):
         Test that each page contains links to the defined URLs.
         """
         result = utility.get_links_from_page(loaded_request)
+
         assert "https://github.com/IATI/IATI-Dashboard/" in result
 
     def test_recently_generated(self, loaded_request):
@@ -29,13 +30,11 @@ class TestIATIDashboard(WebTestBase):
         generation_time_arr = utility.get_text_from_xpath(loaded_request, generation_time_xpath)
         data_time_arr = utility.get_text_from_xpath(loaded_request, data_time_xpath)
 
-        # TODO: split shared functionality so these assertions can be their own test
-        assert len(generation_time_arr) == 1
-        assert len(data_time_arr) == 1
-
         generation_time = date_parser.parse(generation_time_arr[0])
         data_time = date_parser.parse(data_time_arr[0])
         now = datetime.now(pytz.utc)
 
+        assert len(generation_time_arr) == 1
+        assert len(data_time_arr) == 1
         assert (now - max_delay) < generation_time
         assert (now - max_delay) < data_time
