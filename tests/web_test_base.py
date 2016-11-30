@@ -40,11 +40,6 @@ class WebTestBase:
 
     requests_to_load = dict()
     initial_num_urls_to_test = len(requests_to_load)
-    """
-    Will hold request objects from loading each of the URLS in self.urls
-    Keys are the urls themselves
-    Values are the request objects
-    """
     loaded_requests = dict()
 
     def loaded_request_from_test_name(self, test_name):
