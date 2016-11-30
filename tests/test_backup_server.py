@@ -19,6 +19,9 @@ class TestIATIBackupServer:
         try:
             self.client = paramiko.SSHClient()
             self.client.load_system_host_keys()
+            client.set_missing_host_key_policy(
+                paramiko.AutoAddPolicy()
+                )
             self.client.connect(hostname, username=username, password=password, timeout=5)
         except AuthenticationException:
             print("Authentication failed, please verify your credentials: %s")
