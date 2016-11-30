@@ -7,7 +7,7 @@ class TestIATIDatastore(WebTestBase):
             'url': 'http://datastore.iatistandard.org/'
         },
         'Datastore download: csv': {
-            'url': 'http://dev.datastore.iatistandard.org/api/1/access/activity.csv'
+            'url': 'http://datastore.iatistandard.org/api/1/access/activity.csv'
         },
         'Datastore download: xml': {
             'url': 'http://datastore.iatistandard.org/api/1/access/activity.xml'
