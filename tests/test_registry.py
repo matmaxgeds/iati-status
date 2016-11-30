@@ -41,14 +41,17 @@ class TestIATIRegistry(WebTestBase):
         form_xpath = '//*[@id="user-register-form"]'
         form_method_xpath = '//*[@id="user-register-form"]/@method'
         input_xpath = '//*[@id="user-register-form"]/div/div/input'
+        button_xpath = '//*[@id="user-register-form"]/div/button'
 
         forms = utility.locate_xpath_result(req, form_xpath)
         form_method = utility.locate_xpath_result(req, form_method_xpath)
         form_inputs = utility.locate_xpath_result(req, input_xpath)
+        form_buttons = utility.locate_xpath_result(req, button_xpath)
 
         assert len(forms) == 1
         assert form_method == ['post']
         assert len(form_inputs) == 5
+        assert len(form_buttons) == 1
 
     @pytest.mark.parametrize("target_request", ["IATI Registry Login Page"])
     def test_login_form_presence(self, target_request):
@@ -60,13 +63,16 @@ class TestIATIRegistry(WebTestBase):
         form_action_xpath = '//*[@id="content"]/div[3]/div/section/div/form/@action'
         form_method_xpath = '//*[@id="content"]/div[3]/div/section/div/form/@method'
         input_xpath = '//*[@id="content"]/div[3]/div/section/div/form/div/div/input'
+        button_xpath = '//*[@id="content"]/div[3]/div/section/div/form/div/button'
 
         forms = utility.locate_xpath_result(req, form_xpath)
         form_action = utility.locate_xpath_result(req, form_action_xpath)
         form_method = utility.locate_xpath_result(req, form_method_xpath)
         form_inputs = utility.locate_xpath_result(req, input_xpath)
+        form_buttons = utility.locate_xpath_result(req, button_xpath)
 
         assert len(forms) == 1
         assert form_action == ['/login_generic?came_from=/user/logged_in']
         assert form_method == ['post']
         assert len(form_inputs) == 2
+        assert len(form_buttons) == 1
