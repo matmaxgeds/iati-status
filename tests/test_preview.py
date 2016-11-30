@@ -32,7 +32,7 @@ class TestIATIPreview(WebTestBase):
         form_action = utility.locate_xpath_result(req, form_action_xpath)
         form_method = utility.locate_xpath_result(req, form_method_xpath)
         form_inputs = utility.locate_xpath_result(req, input_xpath)
-        form_buttons = utility.locate_xpath_result(req, input_xpath)
+        form_buttons = utility.locate_xpath_result(req, button_xpath)
 
         assert len(forms) == 1
         assert form_action == ['index.php']
