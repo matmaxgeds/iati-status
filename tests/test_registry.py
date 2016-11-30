@@ -15,6 +15,9 @@ class TestIATIRegistry(WebTestBase):
         , 'IATI Registry Homepage - https, with www': {
             'url': 'https://www.iatiregistry.org/'
         }
+        , 'IATI Registry Registration Page': {
+            'url': 'https://iatiregistry.org/user/register'
+        }
     }
 
     def test_contains_links(self, loaded_request):
@@ -25,3 +28,21 @@ class TestIATIRegistry(WebTestBase):
 
         assert "http://www.aidtransparency.net/" in result
         assert "http://www.iatistandard.org/" in result
+
+    @pytest.mark.parametrize("target_request", ["IATI Registry Registration Page"])
+    def test_registration_form_presence(self, target_request):
+        """
+        Test that there is a valid registration form on the Registry Registration Page.
+        """
+        req = self.loaded_request_from_test_name(target_request)
+        form_xpath = '//*[@id="user-register-form"]'
+        form_method_xpath = '//*[@id="user-register-form"]/@method'
+        input_xpath = '//*[@id="user-register-form"]/div/div/input'
+
+        forms = utility.locate_xpath_result(req, form_xpath)
+        form_method = utility.locate_xpath_result(req, form_method_xpath)
+        form_inputs = utility.locate_xpath_result(req, input_xpath)
+
+        assert len(forms) == 1
+        assert form_method == ['post']
+        assert len(form_inputs) == 5
