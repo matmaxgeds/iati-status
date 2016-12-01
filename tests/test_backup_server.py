@@ -51,7 +51,7 @@ class TestIATIBackupServer:
         - a filename matching a regex pattern (which defines the expected filename)
         """
         stdin, stdout, stderr = self.client.exec_command(
-            "find /home/backups/csv2iati -type f -mtime -1 -print0 | xargs -0 du | xargs echo -n"
+            "find /home/backups/csv2iati -maxdepth 1 -type f -mtime -1 -print0 | xargs -0 du | xargs echo -n"
             )
         stdout_unicode = stdout.read().decode('utf-8')
         filesize_str, filename = stdout_unicode.split(" ")
