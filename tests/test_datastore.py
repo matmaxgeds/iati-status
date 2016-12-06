@@ -1,4 +1,4 @@
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 import pytest
 from web_test_base import *
 
@@ -7,8 +7,8 @@ class TestIATIDatastore(WebTestBase):
         'Datastore Homepage': {
             'url': 'http://datastore.iatistandard.org/'
         }
-        , 'API - Activities Updated since Yesterday': {
-            'url': 'http://datastore.iatistandard.org/api/1/access/activity.xml?limit=0&last-updated-datetime__gt=' + str(date.today() - timedelta(days=1))
+        , 'API - Activities Updated since Yesterday-ish': {
+            'url': 'http://datastore.iatistandard.org/api/1/access/activity.xml?limit=0&last-updated-datetime__gt=' + str(date.today() - timedelta(days=(1 if datetime.utcnow().hour >= 8 else 2)))
             , 'min_response_size': 295
         }
         , 'API - Activities Updated since 2 days ago': {
@@ -41,7 +41,7 @@ class TestIATIDatastore(WebTestBase):
 
         assert "http://iatiregistry.org/" in result
 
-    @pytest.mark.parametrize("target_request", ["API - Activities Updated since Yesterday", "API - Activities Updated since 2 days ago", "API - Activities Updated since 3 days ago"])
+    @pytest.mark.parametrize("target_request", ["API - Activities Updated since Yesterday-ish", "API - Activities Updated since 2 days ago", "API - Activities Updated since 3 days ago"])
     def test_recent_activities(self, target_request):
         """
         Test that the datastore API knows of activities updated in the past
