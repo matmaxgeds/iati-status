@@ -145,7 +145,7 @@ class TestGlobalConsistency(WebTestBase):
         Test to ensure the unique activity file count is above a specified minumum value.
         This checks both the dashboard and registry.
         """
-        min_file_count = 4100
+        min_file_count = 4000
 
         assert registry_activity_file_count >= min_file_count
         assert dash_home_activity_file_count >= min_file_count
@@ -162,7 +162,7 @@ class TestGlobalConsistency(WebTestBase):
         Test to ensure the activity file count is consistent, within a margin of error,
         between the registry and dashboard.
         """
-        max_registry_disparity = 0.025
+        max_registry_disparity = 0.05
 
         assert registry_activity_file_count >= dash_files_activity_file_count * (1 - max_registry_disparity)
         assert registry_activity_file_count <= dash_files_activity_file_count * (1 + max_registry_disparity)
