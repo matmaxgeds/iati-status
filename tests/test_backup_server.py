@@ -87,13 +87,13 @@ class TestIATIBackupServer:
         - Every file is greater than 0 bytes
         - All files have been modified (i.e. updated) the past day
         """
+        datetime_yesterday = datetime.now(timezone.utc) - timedelta(days=1)
         github_backups = self._get_directory_contents("/home/backups/backup-github/github-backups")
 
-        github_backups_filesizes = [v['filesize'] for k,v in github_backups.items()]
-        github_backups_last_modified_dates =  [v['last_modified'] for k,v in github_backups.items()]
+        github_backups_filesizes = [v['filesize'] for v in github_backups.values()]
+        github_backups_last_modified_dates =  [v['last_modified'] for v in github_backups.values()]
         smallest_backup_filesize = min(github_backups_filesizes)
         oldest_last_modified_date = min(github_backups_last_modified_dates)
-        datetime_yesterday = datetime.now(timezone.utc) - timedelta(days=1)
 
         assert len(github_backups) >= 115
         assert smallest_backup_filesize > 0
