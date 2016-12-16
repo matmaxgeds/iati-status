@@ -37,11 +37,11 @@ class TestIATIDatastore(WebTestBase):
 
         assert "http://iatiregistry.org/" in result
 
-    @pytest.mark.parametrize("target_request", ["API - Activities Updated since Yesterday-ish", "API - Activities Updated since 2 days ago", "API - Activities Updated since 3 days ago"])
+    @pytest.mark.parametrize("target_request", ["API - Activities Updated since 2 days ago", "API - Activities Updated since 3 days ago"])
     def test_recent_activities(self, target_request):
         """
         Test that the datastore API knows of activities updated in the past
-        couple of days.
+        few days.
         """
         req = self.loaded_request_from_test_name(target_request)
         xpath = '//result/iati-activities/query/total-count'
