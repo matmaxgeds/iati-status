@@ -25,7 +25,7 @@ Tests are written using `pytest <http://doc.pytest.org>`_.
 
 Most tests are designed to obtain HTML and associated content from IATI websites, using the `requests library <http://docs.python-requests.org>`_. Additional tests on the status of backups are made using the `paramiko module <http://www.paramiko.org>`_, which checks the status of expected backup files via an SSH connection.
 
-These tests are run daily (at around 12noon) using Travis `cron jobs <https://docs.travis-ci.com/user/cron-jobs/>`_.
+These tests are run daily (at around 12noon) using Travis `cron jobs <https://docs.travis-ci.com/user/cron-jobs/>`_. They are also run every 15 minutes throughout the day by use of a Travis API call from an IATI-managed server.
 
 For a more detailed of the test architecture, view the README under `tests`.
 
