@@ -1,4 +1,5 @@
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
+from dateutil.relativedelta import relativedelta
 import os
 import pytest
 import paramiko
@@ -44,13 +45,13 @@ class TestIATIBackupServer:
 
         assert result == 0  # 0 indicates the network is active
 
-    def _get_directory_contents(self, dir_path):
+    def _get_file_or_directory_contents(self, file_or_dir_path):
         """
-        Returns a dictionary of files/directories present within a given directory
-        path.
+        Returns a dictionary of files/directories present at a given file or
+        directory path.
 
         Input:
-          dir_path -- Path to to directory
+          file_or_dir_path -- Path to a file or directory
 
         Returns:
           Dictionary with file/directory name as key, then dictionary containing
@@ -59,7 +60,7 @@ class TestIATIBackupServer:
           Returns None if no file/directory present.
         """
         stdin, stdout, stderr = self.client.exec_command(
-            "find {} -maxdepth 1 -print0 | xargs -0 stat -c '%y %s %n' | perl -pe 'chomp if eof'".format(dir_path)
+            "find {} -maxdepth 1 -print0 | xargs -0 stat -c '%y %s %n' | perl -pe 'chomp if eof'".format(file_or_dir_path)
             )
         stdout_unicode = stdout.read().decode('utf-8')
         stdout_lines = stdout_unicode.split("\n")
@@ -68,7 +69,7 @@ class TestIATIBackupServer:
             output = dict()
             for line in stdout_lines:
                 line_parts = line.split(" ")
-                relative_path = line_parts[4].replace(dir_path, ".")
+                relative_path = line_parts[4].replace(file_or_dir_path, ".")
                 output[relative_path] = {
                     "last_modified": datetime.strptime(
                         "{} {} {}".format(line_parts[0], line_parts[1][0:15], line_parts[2]),
@@ -88,7 +89,7 @@ class TestIATIBackupServer:
         - All files have been modified (i.e. updated) the past day
         """
         datetime_yesterday = datetime.now(timezone.utc) - timedelta(days=1)
-        github_backups = self._get_directory_contents("/home/backups/backup-github/github-backups")
+        github_backups = self._get_file_or_directory_contents("/home/backups/backup-github/github-backups")
 
         github_backups_filesizes = [v['filesize'] for v in github_backups.values()]
         github_backups_last_modified_dates =  [v['last_modified'] for v in github_backups.values()]
@@ -108,7 +109,7 @@ class TestIATIBackupServer:
         - a filename matching a regex pattern (which defines the expected filename)
 
         #TODO Possibly refactor (if appropriate, so that this test uses
-            self._get_directory_contents
+            self._get_file_or_directory_contents
         """
         stdin, stdout, stderr = self.client.exec_command(
             "find /home/backups/csv2iati -maxdepth 1 -type f -mtime -1 -print0 | xargs -0 du -b | xargs echo -n"
@@ -133,3 +134,39 @@ class TestIATIBackupServer:
         disk_space_available = int(stdout.read())
 
         assert disk_space_available > 1000000  # 1000000KB ~ 1GB
+
+    @pytest.mark.parametrize("filename_suffix", [
+        "timeliness_frequency.csv",
+        "timeliness_timelag.csv",
+        "forwardlooking.csv",
+        "comprehensiveness_summary.csv",
+        "comprehensiveness_core.csv",
+        "comprehensiveness_financials.csv",
+        "comprehensiveness_valueadded.csv",
+        "coverage.csv",
+        "transparencyindicator.csv"])
+    def test_publisher_stats_backup(self, filename_suffix):
+        """
+        Tests that a monthly backup has been made of staistics that form the Global
+        Partnership Transparency Indicator Proposal.  These will have been downloaded
+        by a script (set-up to run monthly under cron):
+        https://github.com/IATI/operations-helpers/blob/master/Dashboard/gpti_data_pull.sh
+
+        In the saved output, dates are prepended to saved filenames,
+        e.g. '20170101-forwardlooking.csv'.
+        """
+        # Backups are made on the first day of the month at 11pm, so use the previous month if this is the first day of the month
+        if date.today().day == 1:
+            date_month_to_test = date.today() - relativedelta(months=1)
+        else:
+            date_month_to_test = date.today()
+        expected_last_backup_date = date(date_month_to_test.year, date_month_to_test.month, 1)
+        expected_backup_filename = "{}-{}".format(
+            expected_last_backup_date.strftime('%Y%m%d'),
+            filename_suffix
+            )
+
+        saved_file = self._get_file_or_directory_contents("/home/backups/operations-helpers/Dashboard/gpti_output/{}".format(expected_backup_filename))
+
+        assert saved_file is not None
+        assert saved_file['.']['filesize'] > 0
