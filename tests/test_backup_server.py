@@ -1,4 +1,5 @@
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
+from dateutil.relativedelta import relativedelta
 import os
 import pytest
 import paramiko
@@ -133,3 +134,39 @@ class TestIATIBackupServer:
         disk_space_available = int(stdout.read())
 
         assert disk_space_available > 1000000  # 1000000KB ~ 1GB
+
+    @pytest.mark.parametrize("filename_suffix", [
+        "timeliness_frequency.csv",
+        "timeliness_timelag.csv",
+        "forwardlooking.csv",
+        "comprehensiveness_summary.csv",
+        "comprehensiveness_core.csv",
+        "comprehensiveness_financials.csv",
+        "comprehensiveness_valueadded.csv",
+        "coverage.csv",
+        "transparencyindicator.csv"])
+    def test_publisher_stats_backup(self, filename_suffix):
+        """
+        Tests that a monthly backup has been made of staistics that form the Global
+        Partnership Transparency Indicator Proposal.  These will have been downloaded
+        by a script (set-up to run monthly under cron):
+        https://github.com/IATI/operations-helpers/blob/master/Dashboard/gpti_data_pull.sh
+
+        In the saved output, dates are prepended to saved filenames,
+        e.g. '20170101-forwardlooking.csv'.
+        """
+        # Backups are made on the first day of the month at 11pm, so use the previous month if this is the first day of the month
+        if date.today().day == 1:
+            date_month_to_test = date.today() - relativedelta(months=1)
+        else:
+            date_month_to_test = date.today()
+        expected_last_backup_date = date(date_month_to_test.year, date_month_to_test.month, 1)
+        expected_backup_filename = "{}-{}".format(
+            expected_last_backup_date.strftime('%Y%m%d'),
+            filename_suffix
+            )
+
+        saved_file = self._get_directory_contents("/home/backups/operations-helpers/Dashboard/gpti_output/{}".format(expected_backup_filename))
+
+        assert saved_file is not None
+        assert saved_file['.']['filesize'] > 0
