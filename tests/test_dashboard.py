@@ -23,7 +23,7 @@ class TestIATIDashboard(WebTestBase):
         """
         Tests that the dashboard was generated in the past 7 days.
         """
-        max_delay = timedelta(days=10)
+        max_delay = timedelta(days=2)
         generation_time_xpath = '//*[@id="footer"]/div/p/em[1]'
         data_time_xpath = '//*[@id="footer"]/div/p/em[2]'
 
