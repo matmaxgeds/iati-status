@@ -15,6 +15,9 @@ class TestAidTransparency(WebTestBase):
         , 'Tabulated News Archive': {
             'url': 'http://www.aidtransparency.net/category/news/page/5'
         }
+        , 'Randomly-selected News Article': {
+            'url': 'http://www.aidtransparency.net/news/un-pooled-funds-now-published-to-iati'
+        }
         , 'Newsletter Subscription Page': {
             'url': 'http://www.aidtransparency.net/contact/subscribe'
         }
@@ -88,6 +91,24 @@ class TestAidTransparency(WebTestBase):
         result = utility.locate_xpath_result(req, xpath)
 
         assert len(result) == expected_article_count
+
+    @pytest.mark.parametrize("target_request", ["Randomly-selected News Article"])
+    def test_random_news_article(self, target_request):
+        """
+        Tests that a randomly-selected news article contains expected title. Also
+        tests that the post body contains expected text.
+        """
+        req = self.loaded_request_from_test_name(target_request)
+        xpath_post_container = '//*[@id="content"]/article/descendant::*/text()'
+        xpath_post_title = '//*[@id="content"]/article/h1[contains(@class, "post-title")]/text()'
+
+        result_post_container = utility.locate_xpath_result(req, xpath_post_container)
+        result_post_title = utility.locate_xpath_result(req, xpath_post_title)
+        post_container_contents = ''.join(result_post_container)
+        post_title_str = result_post_title[0]
+
+        assert 'UN pooled funds' in post_title_str
+        assert 'significant contribution to transparency and open data' in post_container_contents
 
     @pytest.mark.parametrize("target_request", ["Newsletter Subscription Page"])
     def test_newsletter_subscription_page_form(self, target_request):
