@@ -5,25 +5,25 @@ class TestIATIValidator(WebTestBase):
     requests_to_load = {
         'IATI Validator': {
             'url': 'http://validator.iatistandard.org/'
-        }
-        , 'Valid paste data': {
-            'url': 'http://validator.iatistandard.org/index.php'
-            , 'method': 'POST'
-            , 'data': {
+        },
+        'Valid paste data': {
+            'url': 'http://validator.iatistandard.org/index.php',
+            'method': 'POST',
+            'data': {
                 'paste': utility.load_file_contents('valid.xml')
             }
-        }
-        , 'Invalid paste data': {
-            'url': 'http://validator.iatistandard.org/index.php'
-            , 'method': 'POST'
-            , 'data': {
+        },
+        'Invalid paste data': {
+            'url': 'http://validator.iatistandard.org/index.php',
+            'method': 'POST',
+            'data': {
                 'paste': utility.load_file_contents('invalid.xml')
             }
-        }
-        , 'Valid URL data': {
-            'url': 'http://validator.iatistandard.org/index.php'
-            , 'method': 'POST'
-            , 'data': {
+        },
+        'Valid URL data': {
+            'url': 'http://validator.iatistandard.org/index.php',
+            'method': 'POST',
+            'data': {
                 'url': 'https://raw.githubusercontent.com/IATI/IATI-Extra-Documentation/version-2.01/en/activity-standard/activity-standard-example-annotated.xml'
             }
         }

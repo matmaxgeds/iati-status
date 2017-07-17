@@ -4,6 +4,7 @@ import pytest
 import pytz
 from web_test_base import *
 
+
 class TestIATIDashboard(WebTestBase):
     requests_to_load = {
         'Dashboard Homepage': {
