@@ -5,11 +5,11 @@ class TestIATIPreview(WebTestBase):
     requests_to_load = {
         'IATI Preview': {
             'url': 'http://preview.iatistandard.org/'
-        }
-        , 'Valid (Example) XML Input': {
+        },
+        'Valid (Example) XML Input': {
             'url': 'http://preview.iatistandard.org/index.php?url=https%3A%2F%2Fraw.githubusercontent.com%2FIATI%2FIATI-Extra-Documentation%2Fversion-2.01%2Fen%2Factivity-standard%2Factivity-standard-example-annotated.xml'
-        }
-        , 'Non-XML Input': {
+        },
+        'Non-XML Input': {
             'url': 'http://preview.iatistandard.org/index.php?url=http%3A%2F%2Fpreview.iatistandard.org%2Findex.php'
         }
     }

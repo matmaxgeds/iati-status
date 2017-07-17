@@ -12,20 +12,20 @@ class WebTestBase:
             further information about the request.
             {
                 'test_name': {
-                    'url (str)': The URL to load for this test
-                    , 'min_response_size (int, optional)': An integer value
+                    'url (str)': The URL to load for this test,
+                    'min_response_size (int, optional)': An integer value
                         specifying the minimum size in bytes that the response
                         should be.
-                        If not be set, a default value is utilised.
-                    , 'method (str, optional)': A string stating the HTTP method
+                        If not be set, a default value is utilised.,
+                        'method (str, optional)': A string stating the HTTP method
                         to be used by the request. Defaults to `GET`.
-                        Additionally supports `POST`.
-                    , 'data (optional)': {
-                        'key': 'value'
-                        , 'key2': 'value2'
-                        , ...
-                            A dictionary containing any data to send with a POST
-                            request.
+                        Additionally supports `POST`.,
+                    'data (optional)': {
+                        'key': 'value',
+                        'key2': 'value2',
+                        ...
+                        A dictionary containing any data to send with a POST
+                        request.
                     }
                 }
             }

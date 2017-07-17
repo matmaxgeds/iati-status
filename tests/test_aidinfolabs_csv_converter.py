@@ -5,8 +5,8 @@ class TestAidinfolabsCSVConverter(WebTestBase):
     requests_to_load = {
         'AidInfo Labs CSV Conversion Tool': {
             'url': 'http://tools.aidinfolabs.org/csv/direct_from_registry/'
-        }
-        , 'Download Valid CSV': {
+        },
+        'Download Valid CSV': {
             'url': 'http://tools.aidinfolabs.org/csv/direct_from_registry/?search=&xml=https%3A%2F%2Fraw.githubusercontent.com%2FIATI%2FIATI-Extra-Documentation%2Fversion-2.01%2Fen%2Factivity-standard%2Factivity-standard-example-annotated.xml&download=true&id=Custom&format=full'
         }
     }
