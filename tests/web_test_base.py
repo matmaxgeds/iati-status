@@ -20,12 +20,12 @@ class WebTestBase:
                         'method (str, optional)': A string stating the HTTP method
                         to be used by the request. Defaults to `GET`.
                         Additionally supports `POST`.,
-                        'data (optional)': {
-                                            'key': 'value',
-                                            'key2': 'value2',
+                    'data (optional)': {
+                        'key': 'value',
+                        'key2': 'value2',
                         ...
-                            A dictionary containing any data to send with a POST
-                            request.
+                        A dictionary containing any data to send with a POST
+                        request.
                     }
                 }
             }
