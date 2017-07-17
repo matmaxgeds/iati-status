@@ -8,26 +8,26 @@ class TestAidTransparency():  # To be deleted when tests are passing again
     requests_to_load = {
         'AidTransparency Homepage - no www': {
             'url': 'http://aidtransparency.net/'
-        }
-        , 'AidTransparency Homepage - with www': {
+        },
+        'AidTransparency Homepage - with www': {
             'url': 'http://www.aidtransparency.net/'
-        }
-        , '2015 Annual Report': {
+        },
+        '2015 Annual Report': {
             'url': 'http://www.aidtransparency.net/annualreport2015/'
-        }
-        , 'Tabulated News Archive': {
+        },
+        'Tabulated News Archive': {
             'url': 'http://www.aidtransparency.net/category/news/page/5'
-        }
-        , 'Randomly-selected News Article': {
+        },
+        'Randomly-selected News Article': {
             'url': 'http://www.aidtransparency.net/news/un-pooled-funds-now-published-to-iati'
-        }
-        , 'Newsletter Subscription Page': {
+        },
+        'Newsletter Subscription Page': {
             'url': 'http://www.aidtransparency.net/contact/subscribe'
-        }
-        , 'Misc Sub-navigation Page': {
+        },
+        'Misc Sub-navigation Page': {
             'url': 'http://www.aidtransparency.net/governance/secretariat'
-        }
-        , 'Media Link': {
+        },
+        'Media Link': {
             'url': 'http://www.aidtransparency.net/wp-content/uploads/2014/10/IATISpeakersKitSpeakingNotes.odt'
         }
     }

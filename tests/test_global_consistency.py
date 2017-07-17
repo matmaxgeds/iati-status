@@ -5,28 +5,27 @@ class TestGlobalConsistency(WebTestBase):
     requests_to_load = {
         'IATI Registry - Homepage': {
             'url': 'https://iatiregistry.org/'
-        }
-        , 'IATI Registry - Activity Dataset Page': {
+        },
+        'IATI Registry - Activity Dataset Page': {
             'url': 'https://iatiregistry.org/dataset?q=&filetype=Activity'
-        }
-        , 'IATI Registry - Organisation Dataset Page': {
+        },
+        'IATI Registry - Organisation Dataset Page': {
             'url': 'https://iatiregistry.org/dataset?q=&filetype=Organisation'
-        }
-        , 'IATI Dashboard - Homepage': {
+        },
+        'IATI Dashboard - Homepage': {
             'url': 'http://dashboard.iatistandard.org/'
-        }
-        , 'IATI Dashboard - Activities Page': {
+        },
+        'IATI Dashboard - Activities Page': {
             'url': 'http://dashboard.iatistandard.org/activities.html'
-        }
-        , 'IATI Dashboard - Files Page': {
+        },
+        'IATI Dashboard - Files Page': {
             'url': 'http://dashboard.iatistandard.org/files.html'
-        }
-        , 'IATI Dashboard - Publisher Page': {
+        },
+        'IATI Dashboard - Publisher Page': {
             'url': 'http://dashboard.iatistandard.org/publishers.html'
-        }
-        , 'Datastore API - Activity Count': {
-            'url': 'http://datastore.iatistandard.org/api/1/access/activity.xml?limit=0'
-            , 'min_response_size': 295
+        },
+        'Datastore API - Activity Count': {
+            'url': 'http://datastore.iatistandard.org/api/1/access/activity.xml?limit=0', 'min_response_size': 295
         }
     }
 

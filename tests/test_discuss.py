@@ -5,8 +5,8 @@ class TestIATIDiscuss(WebTestBase):
     requests_to_load = {
         'IATI Discuss': {
             'url': 'http://discuss.iatistandard.org/?iati-website-tests'
-        }
-        , 'IATI Discuss Welcome Thread': {
+        },
+        'IATI Discuss Welcome Thread': {
             'url': 'http://discuss.iatistandard.org/t/welcome-to-iati-discuss/6?iati-website-tests'
         }
     }
