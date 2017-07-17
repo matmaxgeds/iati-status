@@ -1,6 +1,6 @@
 """A module to test critical access to aidstream hosted datasets."""
-import pytest
 from lxml import etree
+import pytest
 from web_test_base import WebTestBase
 
 
