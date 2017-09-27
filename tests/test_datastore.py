@@ -27,7 +27,7 @@ class TestIATIDatastore(WebTestBase):
             'url': 'http://datastore.iatistandard.org/api/1/access/activity.json'
         },
         'Datastore list of datasets': {
-            'url': 'http://datastore.iatistandard.org/api/1/about/dataset'
+            'url': 'http://datastore.iatistandard.org/api/1/about/datasets/nest'
         }
     }
 
@@ -65,20 +65,19 @@ class TestIATIDatastore(WebTestBase):
 
         assert result.startswith(content_type)
 
-    @pytest.mark.slow
+    # @pytest.mark.slow
     @pytest.mark.parametrize("target_request", ["Datastore list of datasets"])
     def test_last_successful_fetch(self, target_request):
         """Test that the datastore has successfully fetched data within the expected time frame."""
         loaded_request = self.loaded_request_from_test_name(target_request)
         successful_fetch_dates = list()
-        json_dataset_list = loaded_request.json()
-        for dataset in json_dataset_list['datasets']:
-            if dataset != None:
-                dataset_url = '/'.join([loaded_request.url, dataset])
-                data = requests.get(dataset_url).json()
-                try:
-                    if (data['resources'][0]['last_successful_fetch'] is not None) or (data['resources'] != list()):
-                        successful_fetch_dates.append(datetime.strptime(data['resources'][0]['last_successful_fetch'][:10], '%Y-%m-%d'))
-                except (TypeError, IndexError, ValueError):
-                    pass
-        assert max(successful_fetch_dates) >= (datetime.now() - timedelta(days=2))
+        json_datasets = loaded_request.json()
+        list_of_datasets = json_datasets['datasets']
+
+        for dataset in list_of_datasets:
+            resources = dataset.values()
+            for resource in resources:
+                date = resource['last_successful_fetch']
+                if date is not None:
+                    successful_fetch_dates.append(datetime.strptime(date[:10], '%Y-%m-%d'))
+        assert min(successful_fetch_dates) >= (datetime.now() - timedelta(days=2))
