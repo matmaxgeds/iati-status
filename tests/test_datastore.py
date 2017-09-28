@@ -1,6 +1,8 @@
 from datetime import date, datetime, timedelta
 import pytest
+import requests
 from web_test_base import *
+
 
 class TestIATIDatastore(WebTestBase):
     requests_to_load = {
@@ -23,14 +25,15 @@ class TestIATIDatastore(WebTestBase):
         },
         'Datastore download: json': {
             'url': 'http://datastore.iatistandard.org/api/1/access/activity.json'
+        },
+        'Datastore list of datasets': {
+            'url': 'http://datastore.iatistandard.org/api/1/about/datasets/nest'
         }
     }
 
     @pytest.mark.parametrize("target_request", ["Datastore Homepage"])
     def test_contains_links(self, target_request):
-        """
-        Test that each page contains links to the defined URLs.
-        """
+        """Test that each page contains links to the defined URLs."""
         loaded_request = self.loaded_request_from_test_name(target_request)
 
         result = utility.get_links_from_page(loaded_request)
@@ -39,10 +42,7 @@ class TestIATIDatastore(WebTestBase):
 
     @pytest.mark.parametrize("target_request", ["API - Activities Updated since 2 days ago", "API - Activities Updated since 3 days ago"])
     def test_recent_activities(self, target_request):
-        """
-        Test that the datastore API knows of activities updated in the past
-        few days.
-        """
+        """Test that the datastore API knows of activities updated in the past few days."""
         req = self.loaded_request_from_test_name(target_request)
         xpath = '//result/iati-activities/query/total-count'
 
@@ -64,3 +64,16 @@ class TestIATIDatastore(WebTestBase):
         result = loaded_request.headers["content-type"]
 
         assert result.startswith(content_type)
+
+    @pytest.mark.parametrize("target_request", ["Datastore list of datasets"])
+    def test_last_successful_fetch(self, target_request):
+        """Test that the datastore has successfully fetched data within the expected time frame."""
+        loaded_request = self.loaded_request_from_test_name(target_request)
+        successful_fetch_dates = list()
+        json_datasets = loaded_request.json()
+        list_of_datasets = json_datasets['datasets']
+
+        resources = [list(dataset.values())[0] for dataset in list_of_datasets]
+        successful_fetch_dates = [datetime.strptime(resource['last_successful_fetch'][:10], '%Y-%m-%d') for resource in resources if resource['last_successful_fetch'] is not None]
+
+        assert max(successful_fetch_dates) >= (datetime.now() - timedelta(days=7))
