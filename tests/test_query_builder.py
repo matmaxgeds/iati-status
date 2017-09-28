@@ -10,12 +10,12 @@ class TestQueryBuilder(WebTestBase):
             'url': 'http://datastore.iatistandard.org/query/index.php',
             'method': 'POST',
             'data': {
-                'entry.1085079344': 'activity',
-                'entry.71167035': 'summary',
-                'entry.1352830161': '50 rows',
-                'entry.1922375458[]': 'DK-1',
-                'entry.1954968791[]': '12181',
-                'entry.1179181326[]': '298',
+                'format': 'activity',
+                'grouping': 'summary',
+                'sample-size': '50 rows',
+                'reporting-org[]': 'DK-1',
+                'sector[]': '12181',
+                'recipient-region[]': '298',
                 'submit': 'Submit'
             }
         }
@@ -37,5 +37,5 @@ class TestQueryBuilder(WebTestBase):
         req = self.loaded_request_from_test_name(target_request)
 
         result = utility.get_links_from_page(req)
-
+        # import pdb; pdb.set_trace()
         assert "http://datastore.iatistandard.org/api/1/access/activity.csv?reporting-org=DK-1&sector=12181&recipient-region=298" in result
