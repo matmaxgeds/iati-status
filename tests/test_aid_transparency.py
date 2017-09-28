@@ -68,7 +68,7 @@ class TestAidTransparency(WebTestBase):
         Test that the image for the latest news item loads correctly.
         """
         req = self.loaded_request_from_test_name(target_request)
-        min_img_file_size = 2048
+        min_img_file_size = 1024
 
         img_url = utility.locate_xpath_result(req, '//*[@id="home-featured"]/div/article[1]/div[1]/a/img/@src')
         assert len(img_url) == 1
