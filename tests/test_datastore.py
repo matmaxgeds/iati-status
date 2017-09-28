@@ -73,10 +73,7 @@ class TestIATIDatastore(WebTestBase):
         json_datasets = loaded_request.json()
         list_of_datasets = json_datasets['datasets']
 
-        for dataset in list_of_datasets:
-            resources = dataset.values()
-            for resource in resources:
-                date = resource['last_successful_fetch']
-                if date is not None:
-                    successful_fetch_dates.append(datetime.strptime(date[:10], '%Y-%m-%d'))
+        resources = [list(dataset.values())[0] for dataset in list_of_datasets]
+        successful_fetch_dates = [datetime.strptime(resource['last_successful_fetch'][:10], '%Y-%m-%d') for resource in resources if resource['last_successful_fetch'] is not None]
+
         assert max(successful_fetch_dates) >= (datetime.now() - timedelta(days=7))
