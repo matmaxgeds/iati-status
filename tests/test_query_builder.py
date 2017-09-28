@@ -37,5 +37,5 @@ class TestQueryBuilder(WebTestBase):
         req = self.loaded_request_from_test_name(target_request)
 
         result = utility.get_links_from_page(req)
-        # import pdb; pdb.set_trace()
+        
         assert "http://datastore.iatistandard.org/api/1/access/activity.csv?reporting-org=DK-1&sector=12181&recipient-region=298" in result
