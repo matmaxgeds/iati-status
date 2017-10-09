@@ -22,9 +22,9 @@ class TestIATIDashboard(WebTestBase):
 
     def test_recently_generated(self, loaded_request):
         """
-        Tests that the dashboard was generated in the past 3 days.
+        Tests that the dashboard was generated in the past 5 days.
         """
-        max_delay = timedelta(days=3)
+        max_delay = timedelta(days=5)
         generation_time_xpath = '//*[@id="footer"]/div/p/em[1]'
         data_time_xpath = '//*[@id="footer"]/div/p/em[2]'
 
