@@ -27,7 +27,7 @@ class TestIATIDatastore(WebTestBase):
             'url': 'http://datastore.iatistandard.org/api/1/access/activity.json'
         },
         'Datastore list of datasets': {
-            'url': 'http://datastore.iatistandard.org/api/1/about/datasets/nest'
+            'url': 'http://datastore.iatistandard.org/api/1/about/datasets/fetch_status'
         }
     }
 
