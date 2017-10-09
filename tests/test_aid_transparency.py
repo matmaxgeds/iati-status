@@ -3,9 +3,9 @@ from web_test_base import *
 
 class TestAidTransparency(WebTestBase):
     requests_to_load = {
-        'AidTransparency Homepage - no www': {
-            'url': 'http://aidtransparency.net/'
-        },
+        # 'AidTransparency Homepage - no www': {
+        #     'url': 'http://aidtransparency.net/'
+        # },
         'AidTransparency Homepage - with www': {
             'url': 'http://www.aidtransparency.net/'
         },
@@ -39,7 +39,7 @@ class TestAidTransparency(WebTestBase):
             assert ("http://iatistandard.org/" in result) or ("http://dashboard.iatistandard.org/" in result)
             assert "http://www.aidtransparency.net" in result
 
-    @pytest.mark.parametrize("target_request", ["AidTransparency Homepage - no www", "AidTransparency Homepage - with www"])
+    @pytest.mark.parametrize("target_request", ["AidTransparency Homepage - with www"])
     def test_homepage_news_items(self, target_request):
         """
         Tests that he aidtransparency homepage contains two news articles.
@@ -62,13 +62,13 @@ class TestAidTransparency(WebTestBase):
         assert max_summary_length > len(utility.get_joined_text_from_xpath(req, summary2_xpath).strip()) > min_summary_length
 
 
-    @pytest.mark.parametrize("target_request", ["AidTransparency Homepage - no www", "AidTransparency Homepage - with www"])
+    @pytest.mark.parametrize("target_request", ["AidTransparency Homepage - with www"])
     def test_homepage_news_item_image(self, target_request):
         """
         Test that the image for the latest news item loads correctly.
         """
         req = self.loaded_request_from_test_name(target_request)
-        min_img_file_size = 2048
+        min_img_file_size = 1024
 
         img_url = utility.locate_xpath_result(req, '//*[@id="home-featured"]/div/article[1]/div[1]/a/img/@src')
         assert len(img_url) == 1
