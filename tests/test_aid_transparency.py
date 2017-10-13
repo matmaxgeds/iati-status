@@ -4,28 +4,28 @@ from web_test_base import *
 class TestAidTransparency(WebTestBase):
     requests_to_load = {
         'AidTransparency Homepage - no www': {
-            'url': 'http://aidtransparency.net/'
+            'url': 'https://aidtransparency.net/'
         },
         'AidTransparency Homepage - with www': {
-            'url': 'http://www.aidtransparency.net/'
+            'url': 'https://www.aidtransparency.net/'
         },
         '2015 Annual Report': {
-            'url': 'http://www.aidtransparency.net/annualreport2015/'
+            'url': 'https://www.aidtransparency.net/annualreport2015/'
         },
         'Tabulated News Archive': {
-            'url': 'http://www.aidtransparency.net/category/news/page/5'
+            'url': 'https://www.aidtransparency.net/category/news/page/5'
         },
         'Randomly-selected News Article': {
-            'url': 'http://www.aidtransparency.net/news/un-pooled-funds-now-published-to-iati'
+            'url': 'https://www.aidtransparency.net/news/un-pooled-funds-now-published-to-iati'
         },
         'Newsletter Subscription Page': {
-            'url': 'http://www.aidtransparency.net/contact/subscribe'
+            'url': 'https://www.aidtransparency.net/contact/subscribe'
         },
         'Misc Sub-navigation Page': {
-            'url': 'http://www.aidtransparency.net/governance/secretariat'
+            'url': 'https://www.aidtransparency.net/governance/secretariat'
         },
         'Media Link': {
-            'url': 'http://www.aidtransparency.net/wp-content/uploads/2014/10/IATISpeakersKitSpeakingNotes.odt'
+            'url': 'https://www.aidtransparency.net/wp-content/uploads/2014/10/IATISpeakersKitSpeakingNotes.odt'
         }
     }
 
@@ -37,7 +37,7 @@ class TestAidTransparency(WebTestBase):
             result = utility.get_links_from_page(loaded_request)
 
             assert ("http://iatistandard.org/" in result) or ("http://dashboard.iatistandard.org/" in result)
-            assert "http://www.aidtransparency.net" in result
+            assert "https://www.aidtransparency.net" in result
 
     @pytest.mark.parametrize("target_request", ["AidTransparency Homepage - no www", "AidTransparency Homepage - with www"])
     def test_homepage_news_items(self, target_request):
