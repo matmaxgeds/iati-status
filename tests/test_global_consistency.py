@@ -26,12 +26,25 @@ class TestGlobalConsistency(WebTestBase):
         },
         'Datastore API - Activity Count': {
             'url': 'http://datastore.iatistandard.org/api/1/access/activity.xml?limit=0', 'min_response_size': 295
+        },
+        'Query Builder': {
+            'url': 'http://datastore.iatistandard.org/query/'
         }
     }
 
+    def _count_element_on_page(self, test_name, xpath):
+        req = self.loaded_request_from_test_name(test_name)
+
+        located_elements = utility.locate_xpath_result(req, xpath)
+        result = len(located_elements)
+
+        return result
+
     def _locate_int_on_page(self, test_name, xpath):
         req = self.loaded_request_from_test_name(test_name)
+
         result = utility.get_single_int_from_xpath(req, xpath)
+
         return result
 
     @pytest.fixture
@@ -89,6 +102,10 @@ class TestGlobalConsistency(WebTestBase):
     @pytest.fixture
     def registry_organisation_file_count(cls):
         return cls._locate_int_on_page('IATI Registry - Organisation Dataset Page', '//*[@id="content"]/div[3]/div/section[1]/div[1]/form/h2')
+
+    @pytest.fixture
+    def query_builder_publisher_count(cls):
+        return cls._count_element_on_page('Query Builder', '//*[@id="reporting-org"]/option')
 
     def test_activity_count_above_min(self, dash_home_activity_count, dash_home_unique_activity_count, dash_activities_activity_count, dash_activities_unique_activity_count, datastore_api_activity_count):
         """
@@ -199,12 +216,22 @@ class TestGlobalConsistency(WebTestBase):
         """
         assert dash_home_publisher_count == dash_publishers_publisher_count
 
-    def test_publisher_count_consistency(self, registry_home_publisher_count, dash_home_publisher_count):
+    def test_publisher_count_consistency_dashboard(self, registry_home_publisher_count, dash_home_publisher_count):
         """
-        Test to ensure the activity file count is consistent, within a margin of error,
+        Test to ensure the publisher count is consistent, within a margin of error,
         between the registry and dashboard.
         """
         max_registry_disparity = 0.01
 
         assert registry_home_publisher_count >= dash_home_publisher_count * (1 - max_registry_disparity)
         assert registry_home_publisher_count <= dash_home_publisher_count * (1 + max_registry_disparity)
+
+    def test_publisher_count_consistency_query_builder(self, registry_home_publisher_count, query_builder_publisher_count):
+        """
+        Test to ensure the publisher count is consistent, within a margin of error,
+        between the registry and query builder.
+        """
+        max_registry_disparity = 0.01
+
+        assert registry_home_publisher_count >= query_builder_publisher_count * (1 - max_registry_disparity)
+        assert registry_home_publisher_count <= query_builder_publisher_count * (1 + max_registry_disparity)
