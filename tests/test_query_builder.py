@@ -18,14 +18,21 @@ class TestQueryBuilder(WebTestBase):
                 'recipient-region[]': '298',
                 'submit': 'Submit'
             }
+        },
+        'Publisher Information': {
+            'url': 'http://datastore.iatistandard.org/query/helpers/groups_cache_dc.json',
+            'min_response_size': 1500000
         }
     }
 
-    def test_locate_links(self, loaded_request):
+    @pytest.mark.parametrize("target_request", ["IATI Query Builder", "POST Example"])
+    def test_locate_links(self, target_request):
         """
         Tests that a page contains links to the defined URLs.
         """
-        result = utility.get_links_from_page(loaded_request)
+        req = self.loaded_request_from_test_name(target_request)
+
+        result = utility.get_links_from_page(req)
 
         assert "http://datastore.iatistandard.org/" in result
 
