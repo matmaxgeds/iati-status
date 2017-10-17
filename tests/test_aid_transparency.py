@@ -3,11 +3,17 @@ from web_test_base import *
 
 class TestAidTransparency(WebTestBase):
     requests_to_load = {
-        'AidTransparency Homepage - no www': {
+        'AidTransparency Homepage - HTTPS - no www': {
             'url': 'https://aidtransparency.net/'
         },
-        'AidTransparency Homepage - with www': {
+        'AidTransparency Homepage - HTTPS - with www': {
             'url': 'https://www.aidtransparency.net/'
+        },
+        'AidTransparency Homepage - HTTP - no www': {
+            'url': 'http://aidtransparency.net/'
+        },
+        'AidTransparency Homepage - HTTP - with www': {
+            'url': 'http://www.aidtransparency.net/'
         },
         '2015 Annual Report': {
             'url': 'https://www.aidtransparency.net/annualreport2015/'
@@ -39,7 +45,24 @@ class TestAidTransparency(WebTestBase):
             assert ("http://iatistandard.org/" in result) or ("http://dashboard.iatistandard.org/" in result)
             assert "https://www.aidtransparency.net" in result
 
-    @pytest.mark.parametrize("target_request", ["AidTransparency Homepage - no www", "AidTransparency Homepage - with www"])
+    @pytest.mark.parametrize("target_request", [
+        "AidTransparency Homepage - HTTP - no www",
+        "AidTransparency Homepage - HTTP - with www"
+    ])
+    def test_homepage_redirects_to_https(self, target_request):
+        """
+        Test that a request made to HTTP redirects to HTTPS.
+        """
+        req = self.loaded_request_from_test_name(target_request)
+
+        assert req.url == 'https://www.aidtransparency.net/'
+
+    @pytest.mark.parametrize("target_request", [
+        "AidTransparency Homepage - HTTPS - no www",
+        "AidTransparency Homepage - HTTPS - with www",
+        "AidTransparency Homepage - HTTP - no www",
+        "AidTransparency Homepage - HTTP - with www"
+    ])
     def test_homepage_news_items(self, target_request):
         """
         Tests that he aidtransparency homepage contains two news articles.
@@ -62,7 +85,10 @@ class TestAidTransparency(WebTestBase):
         assert max_summary_length > len(utility.get_joined_text_from_xpath(req, summary2_xpath).strip()) > min_summary_length
 
 
-    @pytest.mark.parametrize("target_request", ["AidTransparency Homepage - no www", "AidTransparency Homepage - with www"])
+    @pytest.mark.parametrize("target_request", [
+        "AidTransparency Homepage - HTTPS - no www",
+        "AidTransparency Homepage - HTTPS - with www"
+    ])
     def test_homepage_news_item_image(self, target_request):
         """
         Test that the image for the latest news item loads correctly.
