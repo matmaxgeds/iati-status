@@ -9,6 +9,9 @@ class TestIATIDashboard(WebTestBase):
     requests_to_load = {
         'Dashboard Homepage': {
             'url': 'http://dashboard.iatistandard.org/'
+        },
+        'Page Generated Late in Process': {
+            'url': 'http://dashboard.iatistandard.org/element/iati-activity_result_description_narrative.html'
         }
     }
 
