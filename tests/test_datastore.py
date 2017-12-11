@@ -31,6 +31,7 @@ class TestIATIDatastore(WebTestBase):
         }
     }
 
+    @pytest.mark.xfail
     @pytest.mark.parametrize("target_request", ["Datastore Homepage"])
     def test_contains_links(self, target_request):
         """Test that each page contains links to the defined URLs."""
