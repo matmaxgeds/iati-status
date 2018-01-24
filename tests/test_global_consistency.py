@@ -163,6 +163,7 @@ class TestGlobalConsistency(WebTestBase):
         """
         assert dash_home_activity_file_count == dash_files_activity_file_count
 
+    pytest.mark.xfail(strict=True)
     def test_activity_file_count_consistency(self, registry_activity_file_count, dash_home_activity_file_count, dash_files_activity_file_count):
         """
         Test to ensure the activity file count is consistent, within a margin of error,
