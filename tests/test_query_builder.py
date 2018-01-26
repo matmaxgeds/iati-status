@@ -13,7 +13,7 @@ class TestQueryBuilder(WebTestBase):
                 'format': 'activity',
                 'grouping': 'summary',
                 'sample-size': '50 rows',
-                'reporting-org[]': 'DK-1',
+                'reporting-org[]': 'XM-DAC-3-1',
                 'sector[]': '12181',
                 'recipient-region[]': '298',
                 'submit': 'Submit'
@@ -45,4 +45,4 @@ class TestQueryBuilder(WebTestBase):
 
         result = utility.get_links_from_page(req)
 
-        assert "http://datastore.iatistandard.org/api/1/access/activity.csv?reporting-org=DK-1&sector=12181&recipient-region=298" in result
+        assert "http://datastore.iatistandard.org/api/1/access/activity.csv?reporting-org=XM-DAC-3-1&sector=12181&recipient-region=298" in result
