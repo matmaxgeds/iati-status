@@ -221,7 +221,7 @@ class TestGlobalConsistency(WebTestBase):
         Test to ensure the publisher count is consistent, within a margin of error,
         between the registry and dashboard.
         """
-        max_registry_disparity = 0.01
+        max_registry_disparity = 0.03
 
         assert registry_home_publisher_count >= dash_home_publisher_count * (1 - max_registry_disparity)
         assert registry_home_publisher_count <= dash_home_publisher_count * (1 + max_registry_disparity)
