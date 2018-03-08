@@ -112,7 +112,7 @@ class TestGlobalConsistency(WebTestBase):
         Test to ensure the unique activity count is above a specified minumum value.
         This checks both the dashboard and datastore.
         """
-        min_activity_count = 550000
+        min_activity_count = 850000
 
         assert dash_home_activity_count >= min_activity_count
         assert dash_home_unique_activity_count >= min_activity_count
@@ -151,7 +151,7 @@ class TestGlobalConsistency(WebTestBase):
         Test to ensure the unique activity file count is above a specified minumum value.
         This checks both the dashboard and registry.
         """
-        min_file_count = 3700
+        min_file_count = 4700
 
         assert registry_activity_file_count >= min_file_count
         assert dash_home_activity_file_count >= min_file_count
@@ -178,7 +178,7 @@ class TestGlobalConsistency(WebTestBase):
         Test to ensure the organisation file count is above a specified minumum value.
         This checks both the dashboard and registry.
         """
-        min_file_count = 350
+        min_file_count = 450
 
         assert registry_organisation_file_count >= min_file_count
         assert dash_home_org_file_count >= min_file_count
@@ -205,7 +205,7 @@ class TestGlobalConsistency(WebTestBase):
         Test to ensure the publisher count is above a specified minumum value.
         This checks both the dashboard and registry.
         """
-        min_publisher_count = 480
+        min_publisher_count = 630
 
         assert registry_home_publisher_count >= min_publisher_count
         assert dash_home_publisher_count >= min_publisher_count
