@@ -216,6 +216,7 @@ class TestGlobalConsistency(WebTestBase):
         """
         assert dash_home_publisher_count == dash_publishers_publisher_count
 
+    @pytest.mark.xfail(strict=True)
     def test_publisher_count_consistency_dashboard(self, registry_home_publisher_count, dash_home_publisher_count):
         """
         Test to ensure the publisher count is consistent, within a margin of error,
