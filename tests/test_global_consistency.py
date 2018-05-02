@@ -189,6 +189,7 @@ class TestGlobalConsistency(WebTestBase):
         """
         assert dash_home_org_file_count == dash_files_org_file_count
 
+    @pytest.mark.xfail(strict=True)
     def test_organisation_dataset_count_consistency(self, registry_organisation_file_count, dash_home_org_file_count, dash_files_org_file_count):
         """
         Test to ensure the activity file count is consistent, within a margin of error,
