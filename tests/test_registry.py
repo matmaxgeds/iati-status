@@ -21,8 +21,6 @@ class TestIATIRegistry(WebTestBase):
         'IATI Registry Login Page': {
             'url': 'https://iatiregistry.org/user/login'
         },
-        'IATI API Status': {
-            'url': 'http://iatiregistry.org/api/3/action/status_show'
         },
         'IATI API Package Search': {
             'url': 'https://iatiregistry.org/api/3/action/package_search'
