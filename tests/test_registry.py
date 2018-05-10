@@ -27,7 +27,7 @@ class TestIATIRegistry(WebTestBase):
         'IATI Registry: Random Dataset': {
             'url': 'https://iatiregistry.org/dataset/dfid-af'
         },
-        'IATI API Package Search': {
+        'IATI Registry API: Package Search Call': {
             'url': 'https://iatiregistry.org/api/3/action/package_search'
         }
     }
