@@ -21,6 +21,11 @@ class TestIATIRegistry(WebTestBase):
         'IATI Registry Login Page': {
             'url': 'https://iatiregistry.org/user/login'
         },
+        'IATI Registry: Random Publisher Page': {
+            'url': 'https://iatiregistry.org/publisher/worldbank'
+        },
+        'IATI Registry: Random Dataset': {
+            'url': 'https://iatiregistry.org/dataset/dfid-af'
         },
         'IATI API Package Search': {
             'url': 'https://iatiregistry.org/api/3/action/package_search'
@@ -33,7 +38,9 @@ class TestIATIRegistry(WebTestBase):
         "IATI Registry Homepage - https, no www",
         "IATI Registry Homepage - https, with www",
         "IATI Registry Registration Page",
-        "IATI Registry Login Page"
+        "IATI Registry Login Page",
+        "IATI Registry: Random Dataset",
+        "IATI Registry: Random Publisher Page"
     ])
     def test_contains_links(self, target_request):
         """
