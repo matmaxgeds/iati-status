@@ -49,23 +49,23 @@ class TestGlobalConsistency(WebTestBase):
 
     @pytest.fixture
     def dash_home_activity_count(cls):
-        return cls._locate_int_on_page('IATI Dashboard - Homepage', '//*[@id="wrap"]/div[2]/div[2]/div[1]/div[2]/table/tbody/tr[1]/td[1]/a')
+        return cls._locate_int_on_page('IATI Dashboard - Homepage', '//*[@id="wrap"]/div[3]/div[2]/div[1]/div[2]/table/tbody/tr[1]/td[1]/a')
 
     @pytest.fixture
     def dash_home_unique_activity_count(cls):
-        return cls._locate_int_on_page('IATI Dashboard - Homepage', '//*[@id="wrap"]/div[2]/div[2]/div[1]/div[2]/table/tbody/tr[2]/td[1]/a')
+        return cls._locate_int_on_page('IATI Dashboard - Homepage', '//*[@id="wrap"]/div[3]/div[2]/div[1]/div[2]/table/tbody/tr[2]/td[1]/a')
 
     @pytest.fixture
     def dash_home_activity_file_count(cls):
-        return cls._locate_int_on_page('IATI Dashboard - Homepage', '//*[@id="wrap"]/div[2]/div[2]/div[1]/div[2]/table/tbody/tr[4]/td[1]/a')
+        return cls._locate_int_on_page('IATI Dashboard - Homepage', '//*[@id="wrap"]/div[3]/div[2]/div[1]/div[2]/table/tbody/tr[4]/td[1]/a')
 
     @pytest.fixture
     def dash_home_org_file_count(cls):
-        return cls._locate_int_on_page('IATI Dashboard - Homepage', '//*[@id="wrap"]/div[2]/div[2]/div[1]/div[2]/table/tbody/tr[5]/td[1]/a')
+        return cls._locate_int_on_page('IATI Dashboard - Homepage', '//*[@id="wrap"]/div[3]/div[2]/div[1]/div[2]/table/tbody/tr[5]/td[1]/a')
 
     @pytest.fixture
     def dash_home_publisher_count(cls):
-        return cls._locate_int_on_page('IATI Dashboard - Homepage', '//*[@id="wrap"]/div[2]/div[2]/div[1]/div[2]/table/tbody/tr[3]/td[1]/a')
+        return cls._locate_int_on_page('IATI Dashboard - Homepage', '//*[@id="wrap"]/div[3]/div[2]/div[1]/div[2]/table/tbody/tr[3]/td[1]/a')
 
     @pytest.fixture
     def dash_activities_activity_count(cls):
@@ -189,7 +189,6 @@ class TestGlobalConsistency(WebTestBase):
         """
         assert dash_home_org_file_count == dash_files_org_file_count
 
-    @pytest.mark.xfail(strict=True)
     def test_organisation_dataset_count_consistency(self, registry_organisation_file_count, dash_home_org_file_count, dash_files_org_file_count):
         """
         Test to ensure the activity file count is consistent, within a margin of error,
@@ -217,7 +216,6 @@ class TestGlobalConsistency(WebTestBase):
         """
         assert dash_home_publisher_count == dash_publishers_publisher_count
 
-    @pytest.mark.xfail(strict=True)
     def test_publisher_count_consistency_dashboard(self, registry_home_publisher_count, dash_home_publisher_count):
         """
         Test to ensure the publisher count is consistent, within a margin of error,
