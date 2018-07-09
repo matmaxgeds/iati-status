@@ -4,7 +4,6 @@ class TestIATIStandard(WebTestBase):
     """
     TODO: Add tests to assert that:
     - the number of activities and publishers roughly matches those displayed on the Registry
-    - a key string appears on the homepage
     """
     requests_to_load = {
         'IATI Standard Homepage - no www': {
@@ -31,6 +30,14 @@ class TestIATIStandard(WebTestBase):
         assert "/en/contact/" in result
         assert "/en/terms-and-conditions/" in result
         assert "/en/privacy-policy/" in result
+
+    def test_contains_expected_text(self, loaded_request):
+        """
+        Test that each homepage contains an expected substring.
+        """
+        text_to_find = "IATI is a global initiative to improve the transparency of development and humanitarian resources"
+
+        assert text_to_find in loaded_request.text
 
     def test_contains_newsletter_signup_form(self, loaded_request):
         """
