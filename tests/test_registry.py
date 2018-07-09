@@ -49,8 +49,7 @@ class TestIATIRegistry(WebTestBase):
         req = self.loaded_request_from_test_name(target_request)
         result = utility.get_links_from_page(req)
 
-        assert "http://www.aidtransparency.net/" in result
-        assert "http://www.iatistandard.org/" in result
+        assert "http://iatistandard.org/en/about/" in result
 
     @pytest.mark.parametrize("target_request", ["IATI Registry Registration Page"])
     def test_registration_form_presence(self, target_request):
