@@ -17,7 +17,7 @@ class TestIATIDiscuss(WebTestBase):
         """
         result = utility.get_links_from_page(loaded_request)
 
-        assert "http://iatistandard.org/" in result
+        assert "http://iatistandard.org/en/about/" in result
 
     @pytest.mark.parametrize("target_request", ["IATI Discuss Welcome Thread"])
     def test_welcome_thread_welcomingness(self, target_request):
