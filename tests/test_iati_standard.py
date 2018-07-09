@@ -32,7 +32,7 @@ class TestIATIStandard(WebTestBase):
         assert "/en/terms-and-conditions/" in result
         assert "/en/privacy-policy/" in result
 
-    def test_newsletter_signup_form(self, loaded_request):
+    def test_contains_newsletter_signup_form(self, loaded_request):
         """
         Tests to confirm that there is always a form to subscribe to the newsletter within the footer.
         """
