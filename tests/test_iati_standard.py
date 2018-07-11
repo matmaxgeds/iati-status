@@ -1,10 +1,6 @@
 from web_test_base import *
 
 class TestIATIStandard(WebTestBase):
-    """
-    TODO: Add tests to assert that:
-    - the number of activities and publishers roughly matches those displayed on the Registry
-    """
     requests_to_load = {
         'IATI Standard Homepage - no www': {
             'url': 'http://iatistandard.org'
