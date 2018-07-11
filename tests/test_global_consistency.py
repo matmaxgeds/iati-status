@@ -112,11 +112,11 @@ class TestGlobalConsistency(WebTestBase):
 
     @pytest.fixture
     def standard_home_activity_count(cls):
-        return cls._locate_int_on_page('IATI Standard - Homepage', '//*[@id="num_iati_activities"]')
+        return cls._locate_int_on_page('IATI Standard - Homepage', '//*[@id="IATI-Website-Tests_num_iati_activities"]')
 
     @pytest.fixture
     def standard_home_publisher_count(cls):
-        return cls._locate_int_on_page('IATI Standard - Homepage', '//*[@id="num_iati_organisations"]')
+        return cls._locate_int_on_page('IATI Standard - Homepage', '//*[@id="IATI-Website-Tests_num_iati_organisations"]')
 
     def test_activity_count_above_min(self, dash_home_activity_count, dash_home_unique_activity_count, dash_activities_activity_count, dash_activities_unique_activity_count, datastore_api_activity_count):
         """
