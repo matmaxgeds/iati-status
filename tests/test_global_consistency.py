@@ -49,43 +49,43 @@ class TestGlobalConsistency(WebTestBase):
 
     @pytest.fixture
     def dash_home_activity_count(cls):
-        return cls._locate_int_on_page('IATI Dashboard - Homepage', '//*[@id="wrap"]/div[3]/div[2]/div[1]/div[2]/table/tbody/tr[1]/td[1]/a')
+        return cls._locate_int_on_page('IATI Dashboard - Homepage', '//td[@id="activities-count"]/a')
 
     @pytest.fixture
     def dash_home_unique_activity_count(cls):
-        return cls._locate_int_on_page('IATI Dashboard - Homepage', '//*[@id="wrap"]/div[3]/div[2]/div[1]/div[2]/table/tbody/tr[2]/td[1]/a')
+        return cls._locate_int_on_page('IATI Dashboard - Homepage', '//td[@id="unique-activities-count"]/a')
 
     @pytest.fixture
     def dash_home_activity_file_count(cls):
-        return cls._locate_int_on_page('IATI Dashboard - Homepage', '//*[@id="wrap"]/div[3]/div[2]/div[1]/div[2]/table/tbody/tr[4]/td[1]/a')
+        return cls._locate_int_on_page('IATI Dashboard - Homepage', '//td[@id="activity-files-count"]/a')
 
     @pytest.fixture
     def dash_home_org_file_count(cls):
-        return cls._locate_int_on_page('IATI Dashboard - Homepage', '//*[@id="wrap"]/div[3]/div[2]/div[1]/div[2]/table/tbody/tr[5]/td[1]/a')
+        return cls._locate_int_on_page('IATI Dashboard - Homepage', '//td[@id="organisation-files-count"]/a')
 
     @pytest.fixture
     def dash_home_publisher_count(cls):
-        return cls._locate_int_on_page('IATI Dashboard - Homepage', '//*[@id="wrap"]/div[3]/div[2]/div[1]/div[2]/table/tbody/tr[3]/td[1]/a')
+        return cls._locate_int_on_page('IATI Dashboard - Homepage', '//td[@id="publishers-count"]/a')
 
     @pytest.fixture
     def dash_activities_activity_count(cls):
-        return cls._locate_int_on_page('IATI Dashboard - Activities Page', '//*[@id="wrap"]/div[2]/div[2]/div[1]/div/div[1]/h3/span[1]')
+        return cls._locate_int_on_page('IATI Dashboard - Activities Page', '//*[@id="wrap"]/div[3]/div[2]/div[1]/div/div[1]/h3/span[1]')
 
     @pytest.fixture
     def dash_activities_unique_activity_count(cls):
-        return cls._locate_int_on_page('IATI Dashboard - Activities Page', '//*[@id="wrap"]/div[2]/div[2]/div[2]/div/div[1]/h3/span[1]')
+        return cls._locate_int_on_page('IATI Dashboard - Activities Page', '//*[@id="wrap"]/div[3]/div[2]/div[2]/div/div[1]/h3/span[1]')
 
     @pytest.fixture
     def dash_files_activity_file_count(cls):
-        return cls._locate_int_on_page('IATI Dashboard - Files Page', '//*[@id="wrap"]/div[2]/div[2]/div[1]/div/div[1]/h3/span[1]')
+        return cls._locate_int_on_page('IATI Dashboard - Files Page', '//*[@id="wrap"]/div[3]/div[2]/div[1]/div/div[1]/h3/span[1]')
 
     @pytest.fixture
     def dash_files_org_file_count(cls):
-        return cls._locate_int_on_page('IATI Dashboard - Files Page', '//*[@id="wrap"]/div[2]/div[2]/div[2]/div/div[1]/h3/span[1]')
+        return cls._locate_int_on_page('IATI Dashboard - Files Page', '//*[@id="wrap"]/div[3]/div[2]/div[2]/div/div[1]/h3/span[1]')
 
     @pytest.fixture
     def dash_publishers_publisher_count(cls):
-        return cls._locate_int_on_page('IATI Dashboard - Publisher Page', '//*[@id="wrap"]/div[2]/div[2]/div[1]/div/div[1]/h3/span[1]')
+        return cls._locate_int_on_page('IATI Dashboard - Publisher Page', '//*[@id="wrap"]/div[3]/div[2]/div[1]/div/div[1]/h3/span[1]')
 
     @pytest.fixture
     def datastore_api_activity_count(cls):
@@ -216,7 +216,6 @@ class TestGlobalConsistency(WebTestBase):
         """
         assert dash_home_publisher_count == dash_publishers_publisher_count
 
-    @pytest.mark.xfail(strict=True)
     def test_publisher_count_consistency_dashboard(self, registry_home_publisher_count, dash_home_publisher_count):
         """
         Test to ensure the publisher count is consistent, within a margin of error,
