@@ -65,27 +65,27 @@ class TestGlobalConsistency(WebTestBase):
 
     @pytest.fixture
     def dash_home_publisher_count(cls):
-        return cls._locate_int_on_page('IATI Dashboard - Homepage', '//*[@id="wrap"]/div[3]/div[2]/div[1]/div[2]/table/tbody/tr[3]/td[1]/a')
+        return cls._locate_int_on_page('IATI Dashboard - Homepage', '//td[@id="publishers-count"]/a')
 
     @pytest.fixture
     def dash_activities_activity_count(cls):
-        return cls._locate_int_on_page('IATI Dashboard - Activities Page', '//*[@id="wrap"]/div[2]/div[2]/div[1]/div/div[1]/h3/span[1]')
+        return cls._locate_int_on_page('IATI Dashboard - Activities Page', '//*[@id="wrap"]/div[3]/div[2]/div[1]/div/div[1]/h3/span[1]')
 
     @pytest.fixture
     def dash_activities_unique_activity_count(cls):
-        return cls._locate_int_on_page('IATI Dashboard - Activities Page', '//*[@id="wrap"]/div[2]/div[2]/div[2]/div/div[1]/h3/span[1]')
+        return cls._locate_int_on_page('IATI Dashboard - Activities Page', '//*[@id="wrap"]/div[3]/div[2]/div[2]/div/div[1]/h3/span[1]')
 
     @pytest.fixture
     def dash_files_activity_file_count(cls):
-        return cls._locate_int_on_page('IATI Dashboard - Files Page', '//*[@id="wrap"]/div[2]/div[2]/div[1]/div/div[1]/h3/span[1]')
+        return cls._locate_int_on_page('IATI Dashboard - Files Page', '//*[@id="wrap"]/div[3]/div[2]/div[1]/div/div[1]/h3/span[1]')
 
     @pytest.fixture
     def dash_files_org_file_count(cls):
-        return cls._locate_int_on_page('IATI Dashboard - Files Page', '//*[@id="wrap"]/div[2]/div[2]/div[2]/div/div[1]/h3/span[1]')
+        return cls._locate_int_on_page('IATI Dashboard - Files Page', '//*[@id="wrap"]/div[3]/div[2]/div[2]/div/div[1]/h3/span[1]')
 
     @pytest.fixture
     def dash_publishers_publisher_count(cls):
-        return cls._locate_int_on_page('IATI Dashboard - Publisher Page', '//*[@id="wrap"]/div[2]/div[2]/div[1]/div/div[1]/h3/span[1]')
+        return cls._locate_int_on_page('IATI Dashboard - Publisher Page', '//*[@id="wrap"]/div[3]/div[2]/div[1]/div/div[1]/h3/span[1]')
 
     @pytest.fixture
     def datastore_api_activity_count(cls):
