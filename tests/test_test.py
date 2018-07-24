@@ -11,10 +11,10 @@ Usage:
 class TestTest(WebTestBase):
     requests_to_load = {
         'implicit GET': {
-            'url': 'http://iatistandard.org/'
+            'url': 'http://reference.iatistandard.org/'
         },
         'explicit GET': {
-            'url': 'http://iatistandard.org/202/namespaces-extensions/',
+            'url': 'http://reference.iatistandard.org/202/namespaces-extensions/',
             'method': 'GET'
         }
     }
