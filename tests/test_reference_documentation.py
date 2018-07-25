@@ -10,9 +10,6 @@ class TestIATIStandard(WebTestBase):
         'IATI Standard Homepage - with www': {
             'url': 'http://reference.iatistandard.org/'
         },
-        'IATI Standard - Misc Guidance Page': {
-            'url': 'http://reference.iatistandard.org/202/guidance/how-to-publish/prepare-your-org/'
-        },
         'IATI Standard - Summary Page': {
             'url': 'http://reference.iatistandard.org/202/organisation-standard/summary-table/'
         },
