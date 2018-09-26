@@ -59,7 +59,7 @@ class TestIATIPreview(WebTestBase):
         policy_marker_2_text = utility.get_text_from_xpath(req, policy_marker_2_xpath)
 
         assert utility.substring_in_list('This file has 1 activity', activity_count_text)
-        assert utility.substring_in_list(' [vocabulary="1"\xa0code="1"\xa0significance="4"\xa0]', policy_marker_2_text)
+        assert utility.substring_in_list(' [vocabulary="1"\xa0code="9"\xa0significance="4"\xa0]', policy_marker_2_text)
 
     @pytest.mark.parametrize("target_request", ["Non-XML Input"])
     def test_non_xml_detection(self, target_request):
