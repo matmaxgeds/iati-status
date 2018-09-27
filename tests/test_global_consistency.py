@@ -99,6 +99,10 @@ class TestGlobalConsistency(WebTestBase):
         return cls._locate_int_on_page('IATI Registry - Homepage', '//*[@id="home-icons"]/div/div[2]/div/a/strong')
 
     @pytest.fixture
+    def registry_activity_count(cls):
+        return utility.get_total_num_activities()
+
+    @pytest.fixture
     def registry_activity_file_count(cls):
         return cls._locate_int_on_page('IATI Registry - Activity Dataset Page', '//*[@id="content"]/div[3]/div/section[1]/div[1]/form/h2')
 
@@ -156,15 +160,15 @@ class TestGlobalConsistency(WebTestBase):
         assert datastore_api_activity_count >= dash_home_unique_activity_count * (1 - max_datastore_disparity)
         assert datastore_api_activity_count <= dash_home_unique_activity_count * (1 + max_datastore_disparity)
 
-    def test_activity_count_consistency_iatistandard_homepage(self, registry_home_publisher_count, standard_home_activity_count):
+    def test_activity_count_consistency_iatistandard_homepage(self, registry_activity_count, standard_home_activity_count):
         """
         Test to ensure the activity count is consistent, within a margin of error,
         between the registry and the IATI Standard homepage.
         """
         max_registry_disparity = 0.03
 
-        assert registry_home_publisher_count >= standard_home_activity_count * (1 - max_registry_disparity)
-        assert registry_home_publisher_count <= standard_home_activity_count * (1 + max_registry_disparity)
+        assert registry_activity_count >= standard_home_activity_count * (1 - max_registry_disparity)
+        assert registry_activity_count <= standard_home_activity_count * (1 + max_registry_disparity)
 
     def test_activity_file_count_above_min(self, registry_activity_file_count, dash_home_activity_file_count, dash_files_activity_file_count):
         """
