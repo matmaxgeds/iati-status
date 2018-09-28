@@ -1,12 +1,6 @@
 from web_test_base import *
 
 class TestIATIStandard(WebTestBase):
-    """
-    TODO: Add tests to assert that:
-    - the number of activities and publishers roughly matches those displayed on the Registry
-    - the newsletter form is present
-    - a key string appears on the homepage
-    """
     requests_to_load = {
         'IATI Standard Homepage - no www': {
             'url': 'http://iatistandard.org'
@@ -33,4 +27,20 @@ class TestIATIStandard(WebTestBase):
         assert "/en/terms-and-conditions/" in result
         assert "/en/privacy-policy/" in result
 
+    def test_contains_expected_text(self, loaded_request):
+        """
+        Test that each homepage contains an expected substring.
+        """
+        text_to_find = "IATI is a global initiative to improve the transparency of development and humanitarian resources"
 
+        assert text_to_find in loaded_request.text
+
+    def test_contains_newsletter_signup_form(self, loaded_request):
+        """
+        Tests to confirm that there is always a form to subscribe to the newsletter within the footer.
+        """
+        xpath = '//*[@id="mc-embedded-subscribe-form"]'
+
+        result = utility.locate_xpath_result(loaded_request, xpath)
+
+        assert len(result) == 1

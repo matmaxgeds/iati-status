@@ -1,6 +1,7 @@
 pyenv/
 *.pyc
 travis_test_branch.sh
+.pytest_cache
 
 #
 # Python .gitignore
