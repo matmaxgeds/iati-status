@@ -34,7 +34,7 @@ class TestQueryBuilder(WebTestBase):
 
         result = utility.get_links_from_page(req)
 
-        assert "http://iatistandard.org/guidance/datastore/" in result
+        assert "https://iatistandard.org/en/using-data/IATI-tools-and-resources/IATI-datastore/" in result
 
     @pytest.mark.parametrize("target_request", ["POST Example"])
     def test_form_submit_link(self, target_request):
