@@ -36,7 +36,6 @@ class TestIATIStandard(WebTestBase):
         """
         result = utility.get_links_from_page(loaded_request)
 
-        assert "http://www.aidtransparency.net/" in result
         assert "/" in result
         assert "http://iatiregistry.org" in result
         assert utility.regex_match_in_list('^(\.\./)*license/$', result)
