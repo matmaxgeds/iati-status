@@ -24,7 +24,6 @@ class TestIATIStandard(WebTestBase):
 
         # Selection of footer links
         assert "/en/contact/" in result
-        assert "/en/terms-and-conditions/" in result
         assert "/en/privacy-policy/" in result
 
     def test_contains_expected_text(self, loaded_request):
