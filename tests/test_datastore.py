@@ -1,7 +1,7 @@
-from datetime import date, datetime, timedelta
 import pytest
-import requests
-from web_test_base import *
+from datetime import date, datetime, timedelta
+from utility import utility
+from web_test_base import WebTestBase
 
 
 class TestIATIDatastore(WebTestBase):

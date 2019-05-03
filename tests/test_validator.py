@@ -1,5 +1,7 @@
 import pytest
-from web_test_base import *
+from utility import utility
+from web_test_base import WebTestBase
+
 
 class TestIATIValidator(WebTestBase):
     requests_to_load = {
@@ -26,11 +28,11 @@ class TestIATIValidator(WebTestBase):
             'data': {
                 'url': 'https://raw.githubusercontent.com/IATI/IATI-Extra-Documentation/version-2.01/en/activity-standard/activity-standard-example-annotated.xml'
             }
-        }
-        , 'Invalid URL data': {
-            'url': 'http://validator.iatistandard.org/index.php'
-            , 'method': 'POST'
-            , 'data': {
+        },
+        'Invalid URL data': {
+            'url': 'http://validator.iatistandard.org/index.php',
+            'method': 'POST',
+            'data': {
                 'url': 'http://validator.iatistandard.org/index.php'
             }
         }

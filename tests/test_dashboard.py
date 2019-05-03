@@ -1,8 +1,8 @@
+import pytz
 from datetime import datetime, timedelta
 from dateutil import parser as date_parser
-import pytest
-import pytz
-from web_test_base import *
+from utility import utility
+from web_test_base import WebTestBase
 
 
 class TestIATIDashboard(WebTestBase):
@@ -23,7 +23,6 @@ class TestIATIDashboard(WebTestBase):
 
         assert "https://github.com/IATI/IATI-Dashboard/" in result
 
- 
     def test_recently_generated(self, loaded_request):
         """
         Tests that the dashboard was generated in the past 7 days.

@@ -1,5 +1,5 @@
-import pytest
-from web_test_base import *
+from web_test_base import WebTestBase
+
 
 class TestCSV2IATI(WebTestBase):
     requests_to_load = {
