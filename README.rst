@@ -21,7 +21,7 @@ The output of tests can be seen at: https://travis-ci.org/IATI/IATI-Website-Test
 Technology Overview
 -------------------
 
-Tests are written using `pytest <http://doc.pytest.org>`_.
+Tests are written using `pytest <http://doc.pytest.org>`_ using Python 3.7.
 
 Most tests are designed to obtain HTML and associated content from IATI websites, using the `requests library <http://docs.python-requests.org>`_. This retries failed requests several times should a failure occur, so as to reduce flakiness. Additional tests on the status of backups are made using the `paramiko module <http://www.paramiko.org>`_, which checks the status of expected backup files via an SSH connection.
 

@@ -1,5 +1,7 @@
 import pytest
-from web_test_base import *
+from utility import utility
+from web_test_base import WebTestBase
+
 
 class TestQueryBuilder(WebTestBase):
     requests_to_load = {

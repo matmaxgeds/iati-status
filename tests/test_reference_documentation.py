@@ -1,6 +1,6 @@
-import re
-import pytest
-from web_test_base import *
+from utility import utility
+from web_test_base import WebTestBase
+
 
 class TestIATIStandard(WebTestBase):
     requests_to_load = {
@@ -38,7 +38,7 @@ class TestIATIStandard(WebTestBase):
 
         assert "/" in result
         assert "http://iatiregistry.org" in result
-        assert utility.regex_match_in_list('^(\.\./)*license/$', result)
+        assert utility.regex_match_in_list(r'^(\.\./)*license/$', result)
         assert "http://glyphicons.com" in result
         assert "http://creativecommons.org/licenses/by/3.0/" in result
 

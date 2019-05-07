@@ -1,4 +1,6 @@
-from web_test_base import *
+from utility import utility
+from web_test_base import WebTestBase
+
 
 class TestIATIStandard(WebTestBase):
     requests_to_load = {

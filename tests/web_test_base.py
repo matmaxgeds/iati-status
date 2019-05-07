@@ -4,6 +4,7 @@ import requests
 
 from utility import utility
 
+
 class WebTestBase:
     """This is a base class for all web tests.
 
