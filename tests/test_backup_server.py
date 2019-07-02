@@ -1,5 +1,4 @@
 from datetime import date, datetime
-import re
 import os
 import paramiko
 import pytest
@@ -127,7 +126,6 @@ class TestIATIBackupServer:
         "comprehensiveness_valueadded.csv",
         "coverage.csv",
         "summary_stats.csv"])
-
     def test_publisher_stats_backup(self, filename_suffix):
         """
         Tests that a monthly backup has been made of staistics that form the Global
