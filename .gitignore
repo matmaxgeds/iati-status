@@ -1,6 +1,7 @@
-pyenv/
+pyenv*/
 *.pyc
 travis_test_branch.sh
+.pytest_cache
 
 #
 # Python .gitignore
@@ -88,6 +89,7 @@ celerybeat-schedule
 *.sage.py
 
 # Environments
+.vscode*
 .env
 .venv
 env/

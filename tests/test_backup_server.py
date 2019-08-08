@@ -1,5 +1,4 @@
-from datetime import date, datetime, timedelta, timezone
-import re
+from datetime import date, datetime
 import os
 import paramiko
 import pytest
@@ -15,16 +14,19 @@ class TestIATIBackupServer:
         Create a SSH client for use by test methods.
         Login credentials are stored as environment variables.
         """
-        hostname = os.environ["backup_server_hostname"]
-        username = os.environ["backup_server_username"]
-        password = os.environ["backup_server_password"]
+        hostname = os.environ.get("backup_server_hostname")
+        username = os.environ.get("backup_server_username")
+        password = os.environ.get("backup_server_password")
+
+        if not any([hostname, username, password]):
+            pytest.skip("Environment variables not set for backups")
 
         try:
             self.client = paramiko.SSHClient()
             self.client.load_system_host_keys()
             self.client.set_missing_host_key_policy(
                 paramiko.AutoAddPolicy()
-                )
+            )
             self.client.connect(hostname, username=username, password=password, timeout=5)
         except AuthenticationException:
             print("Authentication failed, please verify your credentials: %s")
@@ -62,7 +64,7 @@ class TestIATIBackupServer:
         """
         stdin, stdout, stderr = self.client.exec_command(
             "find {} -maxdepth 1 -print0 | xargs -0 stat -c '%y %s %n' | perl -pe 'chomp if eof'".format(file_or_dir_path)
-            )
+        )
         stdout_unicode = stdout.read().decode('utf-8')
         stdout_lines = stdout_unicode.split("\n")
 
@@ -75,9 +77,9 @@ class TestIATIBackupServer:
                     "last_modified": datetime.strptime(
                         "{} {} {}".format(line_parts[0], line_parts[1][0:15], line_parts[2]),
                         '%Y-%m-%d %H:%M:%S.%f %z'
-                        ),
+                    ),
                     "filesize": int(line_parts[3])
-                    }
+                }
             return output
         else:
             return None
@@ -89,40 +91,18 @@ class TestIATIBackupServer:
         - Every file is greater than 0 bytes
         - All files have been modified (i.e. updated) the past day
         """
-        datetime_yesterday = datetime.now(timezone.utc) - timedelta(days=1)
+        # datetime_yesterday = datetime.now(timezone.utc) - timedelta(days=1)
         github_backups = self._get_file_or_directory_contents("/home/backups/backup-github/github-backups")
 
         github_backups_filesizes = [v['filesize'] for v in github_backups.values()]
-        github_backups_last_modified_dates =  [v['last_modified'] for v in github_backups.values()]
+        # github_backups_last_modified_dates = [v['last_modified'] for v in github_backups.values()]
         smallest_backup_filesize = min(github_backups_filesizes)
-        oldest_last_modified_date = min(github_backups_last_modified_dates)
+        # oldest_last_modified_date = min(github_backups_last_modified_dates)
 
         assert len(github_backups) >= 115
         assert smallest_backup_filesize > 0
-        #TODO Check behaviour of backup script, so that following test is reliable
+        # TODO Check behaviour of backup script, so that following test is reliable
         # assert oldest_last_modified_date > datetime_yesterday
-
-    def test_csv2iati_backup_made_daily(self):
-        """
-        Tests that a csv2iati backups has been made within the past 24 hours, and
-        that this file has:
-        - a filesize greater than 0 bytes
-        - a filename matching a regex pattern (which defines the expected filename)
-
-        #TODO Possibly refactor (if appropriate, so that this test uses
-            self._get_file_or_directory_contents
-        """
-        stdin, stdout, stderr = self.client.exec_command(
-            "find /home/backups/csv2iati -maxdepth 1 -type f -mtime -1 -print0 | xargs -0 du -b | xargs echo -n"
-            )
-        stdout_unicode = stdout.read().decode('utf-8')
-        filesize_str, filename = stdout_unicode.split(" ")
-
-        filesize = int(filesize_str)
-        result = re.search(r"\d{4}-\d{2}-\d{2}.sqlite", filename)  # Returns True is the regex pattern is found in the filename
-
-        assert filesize > 0
-        assert result
 
     def test_at_least_1GB_disk_space_available(self):
         """
@@ -165,7 +145,7 @@ class TestIATIBackupServer:
         expected_backup_filename = "{}-{}".format(
             expected_last_backup_date.strftime('%Y%m%d'),
             filename_suffix
-            )
+        )
 
         saved_file = self._get_file_or_directory_contents("/home/backups/operations-helpers/Dashboard/gpti_output/{}".format(expected_backup_filename))
 

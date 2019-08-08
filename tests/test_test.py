@@ -1,20 +1,21 @@
 import pytest
+from utility import utility
+from web_test_base import WebTestBase
 
-from web_test_base import *
 
-"""
-A class to test new features without running all of the tests.
-
-Usage:
-    py.test tests/test_test.py -rsx
-"""
 class TestTest(WebTestBase):
+    """
+    A class to test new features without running all of the tests.
+
+    Usage:
+        py.test tests/test_test.py -rsx
+    """
     requests_to_load = {
         'implicit GET': {
-            'url': 'http://iatistandard.org/'
+            'url': 'http://reference.iatistandard.org/'
         },
         'explicit GET': {
-            'url': 'http://iatistandard.org/202/namespaces-extensions/',
+            'url': 'http://reference.iatistandard.org/202/namespaces-extensions/',
             'method': 'GET'
         }
     }

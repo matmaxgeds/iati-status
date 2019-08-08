@@ -1,5 +1,7 @@
 import pytest
-from web_test_base import *
+from utility import utility
+from web_test_base import WebTestBase
+
 
 class TestIATIRegistry(WebTestBase):
     requests_to_load = {
@@ -20,17 +22,36 @@ class TestIATIRegistry(WebTestBase):
         },
         'IATI Registry Login Page': {
             'url': 'https://iatiregistry.org/user/login'
+        },
+        'IATI Registry: Random Publisher Page': {
+            'url': 'https://iatiregistry.org/publisher/worldbank'
+        },
+        'IATI Registry: Random Dataset': {
+            'url': 'https://iatiregistry.org/dataset/dfid-af'
+        },
+        'IATI Registry API: Package Search Call': {
+            'url': 'https://iatiregistry.org/api/3/action/package_search'
         }
     }
 
-    def test_contains_links(self, loaded_request):
+    @pytest.mark.parametrize("target_request", [
+        "IATI Registry Homepage - http, no www",
+        "IATI Registry Homepage - http, with www",
+        "IATI Registry Homepage - https, no www",
+        "IATI Registry Homepage - https, with www",
+        "IATI Registry Registration Page",
+        "IATI Registry Login Page",
+        "IATI Registry: Random Dataset",
+        "IATI Registry: Random Publisher Page"
+    ])
+    def test_contains_links(self, target_request):
         """
         Test that each page contains links to the defined URLs.
         """
-        result = utility.get_links_from_page(loaded_request)
+        req = self.loaded_request_from_test_name(target_request)
+        result = utility.get_links_from_page(req)
 
-        assert "http://www.aidtransparency.net/" in result
-        assert "http://www.iatistandard.org/" in result
+        assert "http://iatistandard.org/en/about/" in result
 
     @pytest.mark.parametrize("target_request", ["IATI Registry Registration Page"])
     def test_registration_form_presence(self, target_request):
