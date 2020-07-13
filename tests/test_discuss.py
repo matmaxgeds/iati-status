@@ -28,9 +28,9 @@ class TestIATIDiscuss(WebTestBase):
         """
         req = self.loaded_request_from_test_name(target_request)
         title_xpath = '/html/head/title'
-        heading_xpath = '//*[@id="main-outlet"]/h1/a'
-        subtitle_xpath = '//*[@id="main-outlet"]/div[1]/div[2]/h1'
-        post_body_xpath = '//*[@id="main-outlet"]/div[1]/div[2]/p'
+        heading_xpath = '//*[@id="main-outlet"]/div[@id="topic-title"]/h1/a'
+        subtitle_xpath = '//*[@class="post"]/h1'
+        post_body_xpath = '//*[@class="post"]/p'
 
         title_text = utility.get_text_from_xpath(req, title_xpath)
         heading_text = utility.get_text_from_xpath(req, heading_xpath)
