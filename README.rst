@@ -1,10 +1,10 @@
-IATI Website Tests
-==================
+IATI Service Monitor
+====================
 
-.. image:: https://travis-ci.com/codeforIATI/IATI-Website-Tests.svg?branch=master
-    :target: https://travis-ci.com/codeforIATI/IATI-Website-Tests
+.. image:: https://travis-ci.com/codeforIATI/iati-service-monitor.svg?branch=master
+    :target: https://travis-ci.com/codeforIATI/iati-service-monitor
 .. image:: https://img.shields.io/badge/license-MIT-blue.svg
-    :target: https://github.com/codeforIATI/IATI-Website-Tests/blob/master/LICENSE
+    :target: https://github.com/codeforIATI/iati-service-monitor/blob/master/LICENSE
 
 
 Introduction
@@ -12,7 +12,7 @@ Introduction
 
 This repository contains smoke tests and sanity checks for all live IATI websites and web tools.
 
-The output of tests can be seen at: https://travis-ci.com/codeforIATI/IATI-Website-Tests
+The output of tests can be seen at: https://travis-ci.com/codeforIATI/iati-service-monitor
 
 
 Technology Overview
@@ -26,7 +26,7 @@ These tests are run daily using Travis `cron jobs <https://docs.travis-ci.com/us
 
 For a more detailed of the test architecture, view the README under `tests`.
 
-The current status of the tests can be seen `on the Travis site <https://travis-ci.com/codeforIATI/IATI-Website-Tests>`_. 
+The current status of the tests can be seen `on the Travis site <https://travis-ci.com/codeforIATI/iati-service-monitor>`_. 
 
 
 Installation
