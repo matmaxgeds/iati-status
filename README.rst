@@ -1,13 +1,10 @@
 IATI Website Tests
 ==================
 
-.. image:: https://travis-ci.org/IATI/IATI-Website-Tests.svg?branch=master
-    :target: https://travis-ci.org/IATI/IATI-Website-Tests
-.. image:: https://requires.io/github/IATI/IATI-Website-Tests/requirements.svg?branch=master
-    :target: https://requires.io/github/IATI/IATI-Website-Tests/requirements/?branch=master
-    :alt: Requirements Status
+.. image:: https://travis-ci.com/codeforIATI/IATI-Website-Tests.svg?branch=master
+    :target: https://travis-ci.com/codeforIATI/IATI-Website-Tests
 .. image:: https://img.shields.io/badge/license-MIT-blue.svg
-    :target: https://github.com/IATI/IATI-Website-Tests/blob/master/LICENSE
+    :target: https://github.com/codeforIATI/IATI-Website-Tests/blob/master/LICENSE
 
 
 Introduction
@@ -15,7 +12,7 @@ Introduction
 
 This repository contains smoke tests and sanity checks for all live IATI websites and web tools.
 
-The output of tests can be seen at: https://travis-ci.org/IATI/IATI-Website-Tests
+The output of tests can be seen at: https://travis-ci.com/codeforIATI/IATI-Website-Tests
 
 
 Technology Overview
@@ -29,7 +26,7 @@ These tests are run daily (at around 2pm) using Travis `cron jobs <https://docs.
 
 For a more detailed of the test architecture, view the README under `tests`.
 
-The current status of the tests can be seen `on the Travis site <https://travis-ci.org/IATI/IATI-Website-Tests>`_. 
+The current status of the tests can be seen `on the Travis site <https://travis-ci.com/codeforIATI/IATI-Website-Tests>`_. 
 
 
 Installation
