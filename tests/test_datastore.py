@@ -59,7 +59,7 @@ class TestIATIDatastore(WebTestBase):
 
     @pytest.mark.parametrize("target_request", ["Datastore list of datasets"])
     def test_last_successful_fetch(self, target_request):
-        """Test that the datastore has successfully fetched data within the expected time frame."""
+        """Test that the datastore has successfully fetched data within the last 7 days."""
         loaded_request = self.loaded_request_from_test_name(target_request)
         successful_fetch_dates = list()
         json_datasets = loaded_request.json()
