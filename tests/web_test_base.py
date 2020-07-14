@@ -70,6 +70,8 @@ class WebTestBase:
         Initialise the class
         Loads data from each of the required URLs
         """
+        timeout = 30
+
         for testname, test in cls.requests_to_load.items():
             try:
                 method = test['method']
@@ -77,9 +79,10 @@ class WebTestBase:
                 method = 'GET'
 
             if method == 'GET':
-                result = requests.get(test['url'])
+                result = requests.get(test['url'], timeout=timeout)
             elif method == 'POST':
-                result = requests.post(test['url'], data=test['data'])
+                result = requests.post(test['url'], data=test['data'],
+                                       timeout=timeout)
             else:
                 raise ValueError('Invalid HTTP method - ' + method)
 
