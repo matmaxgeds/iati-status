@@ -31,6 +31,7 @@ class TestIATIDatastore(WebTestBase):
         }
     }
 
+    @pytest.mark.skip(reason="This tests user-supplied data, which isn't relevant.")
     @pytest.mark.parametrize("target_request", ["API - Activities Updated since 2 days ago", "API - Activities Updated since 3 days ago"])
     def test_recent_activities(self, target_request):
         """Test that the datastore API knows of activities updated in the past few days."""
