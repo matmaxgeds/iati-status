@@ -31,16 +31,6 @@ class TestIATIDatastore(WebTestBase):
         }
     }
 
-    @pytest.mark.xfail
-    @pytest.mark.parametrize("target_request", ["Datastore Homepage"])
-    def test_contains_links(self, target_request):
-        """Test that each page contains links to the defined URLs."""
-        loaded_request = self.loaded_request_from_test_name(target_request)
-
-        result = utility.get_links_from_page(loaded_request)
-
-        assert "http://iatiregistry.org/" in result
-
     @pytest.mark.parametrize("target_request", ["API - Activities Updated since 2 days ago", "API - Activities Updated since 3 days ago"])
     def test_recent_activities(self, target_request):
         """Test that the datastore API knows of activities updated in the past few days."""
