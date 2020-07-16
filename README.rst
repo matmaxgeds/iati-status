@@ -5,7 +5,7 @@ This repository contains smoke tests and sanity checks for some live IATI websit
 
 The current status of the tests can be seen on the badge below:
 
-.. image:: https://travis-ci.com/codeforIATI/iati-service-monitor.svg?branch=gh-pages
+.. image:: https://travis-ci.com/codeforIATI/iati-service-monitor.svg?branch=main
     :target: https://travis-ci.com/codeforIATI/iati-service-monitor
 
 Tests are run daily using Travis `cron jobs <https://docs.travis-ci.com/user/cron-jobs/>`_.
