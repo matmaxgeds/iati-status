@@ -1,36 +1,17 @@
 IATI Service Monitor
 ====================
 
+This repository contains smoke tests and sanity checks for some live IATI websites and web tools.
+
+The current status of the tests can be seen on the badge below:
+
 .. image:: https://travis-ci.com/codeforIATI/iati-service-monitor.svg?branch=master
     :target: https://travis-ci.com/codeforIATI/iati-service-monitor
-.. image:: https://img.shields.io/badge/license-MIT-blue.svg
-    :target: https://github.com/codeforIATI/iati-service-monitor/blob/master/LICENSE
 
+Tests are run daily using Travis `cron jobs <https://docs.travis-ci.com/user/cron-jobs/>`_.
 
-Introduction
-------------
-
-This repository contains smoke tests and sanity checks for all live IATI websites and web tools.
-
-The output of tests can be seen at: https://travis-ci.com/codeforIATI/iati-service-monitor
-
-
-Technology Overview
--------------------
-
-Tests are written using `pytest <http://doc.pytest.org>`_ using Python 3.7.
-
-Most tests are designed to obtain HTML and associated content from IATI websites, using the `requests library <http://docs.python-requests.org>`_. This retries failed requests several times should a failure occur, so as to reduce flakiness. Additional tests on the status of backups are made using the `paramiko module <http://www.paramiko.org>`_, which checks the status of expected backup files via an SSH connection.
-
-These tests are run daily using Travis `cron jobs <https://docs.travis-ci.com/user/cron-jobs/>`_.
-
-For a more detailed of the test architecture, view the README under `tests`.
-
-The current status of the tests can be seen `on the Travis site <https://travis-ci.com/codeforIATI/iati-service-monitor>`_. 
-
-
-Installation
-------------
+Setup
+-----
 
 .. code-block:: bash
 
