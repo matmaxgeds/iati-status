@@ -8,11 +8,7 @@ install:
 notifications:
   email:
     recipients:
-      - code@iatistandard.org
-    on_success: change
-    on_failure: always
-  slack:
-    secure: bBzSviJBlwk6tt9lx/y1//04yy3cmgJEAGvUPZlCutMrmDEUQkkILN+6puJQ4PGts5wIZVhEVMwaIEjW3rW9qYzgrBlpr0AgggNuPQs1hprgQSu4Re4eShx+potxVTdVnOwro5WMIFLi8Ef9tNYkddvBmLdz/sK2v1CrQk+bNHU=
+      - hello@codeforiati.org
     on_success: change
     on_failure: always
 script: py.test
