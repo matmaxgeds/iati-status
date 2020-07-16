@@ -10,11 +10,11 @@ class TestIATIDatastore(WebTestBase):
             'url': 'http://datastore.iatistandard.org/'
         },
         'API - Activities Updated since 2 days ago': {
-            'url': 'http://datastore.iatistandard.org/api/1/access/activity.xml?limit=0&last-updated-datetime__gt=' + str(date.today() - timedelta(days=2)),
+            'url': 'http://datastore.iatistandard.org/api/1/access/activity.xml?limit=0&last-change__gt=' + str(date.today() - timedelta(days=2)),
             'min_response_size': 295
         },
         'API - Activities Updated since 3 days ago': {
-            'url': 'http://datastore.iatistandard.org/api/1/access/activity.xml?limit=0&last-updated-datetime__gt=' + str(date.today() - timedelta(days=3)),
+            'url': 'http://datastore.iatistandard.org/api/1/access/activity.xml?limit=0&last-change__gt=' + str(date.today() - timedelta(days=3)),
             'min_response_size': 295
         },
         'Datastore download: csv': {
@@ -31,7 +31,6 @@ class TestIATIDatastore(WebTestBase):
         }
     }
 
-    @pytest.mark.skip(reason="This tests user-supplied data, which isn't relevant.")
     @pytest.mark.parametrize("target_request", ["API - Activities Updated since 2 days ago", "API - Activities Updated since 3 days ago"])
     def test_recent_activities(self, target_request):
         """Test that the datastore API knows of activities updated in the past few days."""
