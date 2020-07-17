@@ -11,4 +11,4 @@ notifications:
       - hello@codeforiati.org
     on_success: change
     on_failure: always
-script: py.test
+script: pytest
