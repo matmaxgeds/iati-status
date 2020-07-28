@@ -25,4 +25,4 @@ Setup
 	pip install -r requirements.txt
 
 	# Run the tests
-	py.test tests/
+	pytest
