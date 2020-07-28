@@ -16,10 +16,10 @@ Setup
 .. code-block:: bash
 
 	# Create a virtual environment using python 3
-	python3 -m venv pyenv
+	python3 -m venv venv
 
 	# Activate the virtual environment
-	source pyenv/bin/activate
+	source venv/bin/activate
 
 	# Install requirements
 	pip install -r requirements.txt
