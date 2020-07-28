@@ -4,3 +4,7 @@ python-dateutil==2.8.0 # rq.filter: <3.0
 pytz==2019.2
 requests==2.22.0 # rq.filter: <3.0
 flake8==3.7.8
+ansi2html==1.5.2
+docutils==0.16
+Jinja2==2.11.2
+pytest-reporter==0.3.0

@@ -11,4 +11,14 @@ notifications:
       - hello@codeforiati.org
     on_success: change
     on_failure: always
-script: pytest
+script: pytest --template=templates/index.html --report=docs/index.html
+deploy:
+  provider: pages
+  committer_from_gh: true
+  local_dir: docs
+  fqdn: status.codeforiati.org
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  keep_history: true
+  on:
+    branch: main
