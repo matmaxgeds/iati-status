@@ -3,14 +3,32 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>IATI service status</title>
+  <title>IATI Service Monitor</title>
+  <link rel="icon" href="https://status.codeforiati.org/favicon.ico">
+
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta name="description" content="Smoke tests and sanity checks for some live IATI websites and web tools." />
+
+  <meta property="og:site_name" content="IATI Service Monitor" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:image" content="https://status.codeforiati.org/img/status.jpg" />
+  <meta property="og:image" content="https://status.codeforiati.org/img/status.jpg" />
+
+  
+  <meta property="og:url" content="https://status.codeforiati.org">
+  <meta name="twitter:url" content="https://status.codeforiati.org" />
+  <meta property="og:title" content="IATI Service Monitor" />
+  <meta name="twitter:title" content="IATI Service Monitor" />
+  <meta property="og:description" content="Smoke tests and sanity checks for some live IATI websites and web tools." />
+  <meta name="twitter:description" content="Smoke tests and sanity checks for some live IATI websites and web tools." />
+
+  <link rel="alternate" href="https://api.travis-ci.com/repos/codeforIATI/iati-service-monitor/builds.atom?branch=main&event_type=cron" title="IATI Service Monitor" type="application/atom+xml" />
   {% filter css %}
     {% filter css_minify %}
       {% include 'templates/normalize.css' %}
       {% include 'templates/style.css' %}
     {% endfilter %}
   {% endfilter %}
-  </style>
 </head>
 <body>
   <header>
