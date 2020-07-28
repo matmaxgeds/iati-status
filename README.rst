@@ -24,11 +24,5 @@ Setup
 	# Install requirements
 	pip install -r requirements.txt
 
-	# Login credentials for the IATI backup server are stored as environment variables.
-	# Add these lines to the end of your virtualenv set-up script - i.e. pyenv/bin/activate
-	export backup_server_hostname='[YOUR_HOSTNAME]'
-	export backup_server_username='[YOUR_USERNAME]'
-	export backup_server_password='[YOUR_PASSWORD]'
-
 	# Run the tests
 	py.test tests/
