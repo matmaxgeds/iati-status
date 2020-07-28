@@ -1,4 +1,4 @@
-/docs/
+/_site/
 
 pyenv*/
 *.pyc

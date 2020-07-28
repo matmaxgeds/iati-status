@@ -11,11 +11,11 @@ notifications:
       - hello@codeforiati.org
     on_success: change
     on_failure: always
-script: pytest --split-report --template=templates/index.html --report=docs/index.html
+script: pytest --split-report --template=templates/index.html --report=_site/index.html
 deploy:
   provider: pages
   committer_from_gh: true
-  local_dir: docs
+  local_dir: _site
   fqdn: status.codeforiati.org
   skip_cleanup: true
   github_token: $GITHUB_TOKEN
