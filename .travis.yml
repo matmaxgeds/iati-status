@@ -11,7 +11,7 @@ notifications:
       - hello@codeforiati.org
     on_success: change
     on_failure: always
-script: pytest --template=templates/index.html --report=docs/index.html
+script: pytest --split-report --template=templates/index.html --report=docs/index.html
 deploy:
   provider: pages
   committer_from_gh: true
