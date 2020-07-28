@@ -12,7 +12,9 @@ class TestGoogleGroup(WebTestBase):
         """
         Tests that a page contains links to the defined URLs.
         This test would ideally check to see whether there is a link to:
-            http://discuss.iatistandard.org
+
+        http://discuss.iatistandard.org
+
         Google Groups, however, is loaded primarily with javascript.
         As such, the link does not exist upon a simple load of the page.
         This functionality could be added later with aSelenium test.
