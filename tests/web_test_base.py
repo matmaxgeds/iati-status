@@ -1,4 +1,3 @@
-import backoff
 import pytest
 import requests
 
@@ -64,7 +63,6 @@ class WebTestBase:
         return utility.substring_in_list(text_to_find, result)
 
     @classmethod
-    @backoff.on_exception(backoff.expo, requests.exceptions.RequestException, max_tries=5)
     def setup_class(cls):
         """
         Initialise the class
