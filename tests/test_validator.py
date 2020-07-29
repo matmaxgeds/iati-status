@@ -59,7 +59,7 @@ class TestIATIValidator(WebTestBase):
         assert utility.locate_xpath_result(req, '//*[@id="extra"]/div/form')
 
     @pytest.mark.parametrize("target_request", ["Valid paste data", "Valid URL data"])
-    def test_valid_pasted_xml(self, target_request):
+    def test_valid_input_xml(self, target_request):
         """
         Confirm the validator correctly identifies valid XML as such.
         """
@@ -70,7 +70,7 @@ class TestIATIValidator(WebTestBase):
             '//*[@id="status"]/div[2]')
 
     @pytest.mark.parametrize("target_request", ["Invalid paste data", "Invalid URL data"])
-    def test_invalid_pasted_xml(self, target_request):
+    def test_invalid_input_xml(self, target_request):
         """
         Confirm the validator correctly identifies invalid XML as such.
         """
