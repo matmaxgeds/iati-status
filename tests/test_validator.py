@@ -5,7 +5,7 @@ from web_test_base import WebTestBase
 
 class TestIATIValidator(WebTestBase):
     requests_to_load = {
-        'IATI Validator': {
+        'validator.iatistandard.org': {
             'url': 'http://validator.iatistandard.org/'
         },
         'Valid paste data': {
@@ -46,7 +46,7 @@ class TestIATIValidator(WebTestBase):
 
         assert "http://iatistandard.org/" in result
 
-    @pytest.mark.parametrize("target_request", ["IATI Validator"])
+    @pytest.mark.parametrize("target_request", ["validator.iatistandard.org"])
     def test_contains_form(self, target_request):
         """
         Confirm the validator contains a form on each of three tabs.

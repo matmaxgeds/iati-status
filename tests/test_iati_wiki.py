@@ -4,14 +4,17 @@ from web_test_base import WebTestBase
 
 class TestIATIWiki(WebTestBase):
     requests_to_load = {
-        'IATI Wiki Homepage': {
+        'wiki.archive.iatistandard.org': {
             'url': 'http://wiki.archive.iatistandard.org/'
         }
     }
 
     def test_locate_links(self, loaded_request):
         """
-        Tests that each page contains links to the defined URLs.
+        Confirm each page contains links to:
+
+        * iatistandard.org
+        * iatiregistry.org
         """
         result = utility.get_links_from_page(loaded_request)
 

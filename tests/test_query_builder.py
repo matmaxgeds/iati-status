@@ -5,7 +5,7 @@ from web_test_base import WebTestBase
 
 class TestQueryBuilder(WebTestBase):
     requests_to_load = {
-        'IATI Query Builder': {
+        'datastore.iatistandard.org/query/': {
             'url': 'http://datastore.iatistandard.org/query/'
         },
         'POST Example': {
@@ -27,10 +27,12 @@ class TestQueryBuilder(WebTestBase):
         }
     }
 
-    @pytest.mark.parametrize("target_request", ["IATI Query Builder", "POST Example"])
+    @pytest.mark.parametrize("target_request", ["datastore.iatistandard.org/query/", "POST Example"])
     def test_locate_links(self, target_request):
         """
-        Tests that a page contains links to the defined URLs.
+        Confirm the page contains a link to:
+
+        * https://iatistandard.org/en/using-data/IATI-tools-and-resources/IATI-datastore/
         """
         req = self.loaded_request_from_test_name(target_request)
 
@@ -41,7 +43,7 @@ class TestQueryBuilder(WebTestBase):
     @pytest.mark.parametrize("target_request", ["POST Example"])
     def test_form_submit_link(self, target_request):
         """
-        Tests that a result page contains a link to the relevant search.
+        Confirm result page contains a link to the relevant search.
         """
         req = self.loaded_request_from_test_name(target_request)
 

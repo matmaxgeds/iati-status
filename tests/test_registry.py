@@ -5,44 +5,32 @@ from web_test_base import WebTestBase
 
 class TestIATIRegistry(WebTestBase):
     requests_to_load = {
-        'IATI Registry Homepage - http, no www': {
-            'url': 'http://iatiregistry.org/'
-        },
-        'IATI Registry Homepage - http, with www': {
+        'iatiregistry.org': {
             'url': 'http://www.iatiregistry.org/'
         },
-        'IATI Registry Homepage - https, no www': {
-            'url': 'https://iatiregistry.org/'
+        'IATI Registry registration page': {
+            'url': 'http://iatiregistry.org/user/register'
         },
-        'IATI Registry Homepage - https, with www': {
-            'url': 'https://www.iatiregistry.org/'
+        'IATI Registry login page': {
+            'url': 'http://iatiregistry.org/user/login'
         },
-        'IATI Registry Registration Page': {
-            'url': 'https://iatiregistry.org/user/register'
+        'IATI Registry: Random publisher page': {
+            'url': 'http://iatiregistry.org/publisher/worldbank'
         },
-        'IATI Registry Login Page': {
-            'url': 'https://iatiregistry.org/user/login'
+        'IATI Registry: Random dataset': {
+            'url': 'http://iatiregistry.org/dataset/dfid-af'
         },
-        'IATI Registry: Random Publisher Page': {
-            'url': 'https://iatiregistry.org/publisher/worldbank'
-        },
-        'IATI Registry: Random Dataset': {
-            'url': 'https://iatiregistry.org/dataset/dfid-af'
-        },
-        'IATI Registry API: Package Search Call': {
-            'url': 'https://iatiregistry.org/api/3/action/package_search'
+        'IATI Registry API: Package search call': {
+            'url': 'http://iatiregistry.org/api/3/action/package_search'
         }
     }
 
     @pytest.mark.parametrize("target_request", [
-        "IATI Registry Homepage - http, no www",
-        "IATI Registry Homepage - http, with www",
-        "IATI Registry Homepage - https, no www",
-        "IATI Registry Homepage - https, with www",
-        "IATI Registry Registration Page",
-        "IATI Registry Login Page",
-        "IATI Registry: Random Dataset",
-        "IATI Registry: Random Publisher Page"
+        "iatiregistry.org",
+        "IATI Registry registration page",
+        "IATI Registry login page",
+        "IATI Registry: Random dataset",
+        "IATI Registry: Random publisher page"
     ])
     def test_contains_links(self, target_request):
         """
@@ -53,7 +41,7 @@ class TestIATIRegistry(WebTestBase):
 
         assert "http://iatistandard.org/en/about/" in result
 
-    @pytest.mark.parametrize("target_request", ["IATI Registry Registration Page"])
+    @pytest.mark.parametrize("target_request", ["IATI Registry registration page"])
     def test_registration_form_presence(self, target_request):
         """
         Test that there is a valid registration form on the Registry Registration Page.
@@ -74,7 +62,7 @@ class TestIATIRegistry(WebTestBase):
         assert len(form_inputs) == 5
         assert len(form_buttons) == 1
 
-    @pytest.mark.parametrize("target_request", ["IATI Registry Login Page"])
+    @pytest.mark.parametrize("target_request", ["IATI Registry login page"])
     def test_login_form_presence(self, target_request):
         """
         Test that there is a valid login form on the Registry Login Page.
