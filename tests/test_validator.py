@@ -43,20 +43,24 @@ class TestIATIValidator(WebTestBase):
         """
         Confirm the validator contains a link to iatistandard.org
         """
-        result = utility.get_links_from_page(target_request)
+        response = self.loaded_request_from_test_name(target_request)
+        page_links = utility.get_links_from_page(response)
 
-        assert "http://iatistandard.org/" in result
+        assert "http://iatistandard.org/" in page_links
 
     @pytest.mark.parametrize("target_request", ["validator.iatistandard.org"])
     def test_contains_form(self, target_request):
         """
         Confirm the validator contains a form on each of three tabs.
         """
-        req = self.loaded_request_from_test_name(target_request)
+        response = self.loaded_request_from_test_name(target_request)
 
-        assert utility.locate_xpath_result(req, '//*[@id="status"]/div/form')
-        assert utility.locate_xpath_result(req, '//*[@id="fileTab"]/div/form')
-        assert utility.locate_xpath_result(req, '//*[@id="extra"]/div/form')
+        assert utility.locate_xpath_result(
+            response, '//*[@id="status"]/div/form')
+        assert utility.locate_xpath_result(
+            response, '//*[@id="fileTab"]/div/form')
+        assert utility.locate_xpath_result(
+            response, '//*[@id="extra"]/div/form')
 
     @pytest.mark.parametrize("target_request", ["Valid paste data", "Valid URL data"])
     def test_valid_input_xml(self, target_request):
