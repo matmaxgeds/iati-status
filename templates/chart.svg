@@ -6,7 +6,7 @@
   {% set C = 2 * 3.141592653589793 * r %}
   {% for category, sub_tests in tests|groupby('status.category') %}
     {% set count = sub_tests|count %}
-    {% if 'passed' in category %}{% set ns.passed = ns.passed + count %}{% endif %}
+    {% if category in ['passed', 'xpassed', 'skipped'] %}{% set ns.passed = ns.passed + count %}{% endif %}
     {% set L = count / total * C %}
     {% set color = colors[category] %}
     <circle
