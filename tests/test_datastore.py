@@ -6,24 +6,24 @@ from web_test_base import WebTestBase
 
 class TestIATIDatastore(WebTestBase):
     requests_to_load = {
-        'Datastore Homepage': {
+        'datastore.iatistandard.org': {
             'url': 'http://datastore.iatistandard.org/'
         },
-        'API - Activities Updated since 2 days ago': {
+        'Activities updated since 2 days ago': {
             'url': 'http://datastore.iatistandard.org/api/1/access/activity.xml?limit=0&last-change__gt=' + str(date.today() - timedelta(days=2)),
             'min_response_size': 295
         },
-        'API - Activities Updated since 3 days ago': {
+        'Activities updated since 3 days ago': {
             'url': 'http://datastore.iatistandard.org/api/1/access/activity.xml?limit=0&last-change__gt=' + str(date.today() - timedelta(days=3)),
             'min_response_size': 295
         },
-        'Datastore download: csv': {
+        'Datastore download: CSV': {
             'url': 'http://datastore.iatistandard.org/api/1/access/activity.csv'
         },
-        'Datastore download: xml': {
+        'Datastore download: XML': {
             'url': 'http://datastore.iatistandard.org/api/1/access/activity.xml'
         },
-        'Datastore download: json': {
+        'Datastore download: JSON': {
             'url': 'http://datastore.iatistandard.org/api/1/access/activity.json'
         },
         'Datastore list of datasets': {
@@ -31,34 +31,40 @@ class TestIATIDatastore(WebTestBase):
         }
     }
 
-    @pytest.mark.parametrize("target_request", ["API - Activities Updated since 2 days ago", "API - Activities Updated since 3 days ago"])
+    @pytest.mark.parametrize("target_request", ["Activities updated since 2 days ago", "Activities updated since 3 days ago"])
     def test_recent_activities(self, target_request):
-        """Test that the datastore API knows of activities updated in the past few days."""
+        """
+        Confirm the datastore API knows of activities updated recently.
+        """
         req = self.loaded_request_from_test_name(target_request)
         xpath = '//result/iati-activities/query/total-count'
 
-        result = utility.get_single_int_from_xpath(req, xpath)
+        updated_recently = utility.get_single_int_from_xpath(req, xpath)
 
-        assert result > 0
+        assert updated_recently > 0
 
-    @pytest.mark.parametrize("content_type", ["application/xml", "application/json", "text/csv"])
-    def test_api_output_filetype(self, content_type):
+    @pytest.mark.parametrize("expected_content_type", ["application/xml", "application/json", "text/csv"])
+    def test_api_output_filetype(self, expected_content_type):
         """
-        Test that API calls return data in the expected filetypes.
+        Confirm the datastore returns data of the requested filetype.
 
-        The test is conducted based upon the data returned in the request
-        headers["content-type"]. For example, 'application/xml; charset=utf-8'
+        The test is conducted based on the data returned in the
+        `Content-Type` response header. E.g.:
+
+            Content-Type: application/xml; charset=utf-8
         """
-        file_extenstion = content_type.split("/")[1]
-        loaded_request = self.loaded_request_from_test_name("Datastore download: {}".format(file_extenstion))
+        file_extension = expected_content_type.split("/")[1]
+        loaded_request = self.loaded_request_from_test_name("Datastore download: {}".format(file_extension.upper()))
 
-        result = loaded_request.headers["content-type"]
+        content_type = loaded_request.headers["content-type"]
 
-        assert result.startswith(content_type)
+        assert content_type.startswith(expected_content_type)
 
     @pytest.mark.parametrize("target_request", ["Datastore list of datasets"])
     def test_last_successful_fetch(self, target_request):
-        """Test that the datastore has successfully fetched data within the last 7 days."""
+        """
+        Confirm the datastore has fetched data within the last 7 days.
+        """
         loaded_request = self.loaded_request_from_test_name(target_request)
         successful_fetch_dates = list()
         json_datasets = loaded_request.json()
