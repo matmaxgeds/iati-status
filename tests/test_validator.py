@@ -38,11 +38,12 @@ class TestIATIValidator(WebTestBase):
         }
     }
 
-    def test_contains_links(self, loaded_request):
+    @pytest.mark.parametrize("target_request", ["validator.iatistandard.org"])
+    def test_contains_links(self, target_request):
         """
         Confirm the validator contains a link to iatistandard.org
         """
-        result = utility.get_links_from_page(loaded_request)
+        result = utility.get_links_from_page(target_request)
 
         assert "http://iatistandard.org/" in result
 
