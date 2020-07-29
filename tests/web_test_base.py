@@ -34,14 +34,9 @@ class WebTestBase:
             The keys to this dictionary are the `test_name` keys from
             `requests_to_load`.
             The values are `Request` objects from the `requests` library.
-        initial_num_urls_to_test (int): The number of URLs specified within this
-            base class. Must not be overwritten by child classes.
-            Used within a test to ensure the class is being inherited from
-            correctly, with child classes defining their own requests_to_load.
     """
 
     requests_to_load = dict()
-    initial_num_urls_to_test = len(requests_to_load)
     loaded_requests = dict()
 
     def loaded_request_from_test_name(self, test_name):
@@ -77,15 +72,14 @@ class WebTestBase:
                 method = 'GET'
 
             if method == 'GET':
-                result = requests.get(test['url'], timeout=timeout)
+                response = requests.get(test['url'], timeout=timeout)
             elif method == 'POST':
-                result = requests.post(test['url'], data=test['data'],
-                                       timeout=timeout)
+                response = requests.post(test['url'], data=test['data'],
+                                         timeout=timeout)
             else:
                 raise ValueError('Invalid HTTP method - ' + method)
 
-            cls.loaded_requests[testname] = result
-        cls.num_urls = len(cls.requests_to_load)
+            cls.loaded_requests[testname] = response
 
     def pytest_generate_tests(cls, metafunc):
         """
