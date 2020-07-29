@@ -10,7 +10,7 @@
           {% set name = test.item.nodeid.split('::')[1:]|join('::') %}
           {% set funcname, _, params = name.partition('[') %}
           <span class="funcname">{{ funcname }}</span>
-          {%- if params -%}
+          {% if params %}
             <span class="params">[{{ params }}</span>
           {% endif %}
           {% endblock %}
