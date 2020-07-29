@@ -106,26 +106,21 @@ class WebTestBase:
 
     def test_200_response(self, loaded_request):
         """
-        Tests that each loaded request has a status code of 200.
+        Confirm each request has a 200 (success) status code.
         """
         assert loaded_request.status_code == 200
 
     def test_non_tiny_response(self, request_to_load):
         """
-        Tests that each loaded request has response content that is not tiny.
+        Confirm each request has response content that is not tiny.
         """
         try:
             min_response_size = self.requests_to_load[request_to_load]['min_response_size']
         except KeyError:
             min_response_size = 4000
-        req = self.loaded_request_from_test_name(request_to_load)
+        response = self.loaded_request_from_test_name(request_to_load)
 
-        if req.encoding:
-            result = req.content.decode(req.encoding)
-        else:
-            result = req.content.decode()
-
-        assert len(result) >= min_response_size
+        assert len(response.content) >= min_response_size
 
     def test_num_urls(self):
         """

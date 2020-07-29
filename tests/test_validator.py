@@ -40,7 +40,7 @@ class TestIATIValidator(WebTestBase):
 
     def test_contains_links(self, loaded_request):
         """
-        Test that each page contains links to the defined URLs.
+        Confirm the validator contains a link to iatistandard.org
         """
         result = utility.get_links_from_page(loaded_request)
 
@@ -49,30 +49,32 @@ class TestIATIValidator(WebTestBase):
     @pytest.mark.parametrize("target_request", ["IATI Validator"])
     def test_contains_form(self, target_request):
         """
-        Test that the validator contains a form on each of three tabs.
+        Confirm the validator contains a form on each of three tabs.
         """
         req = self.loaded_request_from_test_name(target_request)
 
-        assert len(utility.locate_xpath_result(req, '//*[@id="status"]/div/form')) == 1
-        assert len(utility.locate_xpath_result(req, '//*[@id="fileTab"]/div/form')) == 1
-        assert len(utility.locate_xpath_result(req, '//*[@id="extra"]/div/form')) == 1
+        assert utility.locate_xpath_result(req, '//*[@id="status"]/div/form')
+        assert utility.locate_xpath_result(req, '//*[@id="fileTab"]/div/form')
+        assert utility.locate_xpath_result(req, '//*[@id="extra"]/div/form')
 
     @pytest.mark.parametrize("target_request", ["Valid paste data", "Valid URL data"])
     def test_valid_pasted_xml(self, target_request):
         """
-        Tests that the validator correctly detects valid XML as valid.
+        Confirm the validator correctly identifies valid XML as such.
         """
-        text_to_find = "This is a well formed xml file."
-        xpath_to_locate = '//*[@id="status"]/div[2]'
 
-        assert self.passes_text_detection_test(target_request, text_to_find, xpath_to_locate)
+        assert self.passes_text_detection_test(
+            target_request,
+            "This is a well formed xml file.",
+            '//*[@id="status"]/div[2]')
 
     @pytest.mark.parametrize("target_request", ["Invalid paste data", "Invalid URL data"])
     def test_invalid_pasted_xml(self, target_request):
         """
-        Tests that the validator correctly detects invalid XML as invalid.
+        Confirm the validator correctly identifies invalid XML as such.
         """
-        text_to_find = "This is not a well-formed xml file"
-        xpath_to_locate = '//*[@id="status"]/div[2]'
 
-        assert self.passes_text_detection_test(target_request, text_to_find, xpath_to_locate)
+        assert self.passes_text_detection_test(
+            target_request,
+            "This is not a well-formed xml file",
+            '//*[@id="status"]/div[2]')
