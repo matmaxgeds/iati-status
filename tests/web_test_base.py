@@ -121,9 +121,3 @@ class WebTestBase:
         response = self.loaded_request_from_test_name(request_to_load)
 
         assert len(response.content) >= min_response_size
-
-    def test_num_urls(self):
-        """
-        Ensure that urls from a child class are being correctly detected
-        """
-        assert len(self.requests_to_load) > self.initial_num_urls_to_test
