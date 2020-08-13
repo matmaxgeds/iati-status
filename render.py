@@ -90,7 +90,7 @@ class TemplatePlugin:
             return Markup("<style>") + css + Markup("</style>")
         else:
             self._css = css
-            return Markup('<link rel="stylesheet" type="text/css" href="style.css">')
+            return Markup('<link rel="stylesheet" type="text/css" href="/style.css">')
 
     def _assetfilter(self, src, extension=None, inline=None):
         path = None
