@@ -11,9 +11,9 @@ notifications:
       - hello@codeforiati.org
     on_success: change
     on_failure: always
-script: pytest --split-report --template=templates/index.html --report=_site/index.html
+script: pytest --split-report --template=templates/index.html --report=output/_posts/`date +"%Y-%m-%d"`-index.html
 after_success:
-  cp img/healthy.svg _site/status.svg
+  cp img/healthy.svg output/status.svg
 after_failure:
-  cp img/unhealthy.svg _site/status.svg
+  cp img/unhealthy.svg output/status.svg
 after_script: .travis/push.sh
