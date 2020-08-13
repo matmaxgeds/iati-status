@@ -11,9 +11,13 @@ notifications:
       - hello@codeforiati.org
     on_success: change
     on_failure: always
-script: pytest --split-report --template=templates/index.html --report=output/_posts/`date +"%Y-%m-%d"`-index.html
+script: pytest --split-report --template=templates/index.html --report=output/index.html
 after_success:
-  cp img/healthy.svg output/status.svg
+  - mkdir output/_posts
+  - mv output/index.html output/_posts/`date +"%Y-%m-%d"`-unhealthy.html
+  - cp img/healthy.svg output/status.svg
 after_failure:
-  cp img/unhealthy.svg output/status.svg
+  - mkdir output/_posts
+  - mv output/index.html output/_posts/`date +"%Y-%m-%d"`-healthy.html
+  - cp img/unhealthy.svg output/status.svg
 after_script: .travis/push.sh
