@@ -7,7 +7,7 @@ setup_git() {
 }
 
 commit_website_files() {
-  mv output/* gh-pages/
+  cp -r output/ gh-pages
   cd gh-pages
   git add .
   git commit --message "Travis build: $TRAVIS_BUILD_NUMBER"
