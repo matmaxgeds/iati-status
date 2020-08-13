@@ -12,4 +12,8 @@ notifications:
     on_success: change
     on_failure: always
 script: pytest --split-report --template=templates/index.html --report=_site/index.html
+after_success:
+  cp img/healthy.svg _site/status.svg
+after_failure:
+  cp img/unhealthy.svg _site/status.svg
 after_script: .travis/push.sh
