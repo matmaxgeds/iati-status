@@ -14,10 +14,10 @@ notifications:
 script: pytest --split-report --template=templates/index.html --report=output/index.html
 after_success:
   - mkdir output/_posts
-  - mv output/index.html output/_posts/`date +"%Y-%m-%d"`-unhealthy.html
+  - mv output/index.html output/_posts/`date +"%Y-%m-%d"`-healthy.html
   - cp img/healthy.svg output/status.svg
 after_failure:
   - mkdir output/_posts
-  - mv output/index.html output/_posts/`date +"%Y-%m-%d"`-healthy.html
+  - mv output/index.html output/_posts/`date +"%Y-%m-%d"`-unhealthy.html
   - cp img/unhealthy.svg output/status.svg
 after_script: .travis/push.sh
