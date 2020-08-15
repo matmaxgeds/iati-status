@@ -42,8 +42,6 @@ class WebTestBase:
         """
         if 'request_to_load' in metafunc.fixturenames:
             metafunc.parametrize("request_to_load", cls.requests_to_load.keys())
-        if 'text_to_find' in metafunc.fixturenames:
-            metafunc.parametrize("text_to_find", cls.text_to_find)
 
     @pytest.fixture
     def loaded_request(cls, request_to_load):
