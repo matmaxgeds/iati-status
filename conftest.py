@@ -36,12 +36,16 @@ class JSONPlugin:
         self._report[report.fspath]['results'].append(json_output)
 
     def pytest_sessionfinish(self, session):
+        status = 'healthy'
         for v in self._report.values():
             v['total_tests'] = len(v['results'])
             v['total_passed'] = len([x for x in v['results']
                                      if x['outcome'] == 'passed'])
+            if v['total_tests'] != v['total_passed']:
+                status = 'unhealthy'
         report = {
             'created_at': str(datetime.now()),
+            'status': status,
             'report': list(self._report.values()),
         }
 
