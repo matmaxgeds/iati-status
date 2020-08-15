@@ -6,6 +6,9 @@ from web_test_base import WebTestBase
 
 
 class TestIATIDashboard(WebTestBase):
+    """
+    Test dashboard (dashboard.iatistandard.org)
+    """
     requests_to_load = {
         'Dashboard Homepage': {
             'url': 'http://dashboard.iatistandard.org/'

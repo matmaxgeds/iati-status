@@ -3,6 +3,9 @@ from web_test_base import WebTestBase
 
 
 class TestIATIStandard(WebTestBase):
+    """
+    Test IATI website (iatistandard.org)
+    """
     requests_to_load = {
         'iatistandard.org': {
             'url': 'http://www.iatistandard.org'

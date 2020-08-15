@@ -4,6 +4,9 @@ from web_test_base import WebTestBase
 
 
 class TestQueryBuilder(WebTestBase):
+    """
+    Test query builder (datastore.iatistandard.org/query/)
+    """
     requests_to_load = {
         'datastore.iatistandard.org/query/': {
             'url': 'http://datastore.iatistandard.org/query/'

@@ -5,6 +5,9 @@ from web_test_base import WebTestBase
 
 
 class TestIATIDatastore(WebTestBase):
+    """
+    Test datastore (datastore.iatistandard.org)
+    """
     requests_to_load = {
         'datastore.iatistandard.org': {
             'url': 'http://datastore.iatistandard.org/'

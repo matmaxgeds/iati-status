@@ -3,6 +3,9 @@ from web_test_base import WebTestBase
 
 
 class TestIATIWiki(WebTestBase):
+    """
+    Test old wiki (wiki.archive.iatistandard.org)
+    """
     requests_to_load = {
         'wiki.archive.iatistandard.org': {
             'url': 'http://wiki.archive.iatistandard.org/'

@@ -4,6 +4,9 @@ from web_test_base import WebTestBase
 
 
 class TestIATIDiscuss(WebTestBase):
+    """
+    Test discuss (discuss.iatistandard.org)
+    """
     requests_to_load = {
         'IATI Discuss': {
             'url': 'http://discuss.iatistandard.org/?iati-website-tests'

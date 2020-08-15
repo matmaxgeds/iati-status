@@ -8,6 +8,9 @@ from web_test_base import WebTestBase
 
 
 class TestGlobalConsistency(WebTestBase):
+    """
+    Test consistency of various top level figures across IATI websites.
+    """
     requests_to_load = {
         'IATI Registry - Homepage': {
             'url': 'https://iatiregistry.org/'

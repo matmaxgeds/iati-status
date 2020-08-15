@@ -4,6 +4,9 @@ from web_test_base import WebTestBase
 
 
 class TestArchiveReference(WebTestBase):
+    """
+    Test archive reference (archivereference.iatistandard.org)
+    """
     requests_to_load = {
         'IATI Standard Homepage': {
             'url': 'http://archivereference.iatistandard.org/'

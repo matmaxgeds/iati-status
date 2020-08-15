@@ -1,11 +1,12 @@
-"""A module to test critical access to aidstream hosted datasets."""
 import pytest
 from lxml import etree
 from web_test_base import WebTestBase
 
 
 class TestAidstream(WebTestBase):
-    """Setup URLs for tests."""
+    """
+    Test AidStream (aidstream.org)
+    """
 
     requests_to_load = {
         'Aidstream homepage': {

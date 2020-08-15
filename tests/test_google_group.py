@@ -3,6 +3,9 @@ from web_test_base import WebTestBase
 
 
 class TestGoogleGroup(WebTestBase):
+    """
+    Test old IATI google group
+    """
     requests_to_load = {
         'Google Group Landing Page': {
             'url': 'https://groups.google.com/forum/#!forum/iati-technical'

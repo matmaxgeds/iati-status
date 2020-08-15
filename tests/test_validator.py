@@ -5,6 +5,9 @@ from web_test_base import WebTestBase
 
 
 class TestIATIValidator(WebTestBase):
+    """
+    Test validator (validator.iatistandard.org)
+    """
     requests_to_load = {
         'validator.iatistandard.org': {
             'url': 'http://validator.iatistandard.org/'

@@ -4,6 +4,9 @@ from web_test_base import WebTestBase
 
 
 class TestIATIRegistry(WebTestBase):
+    """
+    Test registry (iatiregistry.org)
+    """
     requests_to_load = {
         'iatiregistry.org': {
             'url': 'http://www.iatiregistry.org/'
