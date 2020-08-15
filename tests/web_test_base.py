@@ -65,21 +65,15 @@ class WebTestBase:
         """
         timeout = 30
 
-        for testname, test in cls.requests_to_load.items():
-            try:
-                method = test['method']
-            except KeyError:
-                method = 'GET'
-
-            if method == 'GET':
-                response = requests.get(test['url'], timeout=timeout)
-            elif method == 'POST':
-                response = requests.post(test['url'], data=test['data'],
-                                         timeout=timeout)
-            else:
-                raise ValueError('Invalid HTTP method - ' + method)
-
-            cls.loaded_requests[testname] = response
+        for req_name, req in cls.requests_to_load.items():
+            method = req.get('method', 'GET')
+            kwargs = {
+                'timeout': timeout,
+            }
+            if method == 'POST':
+                kwargs['data'] = req['data']
+            cls.loaded_requests[req_name] = requests.request(
+                method, req['url'], **kwargs)
 
     def pytest_generate_tests(cls, metafunc):
         """
