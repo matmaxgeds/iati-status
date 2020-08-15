@@ -61,10 +61,7 @@ class WebTestBase:
         """
         Confirm each request has response content that is not tiny.
         """
-        try:
-            min_response_size = self.requests_to_load[request_to_load]['min_response_size']
-        except KeyError:
-            min_response_size = 4000
+        min_response_size = self.requests_to_load[request_to_load].get('min_response_size', 4000)
         response = self.loaded_request_from_test_name(request_to_load)
 
         assert len(response.content) >= min_response_size
