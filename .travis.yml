@@ -11,13 +11,21 @@ notifications:
       - hello@codeforiati.org
     on_success: change
     on_failure: always
-script: pytest --split-report --template=templates/index.html --report=output/index.html
+script: pytest
 after_success:
-  - mkdir output/_posts
-  - mv output/index.html output/_posts/`date +"%Y-%m-%d"`-healthy.html
   - cp img/healthy.svg output/status.svg
 after_failure:
-  - mkdir output/_posts
-  - mv output/index.html output/_posts/`date +"%Y-%m-%d"`-unhealthy.html
   - cp img/unhealthy.svg output/status.svg
-after_script: .travis/push.sh
+after_script:
+  - mv report.json output/_data/`date +"%Y-%m-%d"`.json
+
+  - git config --global user.email "deploy@travis-ci.org"
+  - git config --global user.name "Code for IATI bot"
+  - git clone --branch gh-pages https://${GITHUB_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git gh-pages
+
+  - cp -r output/* gh-pages
+  - cd gh-pages
+  - git add .
+  - >-
+    git commit --message "Travis build: ${TRAVIS_BUILD_NUMBER}"
+  - git push
