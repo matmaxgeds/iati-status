@@ -1,3 +1,4 @@
+from lxml import etree
 import pytest
 from utility import utility
 from web_test_base import WebTestBase
@@ -67,19 +68,15 @@ class TestIATIValidator(WebTestBase):
         """
         Confirm the validator correctly identifies valid XML as such.
         """
-
-        assert self.passes_text_detection_test(
-            target_request,
-            "This is a well formed xml file.",
-            '//*[@id="status"]/div[2]')
+        response = self.loaded_request_from_test_name(target_request)
+        text = utility.get_text_from_xpath(response, '//*[@id="status"]/div[2]')
+        assert text[0].strip() == "This is a well formed xml file."
 
     @pytest.mark.parametrize("target_request", ["Invalid paste data", "Invalid URL data"])
     def test_invalid_input_xml(self, target_request):
         """
         Confirm the validator correctly identifies invalid XML as such.
         """
-
-        assert self.passes_text_detection_test(
-            target_request,
-            "This is not a well-formed xml file",
-            '//*[@id="status"]/div[2]')
+        response = self.loaded_request_from_test_name(target_request)
+        text = utility.get_text_from_xpath(response, '//*[@id="status"]/div[2]')
+        assert text[0].strip() == "This is not a well-formed xml file"
