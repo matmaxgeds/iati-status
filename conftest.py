@@ -31,22 +31,22 @@ class JSONPlugin:
             class_desc = class_desc[0].upper() + class_desc[1:]
             self._report[report.fspath] = {
                 'desc': class_desc,
-                'results': [],
+                'results': {},
             }
-        self._report[report.fspath]['results'].append(json_output)
+        self._report[report.fspath]['results'][report.head_line] = json_output
 
     def pytest_sessionfinish(self, session):
         status = 'healthy'
         for v in self._report.values():
             v['total_tests'] = len(v['results'])
-            v['total_passed'] = len([x for x in v['results']
+            v['total_passed'] = len([x for x in v['results'].values()
                                      if x['outcome'] == 'passed'])
             if v['total_tests'] != v['total_passed']:
                 status = 'unhealthy'
         report = {
             'created_at': str(datetime.now()),
             'status': status,
-            'report': list(self._report.values()),
+            'report': self._report,
         }
 
         with open('report.json', 'w') as f:
