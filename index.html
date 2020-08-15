@@ -1,4 +1,40 @@
 ---
-layout: null
 ---
-{{ site.posts.first }}
+
+{% for x in site.data %}{% assign current = x %}{% endfor %}
+
+<div class="alert
+{% if current[1]['status'] == 'healthy' %}
+alert-success
+{% else %}
+alert-danger
+{% endif %}
+" role="alert">
+  Current status: {{ current[1]['status'] }}
+</div>
+
+{% assign recent_data = site.data | sort | slice:-30,30 %}
+
+{% for project in current[1]['report'] %}
+<div class="card">
+  <div class="card-body">
+
+    {% assign project_id = project[0] %}
+    <span class="name">{{ project[1]['desc'] }}</span>
+
+    <div class="shared-partial uptime-90-days-wrapper">
+      <svg style="width:100%" preserveAspectRatio="none" height="34" viewBox="0 0 148 34">
+        {% for d in recent_data %}
+            <rect id="{{ project_id }}-{{ d[0] }}" height="34" width="3" x="{{ forloop.index0 | times: 5 }}" y="0" fill="
+    {% if d[1]['report'][project_id]['status'] == 'healthy' %}
+    #28a745
+    {% else %}
+    #e25a14
+    {% endif %}
+    "></rect>
+        {% endfor %}
+      </svg>
+    </div>
+  </div>
+</div>
+{% endfor %}

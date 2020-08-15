@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IATI Service Monitor</title>
+  <link rel="icon" href="{{ site.github.url }}/favicon.ico">
+
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta name="description" content="{{ site.description }}" />
+
+  <link rel="canonical" href="{{ site.github.url }}">
+  <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="{{ site.github.url }}/assets/css/codeforiati.css?v={{ site.github.build_revision }}" rel="stylesheet">
+
+  {% feed_meta %}
+
+  <meta property="og:site_name" content="{{ site.title }}" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:image" content="{{ site.github.url }}/assets/img/status.jpg" />
+  <meta property="og:image" content="{{ site.github.url }}/assets/img/status.jpg" />
+  <meta property="og:url" content="{{ site.github.url }}">
+  <meta name="twitter:url" content="{{ site.github.url }}" />
+  <meta property="og:title" content="{{ site.title }}" />
+  <meta name="twitter:title" content="{{ site.title }}" />
+  <meta property="og:description" content="{{ site.description }}" />
+  <meta name="twitter:description" content="{{ site.description }}" />
+</head>
+
+
+
+
+  <body>
+    <nav class="navbar navbar-light bg-light navbar-expand-lg header">
+      <div class="container">
+        <a class="navbar-brand" href="{{ site.github.url }}/">
+          <img src="{{ site.github.url }}/assets/img/logo.png?v={{ site.github.build_revision }}" alt="{{ site.title }}" width="100px" />
+        </a>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          {{ content }}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

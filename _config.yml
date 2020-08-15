@@ -1,5 +1,27 @@
+title: IATI Service Monitor
+description: Smoke tests and sanity checks for some live IATI websites and web tools.
+
 plugins:
   - jekyll-feed
+  - jekyll-redirect-from
 
 feed:
   excerpt_only: true
+
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: "default"
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      redirect_to: /
+
+exclude:
+  - /venv/
+  - Gemfile
+  - Gemfile.lock
