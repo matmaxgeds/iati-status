@@ -1,10 +1,7 @@
-import json
-import os
+from os.path import join, dirname, realpath
 import re
-import requests
-from lxml import etree
 
-ACTIVITY_URL = "https://iatiregistry.org/api/3/action/package_search?q=extras_filetype:activity&facet.field=[%22extras_activity_count%22]&start=0&rows=0&facet.limit=1000000"
+from lxml import etree
 
 
 def locate_xpath_result(request, xpath):
@@ -107,20 +104,3 @@ def load_file_contents(file_name):
     with open(get_data_file(file_name), 'r') as myfile:
         data = myfile.read()
     return data
-
-
-def get_total_num_activities():
-    """Query the IATI registry and return a faceted list of activity counts and their frequencies.
-
-    The total number of activities is then calculated as the sum of the product of a count and a frequency.
-    E.g. if "30" is the count and the frequency is 2, then the total number of activities is 60.
-    """
-    activity_request = requests.get(ACTIVITY_URL)
-    if activity_request.status_code == 200:
-        activity_json = json.loads(activity_request.content.decode('utf-8'))
-        activity_count = 0
-        for key in activity_json["result"]["facets"]["extras_activity_count"]:
-            activity_count += int(key) * activity_json["result"]["facets"]["extras_activity_count"][key]
-        return activity_count
-    else:
-        raise Exception('Unable to connect to IATI registry to query activities.')

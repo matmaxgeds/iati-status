@@ -1,4 +1,8 @@
+import json
+
 import pytest
+import requests
+
 from utility import utility
 from web_test_base import WebTestBase
 
@@ -102,7 +106,16 @@ class TestGlobalConsistency(WebTestBase):
 
     @pytest.fixture
     def registry_activity_count(cls):
-        return utility.get_total_num_activities()
+        url = "https://iatiregistry.org/api/3/action/package_search?q=extras_filetype:activity&facet.field=[%22extras_activity_count%22]&start=0&rows=0&facet.limit=1000000"
+        activity_request = requests.get(url)
+        if activity_request.status_code == 200:
+            activity_json = json.loads(activity_request.content.decode('utf-8'))
+            activity_count = 0
+            for key in activity_json["result"]["facets"]["extras_activity_count"]:
+                activity_count += int(key) * activity_json["result"]["facets"]["extras_activity_count"][key]
+            return activity_count
+        else:
+            raise Exception('Unable to connect to IATI registry to query activities.')
 
     @pytest.fixture
     def registry_activity_file_count(cls):
