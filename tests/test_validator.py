@@ -12,14 +12,14 @@ class TestIATIValidator(WebTestBase):
             'url': 'http://validator.iatistandard.org/index.php',
             'method': 'POST',
             'data': {
-                'paste': utility.load_file_contents('valid.xml')
+                'paste': utility.load_file_contents('data/valid.xml')
             }
         },
         'Invalid paste data': {
             'url': 'http://validator.iatistandard.org/index.php',
             'method': 'POST',
             'data': {
-                'paste': utility.load_file_contents('invalid.xml')
+                'paste': utility.load_file_contents('data/invalid.xml')
             }
         },
         'Valid URL data': {

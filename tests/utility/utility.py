@@ -80,27 +80,12 @@ def regex_match_in_list(regex_str_to_find, list_to_search):
     return len(result) > 0
 
 
-def get_data_folder():
-    """
-    Returns the location of the folder containing data files.
-    """
-    path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', 'data')
-    return os.path.normpath(path)
-
-
-def get_data_file(file_name):
-    """
-    Returns a path to a data file with the given name.
-    """
-    return os.path.join(get_data_folder(), file_name)
-
-
-def load_file_contents(file_name):
+def load_file_contents(filepath):
     """
     Reads the contents of a file into a string.
     Returns a string containing the file contents.
     """
-    # TODO: Improve error handling
-    with open(get_data_file(file_name), 'r') as myfile:
+    fullpath = join(dirname(realpath(__file__)), '..', filepath)
+    with open(fullpath, 'r') as myfile:
         data = myfile.read()
     return data
