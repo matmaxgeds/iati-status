@@ -4,7 +4,7 @@ from lxml import etree
 from web_test_base import WebTestBase
 
 
-class TestAidstreamIsLive(WebTestBase):
+class TestAidstream(WebTestBase):
     """Setup URLs for tests."""
 
     requests_to_load = {
