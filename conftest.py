@@ -26,14 +26,18 @@ class JSONPlugin:
             'outcome': report.outcome,
             'error_msg': report.longreprtext,
         }
-        if report.fspath not in self._report:
+
+        module_name = re.match(r'tests/test_([^.]+)\.py',
+                               report.fspath).group(1)
+
+        if module_name not in self._report:
             class_desc = self._class_docstring[5:]
             class_desc = class_desc[0].upper() + class_desc[1:]
-            self._report[report.fspath] = {
+            self._report[module_name] = {
                 'desc': class_desc,
                 'results': {},
             }
-        self._report[report.fspath]['results'][report.head_line] = json_output
+        self._report[module_name]['results'][report.head_line] = json_output
 
     def pytest_sessionfinish(self, session):
         overall_status = 'healthy'
