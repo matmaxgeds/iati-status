@@ -13,17 +13,22 @@ notifications:
     on_failure: always
 script: pytest
 after_success:
-  - cp img/healthy.svg output/status.svg
+  - cp img/healthy.svg status.svg
 after_failure:
-  - cp img/unhealthy.svg output/status.svg
+  - cp img/unhealthy.svg status.svg
 after_script:
-  - mv report.json output/_data/`date +"%Y-%m-%d"`.json
-
+  # setup git
   - git config --global user.email "deploy@travis-ci.org"
   - git config --global user.name "Code for IATI bot"
+
+  # clone the gh-pages branch into /gh-pages/
   - git clone --branch gh-pages https://${GITHUB_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git gh-pages
 
-  - cp -r output/* gh-pages
+  # move the generated report into place
+  - mv report.json gh-pages/_data/`date +"%Y-%m-%d"`.json
+  - mv status.svg gh-pages
+
+  # commit and push
   - cd gh-pages
   - git add .
   - >-
