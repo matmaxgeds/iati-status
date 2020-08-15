@@ -12,7 +12,7 @@ def locate_xpath_result(request, xpath):
     Returns a list of all the content matching the xpath
     """
     parser = etree.HTMLParser()
-    tree = etree.fromstring(request.text, parser)
+    tree = etree.fromstring(request.content, parser)
     return tree.xpath(xpath)
 
 
