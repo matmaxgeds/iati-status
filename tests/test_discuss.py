@@ -18,7 +18,9 @@ class TestIATIDiscuss(WebTestBase):
 
     def test_contains_links(self, loaded_request):
         """
-        Test that each page contains links to the defined URLs.
+        Test the page contains a link to:
+
+        http://iatistandard.org/en/about/
         """
         result = utility.get_links_from_page(loaded_request)
 
@@ -27,7 +29,7 @@ class TestIATIDiscuss(WebTestBase):
     @pytest.mark.parametrize("target_request", ["IATI Discuss Welcome Thread"])
     def test_welcome_thread_welcomingness(self, target_request):
         """
-        Tests that the Welcome Thread is sufficiently welcoming.
+        Test the Welcome Thread says "Welcome to IATI Discuss".
         """
         req = self.loaded_request_from_test_name(target_request)
         title_xpath = '/html/head/title'
