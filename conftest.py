@@ -50,7 +50,7 @@ class JSONPlugin:
             if v['status'] == 'unhealthy':
                 overall_status = 'unhealthy'
         report = {
-            'created_at': str(datetime.now()),
+            'created_at': str(datetime.utcnow()),
             'build': environ.get('TRAVIS_BUILD_NUMBER'),
             'status': overall_status,
             'report': self._report,
