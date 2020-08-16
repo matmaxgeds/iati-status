@@ -1,7 +1,8 @@
 ---
 ---
 
-{% for x in site.data %}{% assign current = x %}{% endfor %}
+{% assign recent_data = site.data | sort | slice:-30,30 %}
+{% assign current = recent_data | last %}
 
 <div class="alert
 {% if current[1]['status'] == 'healthy' %}
@@ -12,8 +13,6 @@ alert-danger
 " role="alert">
   Current status: {{ current[1]['status'] }}
 </div>
-
-{% assign recent_data = site.data | sort | slice:-30,30 %}
 
 {% for project in current[1]['report'] %}
 <div class="card">
