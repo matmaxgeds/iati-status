@@ -55,4 +55,4 @@ class JSONPlugin:
         }
 
         with open('report.json', 'w') as f:
-            json.dump(report, f, indent=4)
+            json.dump(report, f)
