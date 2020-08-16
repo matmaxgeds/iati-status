@@ -13,9 +13,11 @@ notifications:
     on_failure: always
 script: pytest
 after_success:
-  - cp img/healthy.svg status.svg
+  - cp tmpl/img/healthy.svg status.svg
+  - cp tmpl/md/healthy.md latest.md
 after_failure:
-  - cp img/unhealthy.svg status.svg
+  - cp tmpl/img/unhealthy.svg status.svg
+  - cp tmpl/md/unhealthy.md latest.md
 after_script:
   # setup git
   - git config --global user.email "deploy@travis-ci.org"
@@ -27,6 +29,7 @@ after_script:
   # move the generated report into place
   - mv report.json gh-pages/_data/`date +"%Y-%m-%d"`.json
   - mv status.svg gh-pages
+  - mv latest.md gh-pages/_posts/`date +"%Y-%m-%d"`-index.md
 
   # commit and push
   - cd gh-pages
