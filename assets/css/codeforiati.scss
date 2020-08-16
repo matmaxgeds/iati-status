@@ -1,18 +1,24 @@
+---
+---
+
+$color_healthy: #28a745;
+$color_unhealthy: #e25a14;
+
 .rect-healthy {
-  fill: #28a745;
+  fill: $color_healthy;
 }
 
 .rect-unhealthy {
-  fill: #e25a14;
+  fill: $color_unhealthy;
 }
 
 .alert-healthy {
-  background-color: #28a745;
+  background-color: $color_healthy;
   color: white;
 }
 
 .alert-unhealthy {
-  background-color: #e25a14;
+  background-color: $color_unhealthy;
   color: white;
 }
 
@@ -48,13 +54,13 @@ body {
 .card {
   border-radius: 0;
   border-bottom: none;
-}
 
-.card:first-child {
-  border-radius: .25rem .25rem 0 0;
-}
+  &:first-child {
+    border-radius: .25rem .25rem 0 0;
+  }
 
-.card:last-child {
-  border-bottom: 1px solid rgba(0,0,0,.125);
-  border-radius: 0 0 .25rem .25rem;
+  &:last-child {
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    border-radius: 0 0 .25rem .25rem;
+  }
 }
