@@ -4,14 +4,13 @@
 {% assign recent_data = site.data | sort | slice:-30,30 %}
 {% assign current = recent_data | last %}
 
-<div class="alert
 {% if current[1]['status'] == 'healthy' %}
-alert-success
+<div class="alert alert-success" style="background-color:#28a745;color:white">
 {% else %}
-alert-danger
+<div class="alert alert-danger" style="background-color:#e25a14;color:white">
 {% endif %}
-" role="alert">
-  Current status: {{ current[1]['status'] }}
+  <img src="/assets/img/icons/{{ current[1]['status'] }}.svg" />
+  <strong>Current status: {{ current[1]['status'] | capitalize }}</strong>
 </div>
 
 {% for project in current[1]['report'] %}
