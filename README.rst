@@ -1,9 +1,9 @@
 IATI Status
 ===========
 
-This repository contains smoke tests and sanity checks for some live IATI websites and web tools.
+Monitoring the status of live IATI services and websites.
 
-The current status of the tests can be seen on the badge below:
+The current overall status is shown on the badge below:
 
 .. image:: https://raw.githubusercontent.com/codeforIATI/iati-status/gh-pages/status.svg
     :target: https://status.codeforiati.org/
