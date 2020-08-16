@@ -3,5 +3,3 @@ pytest==5.4.3 # rq.filter: <6.0
 python-dateutil==2.8.0 # rq.filter: <3.0
 pytz==2019.2
 requests==2.22.0 # rq.filter: <3.0
-
-pytest-json-report==1.2.1
