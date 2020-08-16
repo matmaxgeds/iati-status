@@ -27,7 +27,7 @@
       {% for e in errors %}
         <li>
           {{ e['desc'] }}
-          {% if e['args'] %}
+          {% if e['args'].size > 0 %}
           ({{ e['args'] }})
           {% endif %}
         </li>
