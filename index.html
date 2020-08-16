@@ -9,6 +9,7 @@
   <strong>Current status: {{ current[1]['status'] | capitalize }}</strong>
 </div>
 
+<div>
 {% for project in current[1]['report'] %}
 {% assign project_id = project[0] %}
 <div class="card">
@@ -23,3 +24,4 @@
   </div>
 </div>
 {% endfor %}
+</div>
