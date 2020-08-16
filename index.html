@@ -4,35 +4,22 @@
 {% assign recent_data = site.data | sort | slice:-30,30 %}
 {% assign current = recent_data | last %}
 
-{% if current[1]['status'] == 'healthy' %}
-<div class="alert alert-success" style="background-color:#28a745;color:white">
-{% else %}
-<div class="alert alert-danger" style="background-color:#e25a14;color:white">
-{% endif %}
+<div class="alert alert-{{ current[1]['status'] }}">
   <img src="/assets/img/icons/{{ current[1]['status'] }}.svg" />
   <strong>Current status: {{ current[1]['status'] | capitalize }}</strong>
 </div>
 
 {% for project in current[1]['report'] %}
+{% assign project_id = project[0] %}
 <div class="card">
   <div class="card-body">
-
-    {% assign project_id = project[0] %}
     <span class="name">{{ project[1]['desc'] }}</span>
 
-    <div class="shared-partial uptime-90-days-wrapper">
-      <svg style="width:100%" preserveAspectRatio="none" height="34" viewBox="0 0 148 34">
-        {% for d in recent_data %}
-            <rect id="{{ project_id }}-{{ d[0] }}" height="34" width="3" x="{{ forloop.index0 | times: 5 }}" y="0" fill="
-    {% if d[1]['report'][project_id]['status'] == 'healthy' %}
-    #28a745
-    {% else %}
-    #e25a14
-    {% endif %}
-    " data-toggle="popover" data-placement="bottom" data-trigger="hover" title="{{ d[0] | date:'%e %B %Y' }}" data-content="Status: {{ d[1]['report'][project_id]['status'] | capitalize }}"></rect>
-        {% endfor %}
-      </svg>
-    </div>
+    <svg style="width:100%" preserveAspectRatio="none" height="34" viewBox="0 0 148 34">
+      {% for d in recent_data %}
+      <rect id="{{ project_id }}-{{ d[0] }}" height="34" width="3" x="{{ forloop.index0 | times: 5 }}" y="0" class="rect-{{ d[1]['report'][project_id]['status'] }}" data-toggle="popover" data-placement="bottom" data-trigger="hover" title="{{ d[0] | date:'%e %B %Y' }}" data-content="Status: {{ d[1]['report'][project_id]['status'] | capitalize }}"></rect>
+      {% endfor %}
+    </svg>
   </div>
 </div>
 {% endfor %}

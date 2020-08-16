@@ -1,3 +1,21 @@
+.rect-healthy {
+  fill: #28a745;
+}
+
+.rect-unhealthy {
+  fill: #e25a14;
+}
+
+.alert-healthy {
+  background-color: #28a745;
+  color: white;
+}
+
+.alert-unhealthy {
+  background-color: #e25a14;
+  color: white;
+}
+
 /* Space out content a bit */
 body {
   /* padding-top: 1.5rem; */
