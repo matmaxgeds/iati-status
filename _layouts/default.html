@@ -51,7 +51,7 @@
         <hr>
         <div class="row">
           <div class="col-md-6">
-            {% assign current = site.data | sort | last %}
+            {%- assign current = site.data | sort | last -%}
             <span class="text-muted">Last updated: {{ current[1]['created_at'] | date: '%e %B %Y %H:%M UTC' }}</span><br />
             <a class="text-muted" href="https://codeforiati.org/code-of-conduct">Code of Conduct</a>
           </div>
