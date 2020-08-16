@@ -45,5 +45,21 @@
         </div>
       </div>
     </div>
+
+    <footer class="footer">
+      <div class="container">
+        <hr>
+        <div class="row">
+          <div class="col-md-6">
+            {% assign current = site.data | sort | last %}
+            <span class="text-muted">Last updated: {{ current[1]['created_at'] | date: "%e %B %Y %H:%M UTC" }}</span><br />
+            <a class="text-muted" href="https://codeforiati.org/code-of-conduct">Code of Conduct</a>
+          </div>
+          <div class="col-md-6 ml-auto text-right">
+            <a class="text-muted" href="{{ site.github.repository_url }}">Edit on Github</a>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
