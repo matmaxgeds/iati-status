@@ -1,5 +1,5 @@
 title: IATI Status
-description: Smoke tests and sanity checks for some live IATI websites and web tools.
+description: Monitoring the status of live IATI services and websites.
 
 plugins:
   - jekyll-feed
