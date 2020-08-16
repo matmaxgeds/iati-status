@@ -1,3 +1,4 @@
+from os import environ
 from datetime import datetime
 from inspect import cleandoc
 import json
@@ -50,6 +51,7 @@ class JSONPlugin:
                 overall_status = 'unhealthy'
         report = {
             'created_at': str(datetime.now()),
+            'build': environ.get('TRAVIS_BUILD_NUMBER'),
             'status': overall_status,
             'report': self._report,
         }
