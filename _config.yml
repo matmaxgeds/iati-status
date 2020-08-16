@@ -1,4 +1,4 @@
-title: IATI Service Monitor
+title: IATI Status
 description: Smoke tests and sanity checks for some live IATI websites and web tools.
 
 plugins:
