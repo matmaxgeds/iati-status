@@ -18,7 +18,25 @@
 
     <svg style="width:100%" preserveAspectRatio="none" height="34" viewBox="0 0 148 34">
       {% for d in recent_data %}
-      <rect id="{{ project_id }}-{{ d[0] }}" height="34" width="3" x="{{ forloop.index0 | times: 5 }}" y="0" class="rect-{{ d[1]['report'][project_id]['status'] }}" data-toggle="popover" data-placement="bottom" data-trigger="hover" title="{{ d[0] | date:'%e %B %Y' }}" data-content="Status: {{ d[1]['report'][project_id]['status'] | capitalize }}"></rect>
+      <rect id="{{ project_id }}-{{ d[0] }}" height="34" width="3" x="{{ forloop.index0 | times: 5 }}" y="0" class="rect-{{ d[1]['report'][project_id]['status'] }}" data-toggle="popover" data-placement="bottom" data-trigger="hover" title="{{ d[0] | date:'%e %B %Y' }}" data-content="Status: <span class='text-{{ d[1]['report'][project_id]['status'] }}'>{{ d[1]['report'][project_id]['status'] | capitalize }}</span>
+
+      {% if d[1]['report'][project_id]['status'] == 'unhealthy' %}
+      <br>The following checks failed:
+      <ul>
+      {% assign errors = d[1]['report'][project_id]['results'] | where:'outcome', 'failed' %}
+      {% for e in errors %}
+        <li>
+          {{ e['desc'] }}
+          {% if e['args'] %}
+          ({{ e['args'] }})
+          {% endif %}
+        </li>
+      {% endfor %}
+      </ul>
+      {% endif %}
+
+
+      " data-html="true"></rect>
       {% endfor %}
     </svg>
   </div>

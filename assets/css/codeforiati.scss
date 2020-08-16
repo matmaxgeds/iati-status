@@ -4,6 +4,14 @@
 $color_healthy: #28a745;
 $color_unhealthy: #e25a14;
 
+.text-healthy {
+  color: $color_healthy;
+}
+
+.text-unhealthy {
+  color: $color_unhealthy;
+}
+
 .rect-healthy {
   fill: $color_healthy;
 }
