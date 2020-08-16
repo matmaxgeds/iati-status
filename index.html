@@ -29,7 +29,7 @@
     {% else %}
     #e25a14
     {% endif %}
-    "></rect>
+    " data-toggle="popover" data-placement="bottom" data-trigger="hover" title="{{ d[0] | date:'%e %B %Y' }}" data-content="Status: {{ d[1]['report'][project_id]['status'] | capitalize }}"></rect>
         {% endfor %}
       </svg>
     </div>
