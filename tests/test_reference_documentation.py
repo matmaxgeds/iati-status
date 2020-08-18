@@ -53,3 +53,16 @@ class TestArchiveReference(WebTestBase):
         result = utility.get_text_from_xpath(loaded_request, footer_xpath)
 
         assert utility.substring_in_list('Text licensed under CC BY 4.0', result)
+
+    @pytest.mark.parametrize("target_request", ["IATI Standard Homepage"])
+    def test_locate_text(self, target_request):
+        """
+        Tests that each page contains the text "technical publishing framework" in the heading.
+        """
+        req = self.loaded_request_from_test_name(target_request)
+        text_to_find = "technical publishing framework"
+        xpath_to_locate = '//*[@id="home-strapline"]/h1'
+
+        result = utility.get_text_from_xpath(req, xpath_to_locate)
+
+        assert utility.substring_in_list(text_to_find, result)
