@@ -27,7 +27,7 @@ class TestIATIRegistry(WebTestBase):
             'url': 'https://iatiregistry.org/publisher/worldbank'
         },
         'IATI Registry: Random Dataset': {
-            'url': 'https://iatiregistry.org/dataset/dfid-af'
+            'url': 'https://iatiregistry.org/dataset/fcdo-af'
         },
         'IATI Registry API: Package Search Call': {
             'url': 'https://iatiregistry.org/api/3/action/package_search'
