@@ -33,8 +33,13 @@ class WebTestBase:
             }
             if method == 'POST':
                 kwargs['data'] = req['data']
-            cls.loaded_requests[req_name] = requests.request(
-                method, req['url'], **kwargs)
+            try:
+                cls.loaded_requests[req_name] = requests.request(
+                    method, req['url'], **kwargs)
+            except requests.exceptions.RequestException:
+                timeout_resp = requests.Response()
+                timeout_resp.status_code = 408
+                cls.loaded_requests[req_name] = timeout_resp
 
     def pytest_generate_tests(cls, metafunc):
         """
