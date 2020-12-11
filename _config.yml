@@ -26,3 +26,6 @@ exclude:
   - CNAME
   - Gemfile
   - Gemfile.lock
+
+redirect_from:
+  json: false
