@@ -16,10 +16,10 @@
     <meta property="og:url" content="{{ page.url | absolute_url }}" />
     <meta property="og:site_name" content="{{ site.title }}" />
     <meta name="twitter:site" content="@iatistatus"/>
-    <meta name="description" content="On {{ page.date | date: '%d %B %Y' }}, IATI Services were: {{ page.title }}"/>
-    <meta property="og:description" content="On {{ page.date | date: '%d %B %Y' }}, IATI Services were: {{ page.title }}" />
+    <meta name="description" content="On {{ page.date | date: '%-d %B %Y' }}, IATI Services were: {{ page.title }}"/>
+    <meta property="og:description" content="On {{ page.date | date: '%-d %B %Y' }}, IATI Services were: {{ page.title }}" />
     <meta property="og:image" content="{{ site.github.url }}/assets/img/{{ page.title | downcase }}.jpg"/>
-    <meta name="twitter:description" content="On {{ page.date | date: '%d %B %Y' }}, IATI Services were: {{ page.title }}"/>
+    <meta name="twitter:description" content="On {{ page.date | date: '%-d %B %Y' }}, IATI Services were: {{ page.title }}"/>
     <meta name="twitter:image" content="{{ site.github.url }}/assets/img/{{ page.title | downcase }}.jpg"/>
   </head>
   <body>
