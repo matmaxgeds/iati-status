@@ -1,0 +1,32 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <link rel="canonical" href="{{ page.url | absolute_url }}">
+    <script>location="{{ page.redirect.to }}"</script>
+    <meta http-equiv="refresh" content="0; url={{ page.redirect.to }}">
+    <meta name="robots" content="noindex">
+    <title>{{ site.title }}</title>
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{ site.title }}" />
+    <meta name="twitter:title" content="{{ site.title }}"/>
+    <meta property="og:url" content="{{ page.url | absolute_url }}" />
+    <meta property="og:site_name" content="{{ site.title }}" />
+    <meta name="twitter:site" content="@iatistatus"/>
+    {% if page.health_status %}
+    <meta name="description" content="On {{ page.date }}, IATI Services were {{ page.health_status }}"/>
+    <meta property="og:description" content="On {{ page.date }}, IATI Services were {{ page.health_status }}" />
+    <meta property="og:image" content="{{ site.github.url }}/assets/img/{{ page.health_status }}.jpg"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:description" content="On {{ page.date }}, IATI Services were {{ page.health_status }}"/>
+    <meta name="twitter:image" content="{{ site.github.url }}/assets/img/{{ page.health_status }}.jpg"/>
+    {% endif %}
+  </head>
+  <body>
+    <h1>Redirecting&hellip;</h1>
+    <a href="{{ page.redirect.to }}">Click here if you are not redirected.</a>
+  </body>
+</html>
