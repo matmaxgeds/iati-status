@@ -26,12 +26,18 @@
         {%- assign errors = d[1]['report'][project_id]['results'] | where:'outcome', 'failed' -%}
 
         {%- for e in errors -%}
+          {% if forloop.index0 < 3 %}
           <li>
             {{ e['desc'] }}
             {%- if e['args'].size > 0 %}
             ({{ e['args'] }})
             {%- endif -%}
           </li>
+          {% elsif forloop.index0 == 3 %}
+          <li>
+            …and {{ errors | size | minus:3 }} more.
+          </li>
+          {% endif %}
         {%- endfor -%}
       </ul>
       {%- endif -%}
