@@ -8,7 +8,7 @@ The current overall status is shown on the badge below:
 .. image:: https://raw.githubusercontent.com/codeforIATI/iati-status/gh-pages/status.svg
     :target: https://status.codeforiati.org/
 
-Tests are run daily using Travis `cron jobs <https://docs.travis-ci.com/user/cron-jobs/>`_. Pytest outputs a report.json file, which is pushed to the ``gh-pages`` branch.
+Tests are run daily using Github Actions. Pytest outputs a report.json file, which is pushed to the ``gh-pages`` branch.
 
 Setup
 -----
