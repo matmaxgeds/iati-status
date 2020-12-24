@@ -37,3 +37,7 @@ after_script:
   - >-
     git commit --message "Travis build: ${TRAVIS_BUILD_NUMBER}"
   - git push
+
+  # clean up
+  - cd ..
+  - rm -rf gh-pages
